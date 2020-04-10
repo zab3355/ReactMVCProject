@@ -18,8 +18,6 @@ const makerPage = (req, res) => {
   });
 };
 
-const aboutPage = (req, res) => res.redirect('/about');
-
 const makeDomo = (req, res) => {
   if (!req.body.name || !req.body.age) {
     return res.status(400).json({
