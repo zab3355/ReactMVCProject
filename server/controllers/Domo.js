@@ -18,6 +18,8 @@ const makerPage = (req, res) => {
   });
 };
 
+const aboutPage = (req, res) => res.redirect('/about');
+
 const makeDomo = (req, res) => {
   if (!req.body.name || !req.body.age) {
     return res.status(400).json({
@@ -55,6 +57,19 @@ const makeDomo = (req, res) => {
   return domoPromise;
 };
 
+//added a remove page to delete a domo
+const removePage = (req, res) => {
+  Domo.DomoModel.findByOwner(req.session.account._id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occurred' });
+    }
+
+    return res.render('remove', { csrfToken: req.csrfToken(), domos: docs });
+  });
+};
+
+
 const getDomos = (request, response) => {
   const req = request;
   const res = response;
@@ -70,6 +85,22 @@ const getDomos = (request, response) => {
 };
 
 
+const removeDomo = (request, response) => {
+    const req = request;
+    const res = response;
+    
+    return Domo.DomoModel.removeById(req.body._id, (err, docs) => {
+        if (err) {
+          console.log(err);
+          return res.status(400).json({ error: 'An error occurred' });
+        }
+
+        return res.json({ domos: docs });
+    });
+};
+
 module.exports.makerPage = makerPage;
 module.exports.getDomos = getDomos;
 module.exports.make = makeDomo;
+module.exports.removePage = removePage;
+module.exports.remove = removeDomo;
