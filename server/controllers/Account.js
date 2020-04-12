@@ -81,6 +81,50 @@ const signup = (request, response) => {
   });
 };
 
+//Change Password method
+const changePassword = (require, response) => {
+  const req = require;
+  const res = response;
+  
+  // Fields required to create new password 
+  req.body.oldPass = `${req.body.oldPass}`;
+  req.body.newPass = `${req.body.newPass}`;
+  req.body.newPass2 = `${req.body.newPass2}`;
+  
+  if (req.body.newPass !== req.body.newPass2) {
+    return response.status(400).json({ error: 'New passwords do not match!' });
+  }
+  
+  if (req.body.oldPass === req.body.newPass) {
+    return response.status(400).json({ error: 'Current password cannot be your current one!' });
+  }
+
+  const username = req.session.account.username;
+  
+  return Account.AccountModel.authenticate(username, req.body.oldPass, (error, account) => {
+    if (error || !username) {
+      return response.status(401).json({ error: 'Current Password is incorrect' });
+    }
+    
+    // Create a new account that is set to the old account
+    const newAccount = account;
+    
+    return Account.AccountModel.generateHash(req.body.newPass, (salt, hash) => {
+      newAccount.password = hash;
+      newAccount.salt = salt;
+      
+      const savePromise = newAccount.save();
+      
+      savePromise.catch((err) => {
+        res.json(err);
+      });
+      
+      savePromise.then(() => res.json({ redirect: '/logout' }));
+    });
+  });
+};
+
+
 const getToken = (request, response) => {
     const req = request;
     const res = response;
@@ -97,3 +141,4 @@ module.exports.login = login;
 module.exports.logout = logout;
 module.exports.signup = signup;
 module.exports.getToken = getToken;
+module.exports.changePassword = changePassword;
