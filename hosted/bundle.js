@@ -29,18 +29,18 @@ var DomoForm = function DomoForm(props) {
     className: "domoForm"
   }, /*#__PURE__*/React.createElement("label", {
     htmlFor: "name"
-  }, "Name: "), /*#__PURE__*/React.createElement("input", {
+  }, "Recipe Name: "), /*#__PURE__*/React.createElement("input", {
     id: "domoName",
     type: "text",
     name: "name",
-    placeholder: "Domo Name"
+    placeholder: "Recipe Name"
   }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "age"
-  }, "Age: "), /*#__PURE__*/React.createElement("input", {
+  }, "Food Category: "), /*#__PURE__*/React.createElement("input", {
     id: "domoAge",
     type: "text",
     name: "age",
-    placeholder: "Domo Age"
+    placeholder: "Food Category"
   }), /*#__PURE__*/React.createElement("input", {
     id: "csrfToken",
     type: "hidden",
@@ -67,14 +67,14 @@ var DomoList = function DomoList(props) {
       key: domo._id,
       className: "domo"
     }, /*#__PURE__*/React.createElement("img", {
-      src: "/assets/img/domoface.jpeg",
+      src: "/assets/img/domoface.png",
       alt: "domo face",
       className: "domoFace"
     }), /*#__PURE__*/React.createElement("h3", {
       className: "domoName"
-    }, "Name: ", domo.name), /*#__PURE__*/React.createElement("h3", {
+    }, "Recipe Name: ", domo.name), /*#__PURE__*/React.createElement("h3", {
       className: "domoAge"
-    }, "Age: ", domo.age));
+    }, "Food Category: ", domo.age));
   });
   return /*#__PURE__*/React.createElement("div", {
     className: "domoList"
