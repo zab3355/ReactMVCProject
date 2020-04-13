@@ -99,12 +99,6 @@ const changePassword = (request, response) => {
   }
 
   const username = req.session.account.username;
-  
-  return Account.AccountModel.authenticate(username, req.body.oldPass, (err) => {
-    if (err || !username) {
-      return res.status(401).json({ error: 'Current Password is incorrect' });
-    }
-  });
 };
 
 

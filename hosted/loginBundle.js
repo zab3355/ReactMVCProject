@@ -138,25 +138,25 @@ var ChangePasswordWindow = function ChangePasswordWindow(props) {
     method: "POST",
     className: "mainForm"
   }, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "username"
-  }, "Username: "), /*#__PURE__*/React.createElement("input", {
-    id: "user",
-    type: "text",
-    name: "username",
-    placeholder: "username"
-  }), /*#__PURE__*/React.createElement("label", {
-    htmlFor: "pass"
-  }, "Password: "), /*#__PURE__*/React.createElement("input", {
-    id: "pass",
+    htmlFor: "oldPass"
+  }, "Old Password: "), /*#__PURE__*/React.createElement("input", {
+    id: "oldPass",
     type: "password",
-    name: "pass",
-    placeholder: "password"
+    name: "oldPass",
+    placeholder: "Old Password"
   }), /*#__PURE__*/React.createElement("label", {
-    htmlFor: "pass2"
-  }, "Password: "), /*#__PURE__*/React.createElement("input", {
-    id: "pass2",
+    htmlFor: "newPass"
+  }, "New Password: "), /*#__PURE__*/React.createElement("input", {
+    id: "newPass",
     type: "password",
-    name: "pass2",
+    name: "newPass",
+    placeholder: "New Password"
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "newPass2"
+  }, "Confirm New Password: "), /*#__PURE__*/React.createElement("input", {
+    id: "newPass2",
+    type: "password",
+    name: "newPass2",
     placeholder: "retype password"
   }), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
