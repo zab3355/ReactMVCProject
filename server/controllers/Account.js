@@ -97,8 +97,8 @@ const changePassword = (request, response) => {
   if (req.body.oldPass === req.body.newPass) {
     return res.status(400).json({ error: 'Your current password cannot match your new password!' });
   }
-
-  const username = req.session.account.username;
+    
+    return res.status(400).json({ error: 'An error occured' });
 };
 
 
