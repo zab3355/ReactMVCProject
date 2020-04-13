@@ -40,13 +40,18 @@ const handleChangePassword = (e) =>{
   
   $("#domoMessage").animate({width: 'hide'}, 350);
   
-  if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == ''){
+  if($("#oldPass").val() == '' || $("#newPass").val() == '' || $("#newPass2").val() == ''){
     handleError("All fields are required!");
     return false;
   }
   
-  if($("#pass").val() !== $("#pass2").val()){
+  if($("#newPass").val() !== $("#newPass2").val()){
     handleError("Passwords do not match!");
+    return false;
+  }  
+    
+  if($("#pass").val() !== $("#oldPass").val()){
+    handleError("Old password does not match!");
     return false;
   }  
   
@@ -101,10 +106,12 @@ const ChangePasswordWindow = (props) =>{
         method='POST'
         className="mainForm"
     >
-    <label htmlFor="username">Username: </label>
-    <input id="user" type="text" name="username" placeholder="username" />
-    <label htmlFor="pass">Password: </label>
-    <input id="pass" type="password" name="pass" placeholder="password" />
+    <label htmlFor="oldPass">Old Password: </label>
+    <input id="pass" type="text" name="oldPass" placeholder="Old Password" />
+    <label htmlFor="newPass">New Password: </label>
+    <input id="newPass" type="newPass" name="newPass" placeholder="New Password" />
+    <label htmlFor="newPass">Confirm New Password: </label>
+    <input id="newPass2" type="newPass2" name="newPass2" placeholder="New Password" />
     <input type="hidden" name="_csrf" value={props.csrf} />
     <input className="formSubmit" type="submit" value="Change Password" />
   </form>
