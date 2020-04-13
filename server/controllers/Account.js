@@ -82,7 +82,7 @@ const signup = (request, response) => {
 };
 
 //Change password method
-const changePassword = (req, res) => {
+const changePassword = (request, response) => {
   const req = request;
   const res = response;
   // Fields required to create new password 
