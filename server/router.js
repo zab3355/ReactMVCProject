@@ -5,6 +5,7 @@ const router = (app) => {
     
   //app GETs
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+  app.get('/changePassword', mid.requiresLogin, controllers.Account.changePassword);
   app.get('/getToken', mid.requiresSecure, controllers.Account.getToken);
   app.get('/getDomos', mid.requiresLogin, controllers.Domo.getDomos);
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);

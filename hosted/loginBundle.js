@@ -7,7 +7,7 @@ var handleLogin = function handleLogin(e) {
   }, 350);
 
   if ($("#user").val() == '' || $("#pass").val() == '') {
-    handleError("RAWR! Username or password is empty");
+    handleError("Username or password is empty!");
     return false;
   }
 
@@ -23,12 +23,32 @@ var handleSignup = function handleSignup(e) {
   }, 350);
 
   if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
-    handleError("RAWR! All fields are required");
+    handleError("All fields are required!");
     return false;
   }
 
   if ($("#pass").val() !== $("#pass2").val()) {
-    handleError("RAWR! Passwords do not match");
+    handleError("Passwords do not match!");
+    return false;
+  }
+
+  sendAjax('POST', $("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
+  return false;
+};
+
+var handleChangePassword = function handleSignup(e) {
+  e.preventDefault();
+  $("#domoMessage").animate({
+    width: 'hide'
+  }, 350);
+
+  if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
+    handleError("All fields are required!");
+    return false;
+  }
+
+  if ($("#pass").val() !== $("#pass2").val()) {
+    handleError("Passwords do not match!");
     return false;
   }
 
@@ -109,6 +129,46 @@ var SignupWindow = function SignupWindow(props) {
   }));
 };
 
+var ChangePasswordWindow = function ChangePasswordWindow(props) {
+  return /*#__PURE__*/React.createElement("form", {
+    id: "changePasswordForm",
+    name: "changePasswordForm",
+    onSubmit: handleChangePassword,
+    action: "/changePassword",
+    method: "POST",
+    className: "mainForm"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "username"
+  }, "Username: "), /*#__PURE__*/React.createElement("input", {
+    id: "user",
+    type: "text",
+    name: "username",
+    placeholder: "username"
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "pass"
+  }, "Password: "), /*#__PURE__*/React.createElement("input", {
+    id: "pass",
+    type: "password",
+    name: "pass",
+    placeholder: "password"
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "pass2"
+  }, "Password: "), /*#__PURE__*/React.createElement("input", {
+    id: "pass2",
+    type: "password",
+    name: "pass2",
+    placeholder: "retype password"
+  }), /*#__PURE__*/React.createElement("input", {
+    type: "hidden",
+    name: "_csrf",
+    value: props.csrf
+  }), /*#__PURE__*/React.createElement("input", {
+    className: "formSubmit",
+    type: "submit",
+    value: "Change Password"
+  }));
+};
+
 var createLoginWindow = function createLoginWindow(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(LoginWindow, {
     csrf: csrf
@@ -121,9 +181,22 @@ var createSignupWindow = function createSignupWindow(csrf) {
   }), document.querySelector("#content"));
 };
 
+var createChangePasswordWindow = function createChangePasswordWindow(csrf) {
+  ReactDOM.render( /*#__PURE__*/React.createElement(ChangePasswordWindow, {
+    csrf: csrf
+  }), document.querySelector("#content"));
+};
+
+//implementing nav functionality for login screen
 var setup = function setup(csrf) {
   var loginButton = document.querySelector("#loginButton");
   var signupButton = document.querySelector("#signupButton");
+  var changePasswordButton = document.querySelector("#changePasswordButton");
+  changePasswordButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    createChangePasswordWindow(csrf);
+    return false;
+  });
   signupButton.addEventListener("click", function (e) {
     e.preventDefault();
     createSignupWindow(csrf);

@@ -4,7 +4,7 @@ const handleDomo = (e) =>{
   $("#domoMessage").animate({width: 'hide'}, 350);
   
   if($("#domoName").val() == '' || $("#domoAge").val() == ''){
-    handleError("RAWR! All fields are required");
+    handleError("All fields are required!");
     return false;
   }
   
@@ -32,7 +32,7 @@ const DomoForm = (props) =>{
     <label htmlFor="age">Age: </label>
     <input id="domoAge" type="text" name="age" placeholder="Domo Age" />
     <input id="csrfToken" type="hidden" name="_csrf" value={props.csrf} />
-    <input className="makeDomoSubmit" type="submit" value="Make Domo" />
+    <input className="makeDomoSubmit" type="submit" value="Add Recipe" />
   </form>
   );
 };
@@ -41,7 +41,7 @@ const DomoList = function(props){
   if(props.domos.length === 0){
     return(
       <div className="domoList">
-        <h3 className="emptyDomo">No Domos Yet</h3>
+        <h3 className="emptyDomo">No Recipes Listed!</h3>
       </div>
     );
   }
@@ -50,8 +50,8 @@ const DomoList = function(props){
     return(
       <div key={domo._id} className="domo">
         <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-        <h3 className="domoName">Name: {domo.name}</h3>
-        <h3 className="domoAge">Age: {domo.age}</h3>     
+        <h3 className="domoName">Recipe Name: {domo.name}</h3>
+        <h3 className="domoAge">Category: {domo.age}</h3>  
       </div>
     );
   });

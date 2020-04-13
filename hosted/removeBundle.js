@@ -62,7 +62,7 @@ var DomoList = function DomoList(props) {
             { className: 'domoList' },
             React.createElement(
                 'h3', { className: 'emptyDomo' },
-                'No Domos Here'
+                'No Recipes to Delete!'
             )
         );
     }

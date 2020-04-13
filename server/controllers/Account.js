@@ -22,7 +22,7 @@ const login = (request, response) => {
   const password = `${req.body.pass}`;
 
   if (!username || !password) {
-    return res.status(400).json({ error: 'RAWR! All fields are required' });
+    return res.status(400).json({ error: 'All fields are required!' });
   }
 
   return Account.AccountModel.authenticate(username, password, (err, account) => {
@@ -46,11 +46,11 @@ const signup = (request, response) => {
   req.body.pass2 = `${req.body.pass2}`;
 
   if (!req.body.username || !req.body.pass || !req.body.pass2) {
-    return res.status(400).json({ error: 'RAWR! Passwords do not match' });
+    return res.status(400).json({ error: 'Passwords do not match!' });
   }
 
   if (req.body.pass !== req.body.pass2) {
-    return res.status(400).json({ error: 'RAWR! Passwords do not match' });
+    return res.status(400).json({ error: 'Passwords do not match!' });
   }
 
   return Account.AccountModel.generateHash(req.body.pass, (salt, hash) => {
@@ -81,7 +81,7 @@ const signup = (request, response) => {
   });
 };
 
-//Change Password method
+//Change password method
 const changePassword = (require, response) => {
   const req = require;
   const res = response;
@@ -96,7 +96,7 @@ const changePassword = (require, response) => {
   }
   
   if (req.body.oldPass === req.body.newPass) {
-    return response.status(400).json({ error: 'Current password cannot be your current one!' });
+    return response.status(400).json({ error: 'Your current password cannot match your new password!' });
   }
 
   const username = req.session.account.username;
@@ -105,22 +105,6 @@ const changePassword = (require, response) => {
     if (error || !username) {
       return response.status(401).json({ error: 'Current Password is incorrect' });
     }
-    
-    // Create a new account that is set to the old account
-    const newAccount = account;
-    
-    return Account.AccountModel.generateHash(req.body.newPass, (salt, hash) => {
-      newAccount.password = hash;
-      newAccount.salt = salt;
-      
-      const savePromise = newAccount.save();
-      
-      savePromise.catch((err) => {
-        res.json(err);
-      });
-      
-      savePromise.then(() => res.json({ redirect: '/logout' }));
-    });
   });
 };
 

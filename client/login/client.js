@@ -4,7 +4,7 @@ const handleLogin = (e) =>{
   $("#domoMessage").animate({width: 'hide'}, 350);
   
   if($("#user").val() == '' || $("#pass").val() == ''){
-    handleError("RAWR! Username or password is empty");
+    handleError("Username or password is empty!");
     return false;
   }
   
@@ -21,12 +21,32 @@ const handleSignup = (e) =>{
   $("#domoMessage").animate({width: 'hide'}, 350);
   
   if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == ''){
-    handleError("RAWR! All fields are required");
+    handleError("All fields are required!");
     return false;
   }
   
   if($("#pass").val() !== $("#pass2").val()){
-    handleError("RAWR! Passwords do not match");
+    handleError("Passwords do not match!");
+    return false;
+  }  
+  
+  sendAjax('POST', $("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
+  
+  return false;
+};
+
+const handleChangePassword = (e) =>{
+  e.preventDefault();
+  
+  $("#domoMessage").animate({width: 'hide'}, 350);
+  
+  if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == ''){
+    handleError("All fields are required!");
+    return false;
+  }
+  
+  if($("#pass").val() !== $("#pass2").val()){
+    handleError("Passwords do not match!");
     return false;
   }  
   
@@ -73,6 +93,24 @@ const SignupWindow = (props) =>{
   );
 };
 
+const ChangePasswordWindow = (props) =>{
+  return(
+  <form id="changePasswordForm" name="changePasswordForm"
+        onSubmit={handleLogin}
+        action="/login"
+        method='POST'
+        className="mainForm"
+    >
+    <label htmlFor="username">Username: </label>
+    <input id="user" type="text" name="username" placeholder="username" />
+    <label htmlFor="pass">Password: </label>
+    <input id="pass" type="password" name="pass" placeholder="password" />
+    <input type="hidden" name="_csrf" value={props.csrf} />
+    <input className="formSubmit" type="submit" value="Change Password" />
+  </form>
+  );
+};
+
 const createLoginWindow = (csrf) =>{
   ReactDOM.render(
     <LoginWindow csrf={csrf} />,
@@ -87,10 +125,23 @@ const createSignupWindow = (csrf) =>{
   );
 };
 
+const createChangePasswordWindow= (csrf) =>{
+  ReactDOM.render(
+    <ChangePasswordWindow csrf={csrf} />,
+    document.querySelector("#content"),
+  );
+};
+
 const setup = (csrf) =>{
   const loginButton = document.querySelector("#loginButton");
   const signupButton = document.querySelector("#signupButton");
-  
+  const changePasswordButton = document.querySelector("#changePasswordButton");
+  changePasswordButton.addEventListener("click", (e) =>{
+    e.preventDefault();
+    createChangePasswordWindow(csrf);
+    return false;   
+  });
+    
   signupButton.addEventListener("click", (e) =>{
     e.preventDefault();
     createSignupWindow(csrf);

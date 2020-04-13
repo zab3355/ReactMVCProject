@@ -7,7 +7,7 @@ var handleDomo = function handleDomo(e) {
   }, 350);
 
   if ($("#domoName").val() == '' || $("#domoAge").val() == '') {
-    handleError("RAWR! All fields are required");
+    handleError("Please fill out all the following fields!");
     return false;
   }
 
@@ -49,7 +49,7 @@ var DomoForm = function DomoForm(props) {
   }), /*#__PURE__*/React.createElement("input", {
     className: "makeDomoSubmit",
     type: "submit",
-    value: "Make Domo"
+    value: "Add Recipe!"
   }));
 };
 
@@ -59,7 +59,7 @@ var DomoList = function DomoList(props) {
       className: "domoList"
     }, /*#__PURE__*/React.createElement("h3", {
       className: "emptyDomo"
-    }, "No Domos Yet"));
+    }, "No Recipes Listed!"));
   }
 
   var domoNodes = props.domos.map(function (domo) {
