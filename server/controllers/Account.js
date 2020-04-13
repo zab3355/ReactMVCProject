@@ -82,7 +82,9 @@ const signup = (request, response) => {
 };
 
 //Change password method
-const changePassword = (require, response) => {
+const changePassword = (req, res) => {
+  const req = request;
+  const res = response;
   // Fields required to create new password 
   req.body.oldPass = `${req.body.oldPass}`;
   req.body.newPass = `${req.body.newPass}`;
