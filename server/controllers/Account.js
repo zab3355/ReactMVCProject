@@ -83,27 +83,24 @@ const signup = (request, response) => {
 
 //Change password method
 const changePassword = (require, response) => {
-  const req = require;
-  const res = response;
-  
   // Fields required to create new password 
   req.body.oldPass = `${req.body.oldPass}`;
   req.body.newPass = `${req.body.newPass}`;
   req.body.newPass2 = `${req.body.newPass2}`;
   
   if (req.body.newPass !== req.body.newPass2) {
-    return response.status(400).json({ error: 'New passwords do not match!' });
+    return res.status(400).json({ error: 'New passwords do not match!' });
   }
   
   if (req.body.oldPass === req.body.newPass) {
-    return response.status(400).json({ error: 'Your current password cannot match your new password!' });
+    return res.status(400).json({ error: 'Your current password cannot match your new password!' });
   }
 
   const username = req.session.account.username;
   
-  return Account.AccountModel.authenticate(username, req.body.oldPass, (error, account) => {
+  return Account.AccountModel.authenticate(username, req.body.oldPass, (error, accountData) => {
     if (error || !username) {
-      return response.status(401).json({ error: 'Current Password is incorrect' });
+      return res.status(401).json({ error: 'Current Password is incorrect' });
     }
   });
 };
