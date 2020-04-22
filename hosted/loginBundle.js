@@ -36,7 +36,6 @@ var handleSignup = function handleSignup(e) {
   return false;
 };
 
-var handleAbout = function handleAbout(e) {};
 
 var LoginWindow = function LoginWindow(props) {
   return /*#__PURE__*/React.createElement("form", {
@@ -85,21 +84,24 @@ var SignupWindow = function SignupWindow(props) {
     id: "user",
     type: "text",
     name: "username",
-    placeholder: "username"
+    placeholder: "username",
+    className: "textBox"
   }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "pass"
   }, "Password: "), /*#__PURE__*/React.createElement("input", {
     id: "pass",
     type: "password",
     name: "pass",
-    placeholder: "password"
+    placeholder: "password",
+    className: "textBox",
   }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "pass2"
   }, "Password: "), /*#__PURE__*/React.createElement("input", {
     id: "pass2",
     type: "password",
     name: "pass2",
-    placeholder: "retype password"
+    placeholder: "retype password",
+    className: "textBox",
   }), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
     name: "_csrf",
@@ -111,45 +113,6 @@ var SignupWindow = function SignupWindow(props) {
   }));
 };
 
-var AboutWindow = function AboutWindow(props) {
-  return /*#__PURE__*/React.createElement("form", {
-    id: "actionSection",
-    name: "aboutSection",
-    onSubmit: handleAbout,
-    action: "/about",
-    method: "POST",
-    className: "mainForm"
-  }, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "oldPass"
-  }, "Old Password: "), /*#__PURE__*/React.createElement("input", {
-    id: "pass",
-    type: "text",
-    name: "oldPass",
-    placeholder: "Old Password"
-  }), /*#__PURE__*/React.createElement("label", {
-    htmlFor: "newPass"
-  }, "New Password: "), /*#__PURE__*/React.createElement("input", {
-    id: "newPass",
-    type: "newPass",
-    name: "newPass",
-    placeholder: "New Password"
-  }), /*#__PURE__*/React.createElement("label", {
-    htmlFor: "newPass"
-  }, "Confirm New Password: "), /*#__PURE__*/React.createElement("input", {
-    id: "newPass2",
-    type: "newPass2",
-    name: "newPass2",
-    placeholder: "New Password"
-  }), /*#__PURE__*/React.createElement("input", {
-    type: "hidden",
-    name: "_csrf",
-    value: props.csrf
-  }), /*#__PURE__*/React.createElement("input", {
-    className: "formSubmit",
-    type: "submit",
-    value: "Change Password"
-  }));
-};
 
 var createLoginWindow = function createLoginWindow(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(LoginWindow, {
@@ -163,21 +126,9 @@ var createSignupWindow = function createSignupWindow(csrf) {
   }), document.querySelector("#content"));
 };
 
-var createAboutWindow = function createAboutWindow(csrf) {
-  ReactDOM.render( /*#__PURE__*/React.createElement(AboutWindow, {
-    csrf: csrf
-  }), document.querySelector("#content"));
-};
-
 var setup = function setup(csrf) {
   var loginButton = document.querySelector("#loginButton");
   var signupButton = document.querySelector("#signupButton");
-  var aboutButton = document.querySelector("#aboutButton");
-  aboutButton.addEventListener("click", function (e) {
-    e.preventDefault();
-    createAboutWindow(csrf);
-    return false;
-  });
   signupButton.addEventListener("click", function (e) {
     e.preventDefault();
     createSignupWindow(csrf);
@@ -187,9 +138,11 @@ var setup = function setup(csrf) {
     e.preventDefault();
     createLoginWindow(csrf);
     return false;
-  });
-  createLoginWindow(csrf); //default view
+  }); // createNavBar();
+
+  createLoginWindow(csrf);
 };
+
 
 var getToken = function getToken() {
   sendAjax('GET', '/getToken', null, function (result) {
@@ -216,6 +169,7 @@ var redirect = function redirect(response) {
   window.location = response.redirect;
 };
 
+//Send Ajax Request
 var sendAjax = function sendAjax(type, action, data, success) {
   $.ajax({
     cache: false,
