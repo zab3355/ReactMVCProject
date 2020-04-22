@@ -1,7 +1,7 @@
 const handleLogin = (e) =>{
   e.preventDefault();
   
-  $("#domoMessage").animate({width: 'hide'}, 350);
+  $("#recipeMessage").animate({width: 'hide'}, 350);
   
   if($("#user").val() == '' || $("#pass").val() == ''){
     handleError("Username or password is empty!");
@@ -18,7 +18,7 @@ const handleLogin = (e) =>{
 const handleSignup = (e) =>{
   e.preventDefault();
   
-  $("#domoMessage").animate({width: 'hide'}, 350);
+  $("#recipeMessage").animate({width: 'hide'}, 350);
   
   if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == ''){
     handleError("All fields are required!");
@@ -35,30 +35,9 @@ const handleSignup = (e) =>{
   return false;
 };
 
-const handleChangePassword = (e) =>{
-  e.preventDefault();
-  
-  $("#domoMessage").animate({width: 'hide'}, 350);
-  
-  if($("#oldPass").val() == '' || $("#newPass").val() == '' || $("#newPass2").val() == ''){
-    handleError("All fields are required!");
-    return false;
-  }
-  
-  if($("#newPass").val() !== $("#newPass2").val()){
-    handleError("Passwords do not match!");
-    return false;
-  }  
-    
-  if($("#pass").val() !== $("#oldPass").val()){
-    handleError("Old password does not match!");
-    return false;
-  }  
-  
-  sendAjax('POST', $("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
-  
-  return false;
-};
+const handleAbout = (e) =>{
+
+}
 
 const LoginWindow = (props) =>{
   return(
@@ -98,9 +77,9 @@ const SignupWindow = (props) =>{
   );
 };
 
-const ChangePasswordWindow = (props) =>{
+const AboutWindow = (props) =>{
   return(
-  <form id="changePasswordForm" name="changePasswordForm"
+  <form id="actionSection" name="aboutSection"
         onSubmit={handleLogin}
         action="/login"
         method='POST'
@@ -132,9 +111,9 @@ const createSignupWindow = (csrf) =>{
   );
 };
 
-const createChangePasswordWindow= (csrf) =>{
+const createAboutWindow= (csrf) =>{
   ReactDOM.render(
-    <ChangePasswordWindow csrf={csrf} />,
+    <AboutWindow csrf={csrf} />,
     document.querySelector("#content"),
   );
 };
@@ -142,10 +121,10 @@ const createChangePasswordWindow= (csrf) =>{
 const setup = (csrf) =>{
   const loginButton = document.querySelector("#loginButton");
   const signupButton = document.querySelector("#signupButton");
-  const changePasswordButton = document.querySelector("#changePasswordButton");
-  changePasswordButton.addEventListener("click", (e) =>{
+  const aboutButton = document.querySelector("#aboutButton");
+  aboutButton.addEventListener("click", (e) =>{
     e.preventDefault();
-    createChangePasswordWindow(csrf);
+    createAboutWindow(csrf);
     return false;   
   });
     

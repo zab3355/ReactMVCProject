@@ -2,7 +2,7 @@
 
 var handleLogin = function handleLogin(e) {
   e.preventDefault();
-  $("#domoMessage").animate({
+  $("#recipeMessage").animate({
     width: 'hide'
   }, 350);
 
@@ -18,7 +18,7 @@ var handleLogin = function handleLogin(e) {
 
 var handleSignup = function handleSignup(e) {
   e.preventDefault();
-  $("#domoMessage").animate({
+  $("#recipeMessage").animate({
     width: 'hide'
   }, 350);
 
@@ -36,25 +36,7 @@ var handleSignup = function handleSignup(e) {
   return false;
 };
 
-var handleChangePassword = function handleSignup(e) {
-  e.preventDefault();
-  $("#domoMessage").animate({
-    width: 'hide'
-  }, 350);
-
-  if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
-    handleError("All fields are required!");
-    return false;
-  }
-
-  if ($("#pass").val() !== $("#pass2").val()) {
-    handleError("Passwords do not match!");
-    return false;
-  }
-
-  sendAjax('POST', $("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
-  return false;
-};
+var handleAbout = function handleAbout(e) {};
 
 var LoginWindow = function LoginWindow(props) {
   return /*#__PURE__*/React.createElement("form", {
@@ -129,35 +111,35 @@ var SignupWindow = function SignupWindow(props) {
   }));
 };
 
-var ChangePasswordWindow = function ChangePasswordWindow(props) {
+var AboutWindow = function AboutWindow(props) {
   return /*#__PURE__*/React.createElement("form", {
-    id: "changePasswordForm",
-    name: "changePasswordForm",
-    onSubmit: handleChangePassword,
-    action: "/changePassword",
+    id: "actionSection",
+    name: "aboutSection",
+    onSubmit: handleAbout,
+    action: "/about",
     method: "POST",
     className: "mainForm"
   }, /*#__PURE__*/React.createElement("label", {
     htmlFor: "oldPass"
   }, "Old Password: "), /*#__PURE__*/React.createElement("input", {
-    id: "oldPass",
-    type: "password",
+    id: "pass",
+    type: "text",
     name: "oldPass",
     placeholder: "Old Password"
   }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "newPass"
   }, "New Password: "), /*#__PURE__*/React.createElement("input", {
     id: "newPass",
-    type: "password",
+    type: "newPass",
     name: "newPass",
     placeholder: "New Password"
   }), /*#__PURE__*/React.createElement("label", {
-    htmlFor: "newPass2"
+    htmlFor: "newPass"
   }, "Confirm New Password: "), /*#__PURE__*/React.createElement("input", {
     id: "newPass2",
-    type: "password",
+    type: "newPass2",
     name: "newPass2",
-    placeholder: "retype password"
+    placeholder: "New Password"
   }), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
     name: "_csrf",
@@ -181,20 +163,19 @@ var createSignupWindow = function createSignupWindow(csrf) {
   }), document.querySelector("#content"));
 };
 
-var createChangePasswordWindow = function createChangePasswordWindow(csrf) {
-  ReactDOM.render( /*#__PURE__*/React.createElement(ChangePasswordWindow, {
+var createAboutWindow = function createAboutWindow(csrf) {
+  ReactDOM.render( /*#__PURE__*/React.createElement(AboutWindow, {
     csrf: csrf
   }), document.querySelector("#content"));
 };
 
-//implementing nav functionality for login screen
 var setup = function setup(csrf) {
   var loginButton = document.querySelector("#loginButton");
   var signupButton = document.querySelector("#signupButton");
-  var changePasswordButton = document.querySelector("#changePasswordButton");
-  changePasswordButton.addEventListener("click", function (e) {
+  var aboutButton = document.querySelector("#aboutButton");
+  aboutButton.addEventListener("click", function (e) {
     e.preventDefault();
-    createChangePasswordWindow(csrf);
+    createAboutWindow(csrf);
     return false;
   });
   signupButton.addEventListener("click", function (e) {
@@ -223,13 +204,13 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#domoMessage").animate({
+  $("#recipeMessage").animate({
     width: 'toggle'
   }, 350);
 };
 
 var redirect = function redirect(response) {
-  $("#domoMessage").animate({
+  $("#recipeMessage").animate({
     width: 'hide'
   }, 350);
   window.location = response.redirect;

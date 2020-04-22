@@ -1,25 +1,60 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+
 html, body {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    font-size: 62.5%;
+    font-size: 10px;
     overflow-x: hidden;
 }
 
+/* ===== NAVIGATION ======*/
+.navbar {
+    border: 0;
+    z-index: 9999;
+    letter-spacing: 4px;
+    background-color: #e6c4b3;
+
+
+}
 #logo {
-    height: 40px;
-    width: 40;
+    display: block;
+    height: auto;
+    width: 52px;
     padding-top: 5px;
-    float:left;
-    border-radius: 8px;
+    margin-right: 15px;
 }
 
-nav {
-    width: 100%;
-    height: 50px;
-    background-color: #2f2626;
+.navbar-header h1 {
+    letter-spacing: 1px;
+    color: white !important;
+    font-family: 'Montserrat';
+}
+
+.navbar li a, .navbar {
+    color: black !important;
+    font-size: 12px;
+    transition: all 0.6s 0s;
+}
+
+.navbar-toggle {
+    background-color: transparent !important;
+    border: 0;
+}
+
+.navbar-nav li a:hover, 
+.navbar-nav li.active a {
+    color: #482818;!important;
+}
+
+.navbar-brand {
+    color:black;
 }
 
 nav:nth-child(1) {
@@ -32,6 +67,8 @@ nav:nth-child(1) {
     padding-left: 20px;
     color: white;
     font-size: 1.3em;
+    margin-top: -50px;
+    margin-left: 40px;
     float: left;
     font-family: "Montserrat";
     text-decoration: none;
@@ -60,7 +97,7 @@ nav:nth-child(1) {
     background-color: #5f4c4c;
 }
 
-.domoForm {
+.recipeForm {
     border: 2px solid #2f2626;
     height: 35px;
     width: 700px;
@@ -71,7 +108,7 @@ nav:nth-child(1) {
     border-top-right-radius: 4px;
 }
 
-.domoForm label {
+.recipeForm label {
     display: inline-block;
     width: 75px;
     margin-left: 10px;
@@ -80,11 +117,11 @@ nav:nth-child(1) {
     color: white;
 }
 
-.domoForm input[type=text] {
+.recipeForm input[type=text] {
     float:left;
 }
 
-.makeDomoSubmit {
+.makeRecipeSubmit {
     transition: background-color 0.4s ease;
     display: inline;
     width: 90px;
@@ -94,11 +131,11 @@ nav:nth-child(1) {
     text-decoration: none;
 }
 
-.makeDomoSubmit:link, .makeDomoSubmit:visited, .makeDomoSubmit:hover, .makeDomoSubmit:active {
+.makeRecipeSubmit:link, .makeRecipeSubmit:visited, .makeRecipeSubmit:hover, .makeRecipeSubmit:active {
     color: white;
 }
 
-.makeDomoSubmit:hover {
+.makeRecipeSubmit:hover {
     transition: background-color 0.4s ease;
     background-color: #5f4c4c;
 }
@@ -160,7 +197,7 @@ nav:nth-child(1) {
     box-shadow: 0px 0px 1px 1px #2f2626;
 }
 
-#domoMessage {
+#recipeMessage {
     display:none;
     top: 250px;
     width: 250px;
@@ -171,7 +208,7 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-#domoMessage h3 {
+#recipeMessage h3 {
     width: 200px;
     position: absolute;
     left: 20px;
@@ -192,14 +229,14 @@ nav:nth-child(1) {
     font-style: italic;
 }
 
-#domo {
+#recipe {
     z-index: 225;
     margin-left: -30px;
     height: 450px;
     margin-top: -150px;
 }
 
-#domos {
+#recipes {
     width: 40%;
     min-width: 400px;
     border: 2px solid #2f2626;
@@ -208,7 +245,7 @@ nav:nth-child(1) {
     margin-top: 100px;
 }
 
-.domo {
+.recipe {
     width: 95%;
     margin: 0 auto;
     margin-top: 2px;
@@ -221,14 +258,14 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-.domo:hover {
+.recipe:hover {
     transition: border-color 0.2s ease-out;
     border-color: rgba(255,255,255, 0.8);
     transition: background-color 2.6s ease-out;
     background-color: #5f4c4c;
 }
 
-img.domoFace {
+img.cartIcon {
     margin-left: 25px;
     margin-right: 10px;
     height: 50px;
@@ -238,7 +275,7 @@ img.domoFace {
     float:left;
 }
 
-h3.emptyDomo {
+h3.emptyRecipe {
     width: 400px;
     font-size: 1.5em;
     margin: 0 auto;
@@ -246,7 +283,7 @@ h3.emptyDomo {
     margin-top: 18px;
 }
 
-h3.domoName {
+h3.recipeName {
     float:left;
     width: 200px;
     font-weight: bold;
@@ -254,7 +291,7 @@ h3.domoName {
     font-size: 1.5em;
 }
 
-h3.domoAge {
+h3.recipeAge {
     float:right;
     text-align: left;
     width: 100px;
@@ -263,10 +300,10 @@ h3.domoAge {
     font-size: 1.5em;
 }
 
-.domo:first-child {
+.recipe:first-child {
     margin-top: 10px;
 }
 
-.domo:last-child {
+.recipe:last-child {
     margin-bottom:10px;
 }

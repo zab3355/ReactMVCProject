@@ -1,89 +1,89 @@
-const handleDomo = (e) =>{
+const handleRecipe = (e) =>{
   e.preventDefault();
   
-  $("#domoMessage").animate({width: 'hide'}, 350);
+  $("#recipeMessage").animate({width: 'hide'}, 350);
   
-  if($("#domoName").val() == '' || $("#domoAge").val() == ''){
+  if($("#recipeName").val() == '' || $("#recipeAge").val() == ''){
     handleError("All fields are required!");
     return false;
   }
   
-  sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function(){
+  sendAjax('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function(){
     
-    //get csrf token to send to new Domo
-    const csrf = document.querySelector('#domoForm').querySelector('#csrfToken').value;
+    //get csrf token to send to new Recipe
+    const csrf = document.querySelector('#recipeForm').querySelector('#csrfToken').value;
     
-    loadDomosFromServer(csrf);
+    loadRecipesFromServer(csrf);
   });
   
   return false;
 };
 
-const DomoForm = (props) =>{
+const RecipeForm = (props) =>{
   return(
-  <form id="domoForm" name="domoForm"
-        onSubmit={handleDomo}
-        action="/maker"
+  <form id="recipeForm" name="recipeForm"
+        onSubmit={handleRecipe}
+        action="/addRecipe"
         method='POST'
-        className="domoForm"
+        className="recipeForm"
     >
     <label htmlFor="name">Name: </label>
-    <input id="domoName" type="text" name="name" placeholder="Domo Name" />
+    <input id="recipeName" type="text" name="name" placeholder="Recipe Name" />
     <label htmlFor="age">Age: </label>
-    <input id="domoAge" type="text" name="age" placeholder="Domo Age" />
+    <input id="recipeAge" type="text" name="age" placeholder="Recipe Age" />
     <input id="csrfToken" type="hidden" name="_csrf" value={props.csrf} />
-    <input className="makeDomoSubmit" type="submit" value="Add Recipe" />
+    <input className="makeRecipeSubmit" type="submit" value="Add Recipe" />
   </form>
   );
 };
 
-const DomoList = function(props){
-  if(props.domos.length === 0){
+const RecipeList = function(props){
+  if(props.recipes.length === 0){
     return(
-      <div className="domoList">
-        <h3 className="emptyDomo">No Recipes Listed!</h3>
+      <div className="recipeList">
+        <h3 className="emptyRecipe">No Recipes Listed!</h3>
       </div>
     );
   }
   
-  const domoNodes = props.domos.map(function(domo){
+  const recipeNodes = props.recipes.map(function(recipe){
     return(
-      <div key={domo._id} className="domo">
-        <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-        <h3 className="domoName">Recipe Name: {domo.name}</h3>
-        <h3 className="domoAge">Category: {domo.age}</h3>  
+      <div key={recipe._id} className="recipe">
+        <img src="/assets/img/cartIcon.jpeg" alt="recipe cart icon" className="cartIcon" />
+        <h3 className="recipeName">Recipe Name: {recipe.name}</h3>
+        <h3 className="recipeAge">Category: {recipe.age}</h3>  
       </div>
     );
   });
   
   return(
-    <div className="domoList">
-      {domoNodes}
+    <div className="recipeList">
+      {recipeNodes}
     </div>
   );
 };
 
-const loadDomosFromServer = (csrf) =>{
-  sendAjax('GET', '/getDomos', null, (data) =>{
+const loadRecipesFromServer = (csrf) =>{
+  sendAjax('GET', '/getRecipeItems', null, (data) =>{
     ReactDOM.render(
-      <DomoList csrf={csrf} domos={data.domos} />,
-      document.querySelector("#domos")
+      <RecipeList csrf={csrf} recipes={data.recipes} />,
+      document.querySelector("#recipes")
     );
   });
 };
 
 const setup = function(csrf){
   ReactDOM.render(
-    <DomoForm csrf={csrf} />,
-    document.querySelector("#makeDomo")
+    <RecipeForm csrf={csrf} />,
+    document.querySelector("#makeRecipe")
   );
   
   ReactDOM.render(
-    <DomoList csrf={csrf} domos={[]} />,
-    document.querySelector("#domos")
+    <RecipeList csrf={csrf} recipes={[]} />,
+    document.querySelector("#recipes")
   );
   
-  loadDomosFromServer(csrf);
+  loadRecipesFromServer(csrf);
 };
 
 const getToken = () =>{

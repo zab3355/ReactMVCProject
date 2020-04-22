@@ -1,104 +1,104 @@
 "use strict";
 
-var handleDomo = function handleDomo(e) {
+var handleRecipe = function handleRecipe(e) {
   e.preventDefault();
-  $("#domoMessage").animate({
+  $("#recipeMessage").animate({
     width: 'hide'
   }, 350);
 
-  if ($("#domoName").val() == '' || $("#domoAge").val() == '') {
-    handleError("Please fill out all the following fields!");
+  if ($("#recipeName").val() == '' || $("#recipeAge").val() == '') {
+    handleError("All fields are required!");
     return false;
   }
 
-  sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function () {
-    //get csrf token to send to new Domo
-    var csrf = document.querySelector('#domoForm').querySelector('#csrfToken').value;
-    loadDomosFromServer(csrf);
+  sendAjax('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function () {
+    //get csrf token to send to new Recipe
+    var csrf = document.querySelector('#recipeForm').querySelector('#csrfToken').value;
+    loadRecipesFromServer(csrf);
   });
   return false;
 };
 
-var DomoForm = function DomoForm(props) {
+var RecipeForm = function RecipeForm(props) {
   return /*#__PURE__*/React.createElement("form", {
-    id: "domoForm",
-    name: "domoForm",
-    onSubmit: handleDomo,
-    action: "/maker",
+    id: "recipeForm",
+    name: "recipeForm",
+    onSubmit: handleRecipe,
+    action: "/addRecipe",
     method: "POST",
-    className: "domoForm"
+    className: "recipeForm"
   }, /*#__PURE__*/React.createElement("label", {
     htmlFor: "name"
-  }, "Recipe Name: "), /*#__PURE__*/React.createElement("input", {
-    id: "domoName",
+  }, "Name: "), /*#__PURE__*/React.createElement("input", {
+    id: "recipeName",
     type: "text",
     name: "name",
     placeholder: "Recipe Name"
   }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "age"
-  }, "Food Category: "), /*#__PURE__*/React.createElement("input", {
-    id: "domoAge",
+  }, "Age: "), /*#__PURE__*/React.createElement("input", {
+    id: "recipeAge",
     type: "text",
     name: "age",
-    placeholder: "Food Category"
+    placeholder: "Recipe Age"
   }), /*#__PURE__*/React.createElement("input", {
     id: "csrfToken",
     type: "hidden",
     name: "_csrf",
     value: props.csrf
   }), /*#__PURE__*/React.createElement("input", {
-    className: "makeDomoSubmit",
+    className: "makeRecipeSubmit",
     type: "submit",
-    value: "Add Recipe!"
+    value: "Add Recipe"
   }));
 };
 
-var DomoList = function DomoList(props) {
-  if (props.domos.length === 0) {
+var RecipeList = function RecipeList(props) {
+  if (props.recipes.length === 0) {
     return /*#__PURE__*/React.createElement("div", {
-      className: "domoList"
+      className: "recipeList"
     }, /*#__PURE__*/React.createElement("h3", {
-      className: "emptyDomo"
+      className: "emptyRecipe"
     }, "No Recipes Listed!"));
   }
 
-  var domoNodes = props.domos.map(function (domo) {
+  var recipeNodes = props.recipes.map(function (recipe) {
     return /*#__PURE__*/React.createElement("div", {
-      key: domo._id,
-      className: "domo"
+      key: recipe._id,
+      className: "recipe"
     }, /*#__PURE__*/React.createElement("img", {
-      src: "/assets/img/domoface.png",
-      alt: "domo face",
-      className: "domoFace"
+      src: "/assets/img/cartIcon.jpeg",
+      alt: "recipe cart icon",
+      className: "cartIcon"
     }), /*#__PURE__*/React.createElement("h3", {
-      className: "domoName"
-    }, "Recipe Name: ", domo.name), /*#__PURE__*/React.createElement("h3", {
-      className: "domoAge"
-    }, "Food Category: ", domo.age));
+      className: "recipeName"
+    }, "Recipe Name: ", recipe.name), /*#__PURE__*/React.createElement("h3", {
+      className: "recipeAge"
+    }, "Category: ", recipe.age));
   });
   return /*#__PURE__*/React.createElement("div", {
-    className: "domoList"
-  }, domoNodes);
+    className: "recipeList"
+  }, recipeNodes);
 };
 
-var loadDomosFromServer = function loadDomosFromServer(csrf) {
-  sendAjax('GET', '/getDomos', null, function (data) {
-    ReactDOM.render( /*#__PURE__*/React.createElement(DomoList, {
+var loadRecipesFromServer = function loadRecipesFromServer(csrf) {
+  sendAjax('GET', '/getRecipeItems', null, function (data) {
+    ReactDOM.render( /*#__PURE__*/React.createElement(RecipeList, {
       csrf: csrf,
-      domos: data.domos
-    }), document.querySelector("#domos"));
+      recipes: data.recipes
+    }), document.querySelector("#recipes"));
   });
 };
 
 var setup = function setup(csrf) {
-  ReactDOM.render( /*#__PURE__*/React.createElement(DomoForm, {
+  ReactDOM.render( /*#__PURE__*/React.createElement(RecipeForm, {
     csrf: csrf
-  }), document.querySelector("#makeDomo"));
-  ReactDOM.render( /*#__PURE__*/React.createElement(DomoList, {
+  }), document.querySelector("#makeRecipe"));
+  ReactDOM.render( /*#__PURE__*/React.createElement(RecipeList, {
     csrf: csrf,
-    domos: []
-  }), document.querySelector("#domos"));
-  loadDomosFromServer(csrf);
+    recipes: []
+  }), document.querySelector("#recipes"));
+  loadRecipesFromServer(csrf);
 };
 
 var getToken = function getToken() {
@@ -114,13 +114,13 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#domoMessage").animate({
+  $("#recipeMessage").animate({
     width: 'toggle'
   }, 350);
 };
 
 var redirect = function redirect(response) {
-  $("#domoMessage").animate({
+  $("#recipeMessage").animate({
     width: 'hide'
   }, 350);
   window.location = response.redirect;
