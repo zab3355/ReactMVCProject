@@ -1,9 +1,9 @@
 const models = require('../models');
 
-const Domo = models.Domo;
+const Recipe = models.Recipe;
 
 const makerPage = (req, res) => {
-  Domo.DomoModel.findByOwner(req.session.account._id, (err, docs) => {
+  Recipe.RecipeModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
       console.log(err);
       return res.status(400).json({
@@ -13,37 +13,37 @@ const makerPage = (req, res) => {
 
     return res.render('app', {
       csrfToken: req.csrfToken(),
-      domos: docs,
+      recipes: docs,
     });
   });
 };
 
-const makeDomo = (req, res) => {
+const makeRecipe = (req, res) => {
   if (!req.body.name || !req.body.age) {
     return res.status(400).json({
       error: 'RAWR! Both name and age are required',
     });
   }
 
-  const domoData = {
+  const recipeData = {
     name: req.body.name,
     age: req.body.age,
     owner: req.session.account._id,
   };
 
-  const newDomo = new Domo.DomoModel(domoData);
+  const newRecipe = new Recipe.RecipeModel(recipeData);
 
-  const domoPromise = newDomo.save();
+  const recipePromise = newRecipe.save();
 
-  domoPromise.then(() => res.json({
-    redirect: '/maker',
+  recipePromise.then(() => res.json({
+    redirect: '/addRecipe',
   }));
 
-  domoPromise.catch((err) => {
+  recipePromise.catch((err) => {
     console.log(err);
     if (err.code === 11000) {
       return res.status(400).json({
-        error: 'Domo already exists.',
+        error: 'Recipe already exists.',
       });
     }
 
@@ -52,53 +52,53 @@ const makeDomo = (req, res) => {
     });
   });
 
-  return domoPromise;
+  return recipePromise;
 };
 
-//added a remove page to delete a domo
+//added a remove page to delete a recipe
 const removePage = (req, res) => {
-  Domo.DomoModel.findByOwner(req.session.account._id, (err, docs) => {
+  Recipe.RecipeModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
       console.log(err);
       return res.status(400).json({ error: 'An error occurred' });
     }
 
-    return res.render('remove', { csrfToken: req.csrfToken(), domos: docs });
+    return res.render('remove', { csrfToken: req.csrfToken(), recipes: docs });
   });
 };
 
 
-const getDomos = (request, response) => {
+const getRecipeItems = (request, response) => {
   const req = request;
   const res = response;
   
-  return Domo.DomoModel.findByOwner(req.session.account._id, (err, docs) => {
+  return Recipe.RecipeModel.findByOwner(req.session.account._id, (err, docs) => {
     if(err) {
       console.log(err);
       return res.status(400).json({ error: 'An error occurred'});
     }
     
-    return res.json({ domos: docs });
+    return res.json({ recipes: docs });
   });
 };
 
 
-const removeDomo = (request, response) => {
+const removeRecipe = (request, response) => {
     const req = request;
     const res = response;
     
-    return Domo.DomoModel.removeById(req.body._id, (err, docs) => {
+    return Recipe.RecipeModel.removeById(req.body._id, (err, docs) => {
         if (err) {
           console.log(err);
           return res.status(400).json({ error: 'An error occurred' });
         }
 
-        return res.json({ domos: docs });
+        return res.json({ recipes: docs });
     });
 };
 
 module.exports.makerPage = makerPage;
-module.exports.getDomos = getDomos;
-module.exports.make = makeDomo;
+module.exports.getRecipeItems = getRecipeItems;
+module.exports.make = makeRecipe;
 module.exports.removePage = removePage;
-module.exports.remove = removeDomo;
+module.exports.remove = removeRecipe;
