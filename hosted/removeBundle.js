@@ -73,7 +73,7 @@ var RecipeList = function RecipeList(props) {
         return React.createElement(
             'div',
             { key: recipe._id, className: 'recipe' },
-            React.createElement('img', { src: '/assets/img/recipeface.jpeg', alt: 'recipe face', className: 'recipeFace' }),
+            React.createElement('img', { src: '/assets/img/cartIcon.png', alt: 'cart icon', className: 'cartIcon' }),
             React.createElement(
                 'h3',
                 { className: 'recipeName' },

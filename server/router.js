@@ -16,6 +16,7 @@ const router = (app) => {
   //app POSTs
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
+  app.post('/changePassword', mid.requiresLogin, controllers.Account.changePassword);
   app.post('/addRecipe', mid.requiresLogin, controllers.Recipe.make);
   app.post('/remove', mid.requiresLogin, controllers.Recipe.remove);
   app.post('/changePassword', mid.requiresLogin, controllers.Account.changePassword);

@@ -16,8 +16,8 @@ var handlePassChange = function handlePassChange(e) {
 };
 
 
-var ChangePasswordForm = function PasswordForm(props) {
-  //renders form
+var PasswordForm = function PasswordForm(props) {
+ //renders form
   return React.createElement(
     "form",
     { id: "passwordForm",
@@ -71,6 +71,14 @@ var ChangePasswordForm = function PasswordForm(props) {
 };
 
 
+var setupAccountPage = function setupAccountPage(csrf) {
+
+  var password = document.querySelector("#passwordContainer");
+  if (password) {
+    //renders form
+    ReactDOM.render(React.createElement(PasswordForm, { csrf: csrf }), document.querySelector("#updateForm"));
+  }
+};
 
 var getAccountToken = function getAccountToken() {
   sendAjax('GET', '/getToken', null, function (result) {
