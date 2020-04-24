@@ -83,8 +83,8 @@ const AboutWindow = (props) =>{
         onSubmit={handleAbout}
         action="/about"
         method='POST'
-        className="mainForm"
-    >
+        className="mainForm">
+       </form>
   );
 };
 
