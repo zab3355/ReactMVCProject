@@ -45,7 +45,7 @@ var RecipeForm = function RecipeForm(props) {
 
 /*#__PURE__*/React.createElement("select", {
     id: "foodCategory",
-    name: "Food Category",
+    name: "category",
   },
 /*#__PURE__*/React.createElement("option", {
     selected: "selected",
@@ -73,7 +73,7 @@ var RecipeForm = function RecipeForm(props) {
 
 /*#__PURE__*/React.createElement("select", {
     id: "priceCategory",
-    name: "Price",
+    name: "price",
   },
 /*#__PURE__*/React.createElement("option", {
     selected: "selected",
@@ -93,7 +93,7 @@ var RecipeForm = function RecipeForm(props) {
     value: "$$$$"
   }, "$$$$")),                                        
 /*#__PURE__*/React.createElement("select", {
-    id: "taste",
+    id: "tasteCategory",
     name: "taste",
   },
 /*#__PURE__*/React.createElement("option", {
@@ -146,7 +146,16 @@ var RecipeList = function RecipeList(props) {
       className: "recipeName"
     }, "Recipe Name: ", recipe.name), /*#__PURE__*/React.createElement("h3", {
       className: "recipeAge"
-    }, "Category: ", recipe.age));
+    }, "Age: ", recipe.age),
+/*#__PURE__*/React.createElement("h3", {
+      className: "foodCategory"
+    }, "Category: ", recipe.category),
+/*#__PURE__*/React.createElement("h3", {
+      className: "tasteCategory"
+    }, "Taste: ", recipe.taste),
+/*#__PURE__*/React.createElement("h3", {
+      className: "priceCategory"
+    }, "Price: ", recipe.price));
   });
   return /*#__PURE__*/React.createElement("div", {
     className: "recipeList"

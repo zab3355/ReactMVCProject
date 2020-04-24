@@ -114,14 +114,21 @@ var SignupWindow = function SignupWindow(props) {
 };
 
 var AboutWindow = function AboutWindow(props) {
-  return /*#__PURE__*/React.createElement("form", {
+  return /*#__PURE__*/React.createElement("div", {
     id: "actionSection",
     name: "aboutSection",
-    onSubmit: handleAbout,
     action: "/about",
     method: "POST",
     className: "mainForm"
-  });
+  }, /*#__PURE__*/React.createElement("h1",  {
+    htmlFor: "title",
+    id: "titleAbout"
+  }, "About Recipe Resort"), 
+     /*#__PURE__*/React.createElement("p", {
+    htmlFor: "title",
+    id: "titleCaption"
+  }, "Welcome to Recipe Resort! Here you and other users can create and share your own recipes online! To get started please Signup, create a username and password, and then Login! After this, you will be able to create a recipe, store it into our database, and put whatever information you'd like on that Recipe. What are you waiting for? Get started and share your recipe today!"),
+);
 };
 
 var createLoginWindow = function createLoginWindow(csrf) {
@@ -173,3 +180,33 @@ var getToken = function getToken() {
 $(document).ready(function () {
   getToken();
 });
+"use strict";
+
+var handleError = function handleError(message) {
+  $("#errorMessage").text(message);
+  $("#recipeMessage").animate({
+    width: 'toggle'
+  }, 350);
+};
+
+var redirect = function redirect(response) {
+  $("#recipeMessage").animate({
+    width: 'hide'
+  }, 350);
+  window.location = response.redirect;
+};
+
+var sendAjax = function sendAjax(type, action, data, success) {
+  $.ajax({
+    cache: false,
+    type: type,
+    url: action,
+    data: data,
+    dataType: "json",
+    success: success,
+    error: function error(xhr, status, _error) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};
