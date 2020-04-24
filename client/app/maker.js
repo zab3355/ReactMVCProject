@@ -29,8 +29,7 @@ const RecipeForm = (props) =>{
     >
     <input id="recipeName" type="text" name="name" placeholder="Recipe Name" />
     <input id="recipeAge" type="text" name="age" placeholder="Recipe Age" />
-    <select className="selectBox" id="reactionLevel" name="level">
-            <option selected="selected" disabled="disabled" value="start">Rate the reaction:</option>
+
     <input id="foodCategory" type="text" name="category" placeholder="Food Category" />
     <label htmlFor="price">Price: </label>
     <input id="priceCategory" type="text" name="price" placeholder="Price" />
