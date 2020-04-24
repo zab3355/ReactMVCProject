@@ -28,6 +28,9 @@ const makeRecipe = (req, res) => {
   const recipeData = {
     name: req.body.name,
     age: req.body.age,
+    category: req.body.category,
+    price: req.body.price,
+    taste: req.body.taste,
     owner: req.session.account._id,
   };
 

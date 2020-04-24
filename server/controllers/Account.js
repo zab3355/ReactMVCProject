@@ -83,46 +83,36 @@ const signup = (request, response) => {
 };
 
 //Change password method
-const changePassword = (require, response) => {
-  const req = require;
+const changePassword = (request, response) => {
+  const req = request;
   const res = response;
-    
-  // Fields required to create new password 
-  req.body.oldPass = `${req.body.oldPass}`;
-  req.body.newPass = `${req.body.newPass}`;
-  req.body.newPass2 = `${req.body.newPass2}`;
-  
-  if (req.body.newPass !== req.body.newPass2) {
-    return res.status(400).json({ error: 'New passwords do not match!' });
-  }
-  
-  if (req.body.oldPass === req.body.newPass) {
-    return res.status(400).json({ error: 'Your current password cannot match your new password!' });
-  }
-    
-  const username = req.session.account.username;
-  
-  return Account.AccountModel.authenticate(username, req.body.oldPass, (error, account) => {
-    if (error || !username) {
-      return response.status(401).json({ error: 'Current Password is incorrect' });
-    }
 
-    
-    const newAccount = account;
-    
-    return Account.AccountModel.generateHash(req.body.newPass, (salt, hash) => {
-      newAccount.password = hash;
-      newAccount.salt = salt;
-      
-      const savePromise = newAccount.save();
-      
-      savePromise.catch((err) => {
-        res.json(err);
+  // creates account
+  Account.AccountModel.authenticate(
+    req.session.account.username,
+    req.body.oldPassword,
+    // eslint-disable-next-line consistent-return
+    (err, doc) => {
+      if (err) {
+        return res.status(400).json({ err });
+      }
+
+      if (!doc) {
+        return res.status(400).json({ err: 'invalid credentials' });
+      }
+
+      Account.AccountModel.generateHash(req.body.newPass1, (salt, hash) => {
+        Account.AccountModel.updateOne({ username: req.session.account.username },
+          { salt, password: hash }, (error) => {
+            if (err) {
+              return res.status(400).json({ error });
+            }
+
+            return res.json({ message: 'password changed' });
+          });
       });
-      
-      savePromise.then(() => res.json({ redirect: '/logout' }));
-    });
-  });
+    },
+  );
 };
 
 const getToken = (request, response) => {

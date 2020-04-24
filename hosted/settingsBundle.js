@@ -70,6 +70,12 @@ var PasswordForm = function PasswordForm(props) {
   );
 };
 
+var setupPassChangeForm = function setupPassChangeForm(csrf) {
+  ReactDOM.render(React.createElement(ChangePassForm, {
+    csrf: csrf
+  }), document.querySelector("#changePassForm"));
+  }
+};
 
 var setupAccountPage = function setupAccountPage(csrf) {
 
@@ -119,3 +125,18 @@ var sendAjax = function sendAjax(type, action, data, success) {
     }
   });
 };
+var sendGenericAjax = function sendGenericAjax(method, action, data, callback) {
+  $.ajax({
+    cache: false,
+    type: method,
+    url: action,
+    data: data,
+    dataType: 'json',
+    success: callback,
+    error: function error(xhr, status, _error2) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};
+

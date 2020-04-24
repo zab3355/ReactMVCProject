@@ -89,6 +89,27 @@ var RecipeList = function RecipeList(props) {
                 ' '
             ),
             React.createElement(
+                'p',
+                { className: 'foodCategory' },
+                'Food Category: ',
+                recipe.category,
+                ' '
+            ),
+            React.createElement(
+                'p',
+                { className: 'tasteCategory' },
+                'Taste: ',
+                recipe.taste,
+                ' '
+            ),
+            React.createElement(
+                'p',
+                { className: 'priceCategory' },
+                'Price: ',
+                recipe.price,
+                ' '
+            ),
+            React.createElement(
                 'form',
                 { name: 'recipeForm',
                     onSubmit: removeRecipe,
