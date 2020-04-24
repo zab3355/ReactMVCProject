@@ -11,6 +11,7 @@ const router = (app) => {
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
   app.get('/addRecipe', mid.requiresLogin, controllers.Recipe.makerPage);
   app.get('/remove', mid.requiresLogin, controllers.Recipe.removePage);
+  app.get('/about', mid.requiresLogin, controllers.Recipe.about);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
     
   //app POSTs

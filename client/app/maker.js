@@ -49,7 +49,7 @@ const RecipeList = function(props){
   const recipeNodes = props.recipes.map(function(recipe){
     return(
       <div key={recipe._id} className="recipe">
-        <img src="/assets/img/cartIcon.jpeg" alt="recipe cart icon" className="cartIcon" />
+        <img src="/assets/img/cartIcon.png" alt="recipe cart icon" className="cartIcon" />
         <h3 className="recipeName">Recipe Name: {recipe.name}</h3>
         <h3 className="recipeAge">Category: {recipe.age}</h3>  
       </div>

@@ -36,6 +36,9 @@ var handleSignup = function handleSignup(e) {
   return false;
 };
 
+var handleAbout = function handleAbout(e) {
+  e.preventDefault();
+};
 
 var LoginWindow = function LoginWindow(props) {
   return /*#__PURE__*/React.createElement("form", {
@@ -84,24 +87,21 @@ var SignupWindow = function SignupWindow(props) {
     id: "user",
     type: "text",
     name: "username",
-    placeholder: "username",
-    className: "textBox"
+    placeholder: "username"
   }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "pass"
   }, "Password: "), /*#__PURE__*/React.createElement("input", {
     id: "pass",
     type: "password",
     name: "pass",
-    placeholder: "password",
-    className: "textBox",
+    placeholder: "password"
   }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "pass2"
   }, "Password: "), /*#__PURE__*/React.createElement("input", {
     id: "pass2",
     type: "password",
     name: "pass2",
-    placeholder: "retype password",
-    className: "textBox",
+    placeholder: "retype password"
   }), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
     name: "_csrf",
@@ -113,6 +113,23 @@ var SignupWindow = function SignupWindow(props) {
   }));
 };
 
+var AboutWindow = function AboutWindow(props) {
+  return /*#__PURE__*/React.createElement("div", {
+    id: "actionSection",
+    name: "aboutSection",
+    action: "/about",
+    method: "POST",
+    className: "mainForm"
+  }, /*#__PURE__*/React.createElement("h1",  {
+    htmlFor: "title",
+    id: "titleAbout"
+  }, "About Recipe Resort"), 
+     /*#__PURE__*/React.createElement("p", {
+    htmlFor: "title",
+    id: "titleCaption"
+  }, "Welcome to Recipe Resort! Here you and other users can create and share your own recipes online! To get started please Signup, create a username and password, and then Login! After this, you will be able to create a recipe, store it into our database, and put whatever information you'd like on that Recipe. What are you waiting for? Get started and share your recipe today!"),
+);
+};
 
 var createLoginWindow = function createLoginWindow(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(LoginWindow, {
@@ -126,9 +143,21 @@ var createSignupWindow = function createSignupWindow(csrf) {
   }), document.querySelector("#content"));
 };
 
+var createAboutWindow = function createAboutWindow(csrf) {
+  ReactDOM.render( /*#__PURE__*/React.createElement(AboutWindow, {
+    csrf: csrf
+  }), document.querySelector("#content"));
+};
+
 var setup = function setup(csrf) {
   var loginButton = document.querySelector("#loginButton");
   var signupButton = document.querySelector("#signupButton");
+  var aboutButton = document.querySelector("#aboutButton");
+  aboutButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    createAboutWindow(csrf);
+    return false;
+  });
   signupButton.addEventListener("click", function (e) {
     e.preventDefault();
     createSignupWindow(csrf);
@@ -138,11 +167,9 @@ var setup = function setup(csrf) {
     e.preventDefault();
     createLoginWindow(csrf);
     return false;
-  }); // createNavBar();
-
-  createLoginWindow(csrf);
+  });
+  createLoginWindow(csrf); //default view
 };
-
 
 var getToken = function getToken() {
   sendAjax('GET', '/getToken', null, function (result) {
@@ -169,7 +196,6 @@ var redirect = function redirect(response) {
   window.location = response.redirect;
 };
 
-//Send Ajax Request
 var sendAjax = function sendAjax(type, action, data, success) {
   $.ajax({
     cache: false,

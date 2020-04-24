@@ -330,6 +330,20 @@ h3.recipeAge {
     margin-bottom:10px;
 }
 
+/* About Page */
+#titleAbout {
+    text-align: center;
+    background-color: #e6c4b3;
+    padding: .3em;
+    border: 1px solid black;
+}
+#titleCaption {
+    text-align: center;
+    background-color: #e6c4b3;
+    padding: 1em;
+    border: 1px solid black;
+}
+
 /* Password Change Page */
 .changePassword {
   transition: background-color 0.4s ease;

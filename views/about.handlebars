@@ -8,6 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.6.2/remarkable.min.js"></script>
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -19,42 +20,40 @@
   <link rel="shortcut icon" href="/assets/img/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
-    <body>
-            <!-- 
+<body> 
+    <!-- 
     Bootstrap code taken and modified from: https://startbootstrap.com/snippets/full-slider/ -->
     
-    <nav class="navbar navbar-expand-lg navbar-light  fixed-top">
-        <div class="container">
-            <a href="/login"><img id="logo" src="/assets/img/logo.png" alt="Recipe Resort logo"/></a>
-            <a class="navbar-brand" href="/login">Recipe Resort</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
+<nav class="navbar navbar-expand-lg navbar-light  fixed-top">
+  <div class="container">
+    <a href="/login"><img id="logo" src="/assets/img/logo.png" alt="Recipe Resort logo"/></a>
+    <a class="navbar-brand" href="/login">Recipe Resort</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
+          <a class="nav-link" id="loginButton"  href="/login">Login
+                <span class="sr-only">(current)</span>
+              </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/logout">Logout</a>
+          <a class="nav-link" id="signUpButton" href="/signup">Signup</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/remove">Delete Recipe</a>
+          <a class="nav-link" id="aboutButton" href="/about">About</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/changePassword">Change Password</a>
-        </li>
+
       </ul>
     </div>
   </div>
 </nav>
-  <section id="makeRecipe">
-  </section>
-  <section id="recipes">
-  </section>
-  <div id="recipeMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box" />
-    <h3><span id="errorMessage"></span></h3><img id="recipe" src="assets/img/errorIcon.png" alt="recipe" />
-  </div>
-  <script src="/assets/bundle.js"></script>
-</body>
 
-</html>
+  <section id="content">
+      <div id="about"></div>
+    </section>
+
+  <script src="/assets/loginBundle.js"></script>
+</body>
+</html>  

@@ -36,7 +36,7 @@ const handleSignup = (e) =>{
 };
 
 const handleAbout = (e) =>{
-
+  e.preventDefault();
 }
 
 const LoginWindow = (props) =>{
@@ -78,22 +78,13 @@ const SignupWindow = (props) =>{
 };
 
 const AboutWindow = (props) =>{
-  return(
+ return(
   <form id="actionSection" name="aboutSection"
-        onSubmit={handleLogin}
-        action="/login"
+        onSubmit={handleAbout}
+        action="/about"
         method='POST'
         className="mainForm"
     >
-    <label htmlFor="oldPass">Old Password: </label>
-    <input id="pass" type="text" name="oldPass" placeholder="Old Password" />
-    <label htmlFor="newPass">New Password: </label>
-    <input id="newPass" type="newPass" name="newPass" placeholder="New Password" />
-    <label htmlFor="newPass">Confirm New Password: </label>
-    <input id="newPass2" type="newPass2" name="newPass2" placeholder="New Password" />
-    <input type="hidden" name="_csrf" value={props.csrf} />
-    <input className="formSubmit" type="submit" value="Change Password" />
-  </form>
   );
 };
 

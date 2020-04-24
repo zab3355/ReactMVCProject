@@ -41,7 +41,33 @@ var RecipeForm = function RecipeForm(props) {
     type: "text",
     name: "age",
     placeholder: "Recipe Age"
-  }), /*#__PURE__*/React.createElement("input", {
+  }), 
+
+/*#__PURE__*/React.createElement("select", {
+    id: "foodCategory",
+    name: "Food Category",
+  },
+/*#__PURE__*/React.createElement("option", {
+    selected: "selected",
+    disabled: "disabled",
+    value: "start"
+  }, "Food Category:"),
+  React.createElement("option", {
+    value: "Chinese Cuisine"
+  }, "Chinese Cuisine"), React.createElement("option", {
+    value: "American Cuisine"
+  }, "American Cuisine"), React.createElement("option", {
+    value: "Mexican Cuisine"
+  }, "Mexican Cuisine"), React.createElement("option", {
+    value: "Indian Cuisine"
+  }, "Indian Cuisine"), 
+React.createElement("option", {
+    value: "Japanese Cuisine"
+  }, "Japanese Cuisine"), 
+React.createElement("option", {
+    value: "Italian Cuisine"
+  }, "Italian Cuisine")),       
+/*#__PURE__*/React.createElement("input", {
     id: "csrfToken",
     type: "hidden",
     name: "_csrf",

@@ -97,8 +97,15 @@ const removeRecipe = (request, response) => {
     });
 };
 
+const about = (request, response) => {
+    const req = request;
+    const res = response;
+    
+}
+
 module.exports.makerPage = makerPage;
 module.exports.getRecipeItems = getRecipeItems;
 module.exports.make = makeRecipe;
 module.exports.removePage = removePage;
 module.exports.remove = removeRecipe;
+module.exports.about = about;
