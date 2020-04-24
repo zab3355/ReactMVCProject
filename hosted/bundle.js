@@ -52,21 +52,67 @@ var RecipeForm = function RecipeForm(props) {
     disabled: "disabled",
     value: "start"
   }, "Food Category:"),
-  React.createElement("option", {
+/*#__PURE__*/React.createElement("option", {
     value: "Chinese Cuisine"
-  }, "Chinese Cuisine"), React.createElement("option", {
+  }, "Chinese Cuisine"),
+/*#__PURE__*/React.createElement("option", {
     value: "American Cuisine"
-  }, "American Cuisine"), React.createElement("option", {
+  }, "American Cuisine"), 
+/*#__PURE__*/React.createElement("option", {
     value: "Mexican Cuisine"
-  }, "Mexican Cuisine"), React.createElement("option", {
+  }, "Mexican Cuisine"), 
+/*#__PURE__*/React.createElement("option", {
     value: "Indian Cuisine"
-  }, "Indian Cuisine"), 
-React.createElement("option", {
+  }, "Indian Cuisine"),
+/*#__PURE__*/React.createElement("option", {
     value: "Japanese Cuisine"
   }, "Japanese Cuisine"), 
-React.createElement("option", {
+/*#__PURE__*/React.createElement("option", {
     value: "Italian Cuisine"
-  }, "Italian Cuisine")),       
+  }, "Italian Cuisine")), 
+
+/*#__PURE__*/React.createElement("select", {
+    id: "priceCategory",
+    name: "Price",
+  },
+/*#__PURE__*/React.createElement("option", {
+    selected: "selected",
+    disabled: "disabled",
+    value: "start"
+  }, "Price:"),
+/*#__PURE__*/React.createElement("option", {
+    value: "$"
+  }, "$"),
+/*#__PURE__*/React.createElement("option", {
+    value: "$$"
+  }, "$$"), 
+/*#__PURE__*/React.createElement("option", {
+    value: "$$$"
+  }, "$$$"), 
+/*#__PURE__*/React.createElement("option", {
+    value: "$$$$"
+  }, "$$$$")),                                        
+/*#__PURE__*/React.createElement("select", {
+    id: "taste",
+    name: "taste",
+  },
+/*#__PURE__*/React.createElement("option", {
+    selected: "selected",
+    disabled: "disabled",
+    value: "start"
+  }, "Taste:"),
+/*#__PURE__*/React.createElement("option", {
+    value: "Sour"
+  }, "Sour"),
+/*#__PURE__*/React.createElement("option", {
+    value: "Sweet"
+  }, "Sweet"), 
+/*#__PURE__*/React.createElement("option", {
+    value: "Spicy"
+  }, "Spicy"), 
+/*#__PURE__*/React.createElement("option", {
+    value: "Bitter"
+  }, "Bitter")),                                               
 /*#__PURE__*/React.createElement("input", {
     id: "csrfToken",
     type: "hidden",
