@@ -97,13 +97,8 @@ const removeRecipe = (request, response) => {
     });
 };
 
-const about = (response) => {
-    const res = response;
-    
-    if(err) {
-      console.log(err);
-      return res.status(400).json({ error: 'An error occurred'});
-    }
+const about = () => {
+
 }
 
 module.exports.makerPage = makerPage;
