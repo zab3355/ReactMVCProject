@@ -101,6 +101,7 @@ const about = (request, response) => {
     const req = request;
     const res = response;
     
+    return res.json({ recipes: docs });
 }
 
 module.exports.makerPage = makerPage;
