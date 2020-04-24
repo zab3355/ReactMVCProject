@@ -46,6 +46,7 @@ var RecipeForm = function RecipeForm(props) {
 /*#__PURE__*/React.createElement("select", {
     id: "foodCategory",
     name: "category",
+    className: "select-option-category",
   },
 /*#__PURE__*/React.createElement("option", {
     selected: "selected",
@@ -74,6 +75,7 @@ var RecipeForm = function RecipeForm(props) {
 /*#__PURE__*/React.createElement("select", {
     id: "priceCategory",
     name: "price",
+    className: "select-option-price",
   },
 /*#__PURE__*/React.createElement("option", {
     selected: "selected",
@@ -95,6 +97,7 @@ var RecipeForm = function RecipeForm(props) {
 /*#__PURE__*/React.createElement("select", {
     id: "tasteCategory",
     name: "taste",
+    className: "select-option-taste",
   },
 /*#__PURE__*/React.createElement("option", {
     selected: "selected",
@@ -169,6 +172,70 @@ var loadRecipesFromServer = function loadRecipesFromServer(csrf) {
       recipes: data.recipes
     }), document.querySelector("#recipes"));
   });
+};
+
+
+var handleChangePass = function handleChangePass(e) {
+  e.preventDefault();
+
+  if ($('#oldPass').val() == '' || $('#newPass').val() == '' || $('#newPass2').val() == '') {
+    handleError('All fields are required');
+    return false;
+  }
+
+  if ($('#newPass').val() !== $('#newPass2').val()) {
+    handleError('Passwords do not match');
+    return false;
+  }
+
+  /* Otherwise continue loading new page */
+
+  sendAjax($('#changePassword').attr('action'), $('#changePassword').serialize(), function (data) {
+    handleSuccess('Password changed');
+  });
+  return false;
+};
+
+
+var ChangePassForm = function ChangePassForm(props) {
+  // webkit text security from https://stackoverflow.com/questions/1648665/changing-the-symbols-shown-in-a-html-password-field -->
+  return React.createElement("form", {
+    id: "changePassword",
+    name: "changePassword",
+    action: "/changePassword",
+    method: "POST",
+    onSubmit: handlePassChange
+  }, React.createElement("input", {
+    id: "oldPass",
+    type: "text",
+    name: "oldPass",
+    placeholder: "Old Password"
+  }), React.createElement("input", {
+    id: "newPass",
+    type: "text",
+    name: "newPass",
+    placeholder: "New Password"
+  }), React.createElement("input", {
+    id: "newPass2",
+    type: "text",
+    name: "newPass2",
+    placeholder: "Retype New Password"
+  }), React.createElement("input", {
+    type: "hidden",
+    name: "_csrf",
+    value: props.csrf
+  }), React.createElement("input", {
+    className: "formSubmit",
+    type: "submit",
+    value: "Change Password"
+  }));
+};
+
+
+var setupPassChangeForm = function setupPassChangeForm(csrf) {
+  ReactDOM.render(React.createElement(ChangePassForm, {
+    csrf: csrf
+  }), document.querySelector("#changePassForm"));
 };
 
 var setup = function setup(csrf) {

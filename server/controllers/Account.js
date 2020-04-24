@@ -90,7 +90,7 @@ const changePassword = (request, response) => {
   // creates account
   Account.AccountModel.authenticate(
     req.session.account.username,
-    req.body.oldPassword,
+    req.body.oldPass,
     // eslint-disable-next-line consistent-return
     (err, doc) => {
       if (err) {
@@ -101,7 +101,7 @@ const changePassword = (request, response) => {
         return res.status(400).json({ err: 'invalid credentials' });
       }
 
-      Account.AccountModel.generateHash(req.body.newPass1, (salt, hash) => {
+      Account.AccountModel.generateHash(req.body.newPass, (salt, hash) => {
         Account.AccountModel.updateOne({ username: req.session.account.username },
           { salt, password: hash }, (error) => {
             if (err) {

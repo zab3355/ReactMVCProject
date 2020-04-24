@@ -1,3 +1,5 @@
+module.exports.Account = require('./Account.js');
+
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const _ = require('underscore');
