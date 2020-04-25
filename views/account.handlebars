@@ -37,23 +37,25 @@
           <a class="nav-link" href="/addRecipe">Add Recipe</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/remove">Delete Recipe</a>
+          <a class="nav-link" href="/deleteRecipe">Delete Recipe</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
     <!-- Page Content -->
-  <section id ="accountPage">
+  <section class="accountPage">
   <div class="account">
     {{#if userInfo}}
-    <h2>Username: {{userInfo.username}}</h2>
+        <h3 id="titleChangePass">Hello! Change your password here {{userInfo.username}}!</h3>
+        <div id="changePassForm"></div>
     {{/if}}
   </div>
-  <div id="changePassForm"></div>
+
     </section>
+<script src="/assets/settingsBundle.js"></script>
   <div id="recipeMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>
     <h3><span id="errorMessage"></span></h3><img id="recipe" src="assets/img/errorIcon.png" alt="recipe"/>
   </div>
-  <script src="/assets/bundle.js"></script>
+
 </body>

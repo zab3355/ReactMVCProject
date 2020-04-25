@@ -8,13 +8,17 @@ const handleRecipe = (e) =>{
     return false;
   }
   
-  sendAjax('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function(){
+  sendGenericAjax('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function(){
     
     //get csrf token to send to new Recipe
     const csrf = document.querySelector('#recipeForm').querySelector('#csrfToken').value;
     
     loadRecipesFromServer(csrf);
   });
+    
+  $('#tasteCategory').value = '';
+  $('#priceCategory').value = '';
+  $('#foodCategory').value = 'start';
   
   return false;
 };
@@ -27,17 +31,33 @@ const RecipeForm = (props) =>{
         method='POST'
         className="recipeForm"
     >
-    <input id="recipeName" type="text" name="name" placeholder="Recipe Name" />
-    <input id="recipeAge" type="text" name="age" placeholder="Recipe Age" />
-    
-    <select className="selectBox" id="reactionLevel" name="level">
-            <option selected="selected" disabled="disabled" value="start">Rate the reaction:</option>
+    <input id="recipeName" type="text" name="name" placeholder="Recipe Name" />    
+    <select className="select-option" id="foodCategory" name="category">
+            <option selected="selected" disabled="disabled" value="start">Food Category: </option>
+            <option value="Chinese Cuisine">Chinese Cuisine</option>
+            <option value="American Cuisine">American Cuisine</option>
+            <option value="Mexican Cuisine">Mexican Cuisine</option>
+            <option value="Indian Cuisine">Indian Cuisine</option>
+            <option value="Indian Cuisine">Indian Cuisine</option>
+            <option value="Japanese Cuisine">Japanese Cuisine</option>
+            <option value="Italian Cuisine">Italian Cuisine</option>
       </select>
-    <input id="foodCategory" type="text" name="category" placeholder="Food Category" />
-    <label htmlFor="price">Price: </label>
-    <input id="priceCategory" type="text" name="price" placeholder="Price" />
-    <label htmlFor="taste">Taste: </label>
-    <input id="tasteCategory" type="text" name="taste" placeholder="Taste" />
+      
+    <select className="select-option" id="priceCateogry" name="price">
+            <option selected="selected" disabled="disabled" value="start">Price: </option>
+            <option value="$">$</option>
+            <option value="$$">$$</option>
+            <option value="$$$">$$$</option>
+            <option value="$$$$">$$$$</option>
+      </select>
+      
+    <select className="select-option" id="tasteCategory" name="taste">
+            <option selected="selected" disabled="disabled" value="start">Price: </option>
+            <option value="Sour">Sour</option>
+            <option value="Sweet">Sweet</option>
+            <option value="Spicy">Spicy</option>
+            <option value="Bitter">Bitter</option>
+      </select>
     <input id="csrfToken" type="hidden" name="_csrf" value={props.csrf} />
     <input className="makeRecipeSubmit" type="submit" value="Add Recipe" />
   </form>
@@ -51,14 +71,13 @@ const RecipeList = function(props){
         <h3 className="emptyRecipe">No Recipes Listed!</h3>
       </div>
     );
-  }
+  };
   
   const recipeNodes = props.recipes.map(function(recipe){
     return(
       <div key={recipe._id} className="recipe">
         <img src="/assets/img/cartIcon.png" alt="recipe cart icon" className="cartIcon" />
-        <h3 className="recipeName">Recipe Name: {recipe.name}</h3>
-        <h3 className="recipeAge">Age: {recipe.age}</h3>  
+        <h3 className="recipeName">Recipe Name: {recipe.name}</h3> 
         <p className="foodCategory">Category: {recipe.category}</p>
         <p className="tasteCategory">Taste: {recipe.taste}</p>
         <p className="priceCategory">Price: {recipe.price}</p>
@@ -73,31 +92,7 @@ const RecipeList = function(props){
   );
 };
 
-
-  const ChangePassForm = (props) => {
-    // webkit text security from https://stackoverflow.com/questions/1648665/changing-the-symbols-shown-in-a-html-password-field -->
-    return (
-      <form id="changePassword" name="changePassword" 
-      action="/changePassword" method="POST" 
-      class="mealForm" onSubmit={handleChangePass}>
-        <input className="textBox add" id="oldPass" type="text" name="oldPass" placeholder="Old Password" />
-        <input className="textBox add" id="newPass" type="text" name="newPass" placeholder="New Password" />
-        <input className="textBox add" id="newPass2" type="text" name="newPass2" placeholder="Repeat New Password" />
-        <input type="hidden" name="_csrf" value={props.csrf} />
-        <input className="formSubmit" type="submit" value="Change Password" />
-        <div className="alert alert-danger" role="alert" id="error">Error</div>
-        <div className="alert alert-success" role="alert" id="success">Success</div>
-    </form>
-    )
-  };
-
-const setupPassChangeForm = function(csrf) {
-    ReactDOM.render(
-        <ChangePassForm csrf={csrf} />, document.querySelector("#changePassForm")
-    ); 
-};
-
-
+// Handling Password Change Form
 const handleChangePass = (e) => {
     e.preventDefault();
     $('#error').fadeOut(200);
@@ -122,6 +117,29 @@ const handleChangePass = (e) => {
   };
 
 
+//Password Change Form
+  const ChangePassForm = (props) => {
+    // webkit text security from https://stackoverflow.com/questions/1648665/changing-the-symbols-shown-in-a-html-password-field -->
+    return (
+      <form id="changePassword" name="changePassword" 
+      action="/changePassword" method="POST" 
+      class="recipeForm" onSubmit={handleChangePass}>
+        <input id="oldPass" type="text" name="oldPass" placeholder="Old Password" />
+        <input id="newPass" type="text" name="newPass" placeholder="New Password" />
+        <input id="newPass2" type="text" name="newPass2" placeholder="Repeat New Password" />
+        <input type="hidden" name="_csrf" value={props.csrf} />
+        <input className="formSubmit" type="submit" value="Change Password" />
+    </form>
+    )
+  };
+
+//Password Change Form Setup
+const setupPassChangeForm = function(csrf) {
+    ReactDOM.render(
+        <ChangePassForm csrf={csrf} />, document.querySelector("#changePassForm")
+    );
+};
+
 const loadRecipesFromServer = (csrf) =>{
   sendAjax('GET', '/getRecipeItems', null, (data) =>{
     ReactDOM.render(
@@ -129,56 +147,6 @@ const loadRecipesFromServer = (csrf) =>{
       document.querySelector("#recipes")
     );
   });
-};
-
-
-const handleChangePass = (e) => {
-    e.preventDefault();
-    $('#error').fadeOut(200);
-  
-    if ($('#oldPass').val() == '' || $('#newPass').val() == '' || $('#newPass2').val() == '') {
-      handleError('All fields are required');
-      return false;
-    }
-  
-    if ($('#newPass').val() !== $('#newPass2').val()) {
-      handleError('Passwords do not match');
-      return false;
-    }
-  
-    $('#error').fadeIn(200);
-    /* Otherwise continue loading new page */
-    sendAjaxWithCallback($('#changePassword').attr('action'), $('#changePassword').serialize(), (data) => {
-      handleSuccess('Password changed');
-    });
-  
-    return false;
-  };
-
-
-
-  const ChangePassForm = (props) => {
-    // webkit text security from https://stackoverflow.com/questions/1648665/changing-the-symbols-shown-in-a-html-password-field -->
-    return (
-      <form id="changePassword" name="changePassword" 
-      action="/changePassword" method="POST" 
-      class="mealForm" onSubmit={handleChangePass}>
-        <input className="textBox add" id="oldPass" type="text" name="oldPassword" placeholder="Old Password" />
-        <input className="textBox add" id="newPass" type="text" name="newPass" placeholder="New Password" />
-        <input className="textBox add" id="newPass2" type="text" name="newPass2" placeholder="Repeat New Password" />
-        <input type="hidden" name="_csrf" value={props.csrf} />
-        <input className="formSubmit" type="submit" value="Change Password" />
-        <div className="alert alert-danger" role="alert" id="error">Error</div>
-        <div className="alert alert-success" role="alert" id="success">Success</div>
-    </form>
-    )
-  };
-
-
-const setupPassChangeForm = function(csrf) {
-    ReactDOM.render(
-        <ChangePassForm csrf={csrf} />, document.querySelector("#changePassForm")
-    );
 };
 
 const setup = function(csrf){
@@ -195,7 +163,7 @@ const setup = function(csrf){
   loadRecipesFromServer(csrf);
 };
 
-const getToken = () =>{
+const getToken = (url) =>{
   sendAjax('GET', '/getToken', null, (result) =>{
     
     if(window.location.href.indexOf("maker") > -1){

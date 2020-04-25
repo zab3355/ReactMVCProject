@@ -6,16 +6,21 @@ var handleRecipe = function handleRecipe(e) {
     width: 'hide'
   }, 350);
 
-  if ($("#recipeName").val() == '' || $("#recipeAge").val() == '') {
+  if ($("#recipeName").val() == '' || $("#foodCategory").val() == '' || $("#priceCategory").val() == '' || $("#tasteCategory").val() == '') {
     handleError("All fields are required!");
     return false;
   }
 
-  sendAjax('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function () {
+  sendGenericAjax('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function () {
     //get csrf token to send to new Recipe
     var csrf = document.querySelector('#recipeForm').querySelector('#csrfToken').value;
     loadRecipesFromServer(csrf);
   });
+    
+  $('#tasteCategory').value = '';
+  $('#priceCategory').value = '';
+  $('#foodCategory').value = 'start';
+    
   return false;
 };
 
@@ -27,26 +32,16 @@ var RecipeForm = function RecipeForm(props) {
     action: "/addRecipe",
     method: "POST",
     className: "recipeForm"
-  }, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "name"
-  }, "Name: "), /*#__PURE__*/React.createElement("input", {
+  },/*#__PURE__*/React.createElement("input", {
     id: "recipeName",
     type: "text",
     name: "name",
     placeholder: "Recipe Name"
-  }), /*#__PURE__*/React.createElement("label", {
-    htmlFor: "age"
-  }, "Age: "), /*#__PURE__*/React.createElement("input", {
-    id: "recipeAge",
-    type: "text",
-    name: "age",
-    placeholder: "Recipe Age"
   }), 
-
 /*#__PURE__*/React.createElement("select", {
     id: "foodCategory",
     name: "category",
-    className: "select-option-category",
+    className: "select-option",
   },
 /*#__PURE__*/React.createElement("option", {
     selected: "selected",
@@ -75,7 +70,7 @@ var RecipeForm = function RecipeForm(props) {
 /*#__PURE__*/React.createElement("select", {
     id: "priceCategory",
     name: "price",
-    className: "select-option-price",
+    className: "select-option",
   },
 /*#__PURE__*/React.createElement("option", {
     selected: "selected",
@@ -97,7 +92,7 @@ var RecipeForm = function RecipeForm(props) {
 /*#__PURE__*/React.createElement("select", {
     id: "tasteCategory",
     name: "taste",
-    className: "select-option-taste",
+    className: "select-option",
   },
 /*#__PURE__*/React.createElement("option", {
     selected: "selected",
@@ -147,9 +142,7 @@ var RecipeList = function RecipeList(props) {
       className: "cartIcon"
     }), /*#__PURE__*/React.createElement("h3", {
       className: "recipeName"
-    }, "Recipe Name: ", recipe.name), /*#__PURE__*/React.createElement("h3", {
-      className: "recipeAge"
-    }, "Age: ", recipe.age),
+    }, "Recipe Name: ", recipe.name),
 /*#__PURE__*/React.createElement("h3", {
       className: "foodCategory"
     }, "Category: ", recipe.category),
@@ -175,68 +168,6 @@ var loadRecipesFromServer = function loadRecipesFromServer(csrf) {
 };
 
 
-var handleChangePass = function handleChangePass(e) {
-  e.preventDefault();
-
-  if ($('#oldPass').val() == '' || $('#newPass').val() == '' || $('#newPass2').val() == '') {
-    handleError('All fields are required');
-    return false;
-  }
-
-  if ($('#newPass').val() !== $('#newPass2').val()) {
-    handleError('Passwords do not match');
-    return false;
-  }
-
-  /* Otherwise continue loading new page */
-
-  sendAjax($('#changePassword').attr('action'), $('#changePassword').serialize(), function (data) {
-    handleSuccess('Password changed');
-  });
-  return false;
-};
-
-
-var ChangePassForm = function ChangePassForm(props) {
-  // webkit text security from https://stackoverflow.com/questions/1648665/changing-the-symbols-shown-in-a-html-password-field -->
-  return React.createElement("form", {
-    id: "changePassword",
-    name: "changePassword",
-    action: "/changePassword",
-    method: "POST",
-    onSubmit: handlePassChange
-  }, React.createElement("input", {
-    id: "oldPass",
-    type: "text",
-    name: "oldPass",
-    placeholder: "Old Password"
-  }), React.createElement("input", {
-    id: "newPass",
-    type: "text",
-    name: "newPass",
-    placeholder: "New Password"
-  }), React.createElement("input", {
-    id: "newPass2",
-    type: "text",
-    name: "newPass2",
-    placeholder: "Retype New Password"
-  }), React.createElement("input", {
-    type: "hidden",
-    name: "_csrf",
-    value: props.csrf
-  }), React.createElement("input", {
-    className: "formSubmit",
-    type: "submit",
-    value: "Change Password"
-  }));
-};
-
-
-var setupPassChangeForm = function setupPassChangeForm(csrf) {
-  ReactDOM.render(React.createElement(ChangePassForm, {
-    csrf: csrf
-  }), document.querySelector("#changePassForm"));
-};
 
 var setup = function setup(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(RecipeForm, {
@@ -249,8 +180,8 @@ var setup = function setup(csrf) {
   loadRecipesFromServer(csrf);
 };
 
-var getToken = function getToken() {
-  sendAjax('GET', '/getToken', null, function (result) {
+var getToken = function getToken(url) {
+  sendGenericAjax('GET', '/getToken', null, function (result) {
     setup(result.csrfToken);
   });
 };
@@ -258,8 +189,8 @@ var getToken = function getToken() {
 $(document).ready(function () {
   getToken();
 });
-"use strict";
 
+//error handler
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
   $("#recipeMessage").animate({
@@ -274,6 +205,8 @@ var redirect = function redirect(response) {
   window.location = response.redirect;
 };
 
+//Functions for Ajax Requests
+
 var sendAjax = function sendAjax(type, action, data, success) {
   $.ajax({
     cache: false,
@@ -283,6 +216,35 @@ var sendAjax = function sendAjax(type, action, data, success) {
     dataType: "json",
     success: success,
     error: function error(xhr, status, _error) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};
+var sendGenericAjax = function sendGenericAjax(method, action, data, callback) {
+  $.ajax({
+    cache: false,
+    type: method,
+    url: action,
+    data: data,
+    dataType: 'json',
+    success: callback,
+    error: function error(xhr, status, _error2) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};
+
+var sendAjaxWithCallback = function sendAjaxWithCallback(action, data, callback) {
+  $.ajax({
+    cache: false,
+    type: 'POST',
+    url: action,
+    data: data,
+    dataType: 'json',
+    success: callback,
+    error: function error(xhr, status, error) {
       var messageObj = JSON.parse(xhr.responseText);
       handleError(messageObj.error);
     }

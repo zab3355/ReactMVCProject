@@ -10,24 +10,25 @@ const makerPage = (req, res) => {
         error: 'An error occurred',
       });
     }
-
     return res.render('app', {
       csrfToken: req.csrfToken(),
-      recipes: docs,
+      recipeData: docs,
     });
   });
 };
 
+
 const makeRecipe = (req, res) => {
-  if (!req.body.name || !req.body.age) {
+
+  if (!req.body.name) {
     return res.status(400).json({
-      error: 'RAWR! Both name and age are required',
+      error: 'Please fill out each field before continuing.',
     });
   }
+  
 
   const recipeData = {
     name: req.body.name,
-    age: req.body.age,
     category: req.body.category,
     price: req.body.price,
     taste: req.body.taste,
@@ -39,7 +40,7 @@ const makeRecipe = (req, res) => {
   const recipePromise = newRecipe.save();
 
   recipePromise.then(() => res.json({
-    redirect: '/addRecipe',
+    redirect: 'maker',
   }));
 
   recipePromise.catch((err) => {

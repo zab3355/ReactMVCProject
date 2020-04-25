@@ -1,5 +1,15 @@
 "use strict";
 
+var handleError = function handleError(message) {
+  $("#errorMessage").text(message);
+  $("#errorMessage").fadeIn(350);
+};
+
+var handleSuccess = function handleSuccess(message) {
+  $('#success').text = message;
+  $('#success').fadeIn(200);
+};
+
 var handleLogin = function handleLogin(e) {
   e.preventDefault();
   $("#recipeMessage").animate({
@@ -182,12 +192,6 @@ $(document).ready(function () {
 });
 "use strict";
 
-var handleError = function handleError(message) {
-  $("#errorMessage").text(message);
-  $("#recipeMessage").animate({
-    width: 'toggle'
-  }, 350);
-};
 
 var redirect = function redirect(response) {
   $("#recipeMessage").animate({

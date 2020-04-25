@@ -1,6 +1,8 @@
 const models = require('../models');
 
-const Account = models.Account;
+const { Account } = models;
+
+const AccountData = models.Account;
 
 // Renders Login page
 const loginPage = (req, res) => {
@@ -9,9 +11,15 @@ const loginPage = (req, res) => {
   });
 };
 
+// Logout destroys session
 const logout = (req, res) => {
   req.session.destroy();
   res.redirect('/');
+};
+
+// Renders 404 page
+const errorPage = (req, res) => {
+  res.render('error', { csrfToken: req.csrfToken() });
 };
 
 const login = (request, response) => {
@@ -82,12 +90,27 @@ const signup = (request, response) => {
   });
 };
 
+/* Renders account page */
+const settingsPage = (req, res) => {
+  AccountData.AccountModel.findByUsername(req.session.account.username, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occured' });
+    }
+    console.log(req.session.account);
+    return res.render('account', {
+      csrfToken: req.csrfToken(),
+      userInfo: req.session.account,
+    });
+  });
+};
+
 //Change password method
 const changePassword = (request, response) => {
   const req = request;
   const res = response;
 
-  // creates account
+  // creates settings
   Account.AccountModel.authenticate(
     req.session.account.username,
     req.body.oldPass,
@@ -128,7 +151,9 @@ const getToken = (request, response) => {
 
 module.exports.loginPage = loginPage;
 module.exports.login = login;
+module.exports.errorPage = errorPage;
 module.exports.logout = logout;
 module.exports.signup = signup;
 module.exports.getToken = getToken;
+module.exports.settingsPage = settingsPage;
 module.exports.changePassword = changePassword;

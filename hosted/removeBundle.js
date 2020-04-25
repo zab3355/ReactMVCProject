@@ -48,7 +48,7 @@ var removeRecipe = function removeRecipe(e) {
     
     var formData = '_id=' + getRecipeId.value + '&_csrf=' + csrfSelect.value;
 
-    sendAjax('POST', '/remove', formData, function () {
+    sendAjax('POST', '/deleteRecipe', formData, function () {
         loadRecipesFromServer();
     });
 
@@ -82,13 +82,6 @@ var RecipeList = function RecipeList(props) {
                 ' '
             ),
             React.createElement(
-                'h3',
-                { className: 'recipeAge' },
-                'Age: ',
-                recipe.age,
-                ' '
-            ),
-            React.createElement(
                 'p',
                 { className: 'foodCategory' },
                 'Food Category: ',
@@ -113,7 +106,7 @@ var RecipeList = function RecipeList(props) {
                 'form',
                 { name: 'recipeForm',
                     onSubmit: removeRecipe,
-                    action: '/remove',
+                    action: '/deleteRecipe',
                     method: 'POST',
                     className: 'removeRecipeForm'
                 },

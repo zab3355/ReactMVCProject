@@ -38,10 +38,10 @@ const PasswordForm = (props) => {
   );
 };
 
-const getAccountToken = () =>{
-  sendAjax('GET', '/getToken', null, (result)=>{
-    setupAccountPage(result.csrfToken);
-  });
+const getAccountToken = (url) =>{
+  sendAjax('GET', '/getAccountToken', null, (result) =>{
+ setupPassChangeForm(result.csrfToken);
+    });
 };
 
 $(document).ready(function(){

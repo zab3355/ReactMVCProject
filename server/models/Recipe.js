@@ -19,12 +19,22 @@ const RecipeSchema = new mongoose.Schema({
     set: setName,
   },
 
-  age: {
-    type: Number,
-    min: 0,
+  category: {
+    type: String,
+    default: 'Chinese Cuisine',
     required: true,
   },
-
+  price: {
+    type: String,
+    default: '$',
+    required: true,
+  },
+  taste: {
+    type: String,
+    default: 'Sour',
+    required: true,
+  },
+    
   owner: {
     type: mongoose.Schema.ObjectId,
     required: true,
@@ -39,7 +49,9 @@ const RecipeSchema = new mongoose.Schema({
 
 RecipeSchema.statics.toAPI = (doc) => ({
   name: doc.name,
-  age: doc.age,
+  category: doc.category,
+  price: doc.price,
+  taste: doc.taste,
 });
 
 RecipeSchema.statics.findByOwner = (ownerId, callback) => {
@@ -47,7 +59,7 @@ RecipeSchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertId(ownerId)
   };
   
-  return RecipeModel.find(search).select('name age').lean().exec(callback);
+  return RecipeModel.find(search).select('name category price taste').lean().exec(callback);
 };
 
 RecipeSchema.statics.removeById = (recipeId, callback) => {
@@ -55,6 +67,8 @@ RecipeSchema.statics.removeById = (recipeId, callback) => {
     _id: convertId(recipeId),
   };
 
+  return RecipeModel.find(search).select('name category price taste').exec(callback);
+    
   return RecipeModel.remove(search).exec(callback);
 };
 

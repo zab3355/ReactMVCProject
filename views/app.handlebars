@@ -38,19 +38,29 @@
           <a class="nav-link" href="/logout">Logout</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/remove">Delete Recipe</a>
+          <a class="nav-link" href="/deleteRecipe">Delete Recipe</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/changePassword">Change Password</a>
+          <a class="nav-link" href="/account">Change Password</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-      <section id="recipes">
+<h3 class="makeRecipeh3">Create a Recipe</h3>
+  <section id="recipes">
   </section>
   <section id="makeRecipe">
   </section>
+        
+      <div class="search">
+        <h3 class="searchRecipeh3">Search Recipe</h3>
+          <form class="searchForm" name="searchForm" method="GET">
+            <input type="text" class="searchForm input" placeholder="Search By Recipe Name">
+            <button class="formSubmit" type="button" onclick="searchData()">Search Recipe</button>
+            </form>
+      </div>
+    <script src="/assets/searchBundle.js"></script>
 
   <div id="recipeMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box" />
     <h3><span id="errorMessage"></span></h3><img id="recipe" src="assets/img/errorIcon.png" alt="recipe" />
