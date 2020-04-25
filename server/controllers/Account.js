@@ -92,7 +92,7 @@ const signup = (request, response) => {
 
 /* Renders account page */
 const settingsPage = (req, res) => {
-  AccountData.AccountModel.findByUsername(req.session.account.username, (err, docs) => {
+  AccountData.AccountModel.findByUsername(req.session.account.username, (err) => {
     if (err) {
       console.log(err);
       return res.status(400).json({ error: 'An error occured' });

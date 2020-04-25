@@ -69,7 +69,7 @@ RecipeSchema.statics.removeById = (recipeId, callback) => {
 
   return RecipeModel.find(search).select('name category price taste').exec(callback);
     
-  return RecipeModel.remove(search).exec(callback);
+  //return RecipeModel.remove(search).exec(callback);
 };
 
 RecipeModel = mongoose.model('Recipe', RecipeSchema);
