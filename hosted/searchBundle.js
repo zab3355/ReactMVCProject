@@ -1,4 +1,4 @@
-  const searchData = () => {
+  const searchRecipe = () => {
       // grabs searchbar input
         let input = document.getElementById("searchInput").value;
 
@@ -11,7 +11,7 @@
         // grabs all the cards on screen
         let cardElements = document.querySelectorAll(".card");
 
-        let itemsDisplaying = false;
+        let recipeShow = false;
 
         //for each card,
         cardElements.forEach(card => {
@@ -26,16 +26,16 @@
           ingred.forEach(item => {
             item = item.trim();
               if (title == input) {
-              itemsDisplaying = true;
+              recipeShow = true;
               card.style.display = "block";
               tag.querySelector("h5").innerHTML = input;
               tag.style.display = "block";
             //if not, set the display to none
             } else if (item == input) {
-                itemsDisplaying = true;
+                recipeShow = true;
                 console.log(card);
                 card.style.display = "block";
-                tag.querySelector("h5").innerHTML = input;
+                tag.querySelector("h3").innerHTML = input;
                 tag.style.display = "block";
             } else {
               card.style.display = "none";
@@ -43,8 +43,7 @@
           });
         });
 
-        if (itemsDisplaying == false) {
-            console.log("nothing on screen");
+        if (recipeShow == false) {
             $('#searchEmpty').modal('show');
           }
     } 

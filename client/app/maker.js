@@ -33,14 +33,14 @@ const RecipeForm = (props) =>{
     >
     <input id="recipeName" type="text" name="name" placeholder="Recipe Name" />    
     <select className="select-option" id="foodCategory" name="category">
-            <option selected="selected" disabled="disabled" value="start">Food Category: </option>
-            <option value="Chinese Cuisine">Chinese Cuisine</option>
-            <option value="American Cuisine">American Cuisine</option>
-            <option value="Mexican Cuisine">Mexican Cuisine</option>
-            <option value="Indian Cuisine">Indian Cuisine</option>
-            <option value="Indian Cuisine">Indian Cuisine</option>
-            <option value="Japanese Cuisine">Japanese Cuisine</option>
-            <option value="Italian Cuisine">Italian Cuisine</option>
+            <option selected="selected" disabled="disabled" value="start">Category: </option>
+            <option value="Chinese">Chinese</option>
+            <option value="American">American</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Indian">Indian</option>
+            <option value="Indian">Indian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Italian">Italian</option>
       </select>
       
     <select className="select-option" id="priceCateogry" name="price">

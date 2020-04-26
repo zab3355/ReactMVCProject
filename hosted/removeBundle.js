@@ -84,7 +84,7 @@ var RecipeList = function RecipeList(props) {
             React.createElement(
                 'p',
                 { className: 'foodCategory' },
-                'Food Category: ',
+                'Category: ',
                 recipe.category,
                 ' '
             ),

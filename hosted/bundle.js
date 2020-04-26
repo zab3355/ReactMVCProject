@@ -47,25 +47,25 @@ var RecipeForm = function RecipeForm(props) {
     selected: "selected",
     disabled: "disabled",
     value: "start"
-  }, "Food Category:"),
+  }, "Category:"),
 /*#__PURE__*/React.createElement("option", {
-    value: "Chinese Cuisine"
-  }, "Chinese Cuisine"),
+    value: "Chinese"
+  }, "Chinese"),
 /*#__PURE__*/React.createElement("option", {
-    value: "American Cuisine"
-  }, "American Cuisine"), 
+    value: "American"
+  }, "American"), 
 /*#__PURE__*/React.createElement("option", {
-    value: "Mexican Cuisine"
-  }, "Mexican Cuisine"), 
+    value: "Mexican"
+  }, "Mexican"), 
 /*#__PURE__*/React.createElement("option", {
-    value: "Indian Cuisine"
-  }, "Indian Cuisine"),
+    value: "Indian"
+  }, "Indian"),
 /*#__PURE__*/React.createElement("option", {
-    value: "Japanese Cuisine"
-  }, "Japanese Cuisine"), 
+    value: "Japanese"
+  }, "Japanese"), 
 /*#__PURE__*/React.createElement("option", {
-    value: "Italian Cuisine"
-  }, "Italian Cuisine")), 
+    value: "Italian"
+  }, "Italian")), 
 
 /*#__PURE__*/React.createElement("select", {
     id: "priceCategory",
@@ -143,15 +143,16 @@ var RecipeList = function RecipeList(props) {
     }), /*#__PURE__*/React.createElement("h3", {
       className: "recipeName"
     }, "Recipe Name: ", recipe.name),
-/*#__PURE__*/React.createElement("h3", {
+/*#__PURE__*/React.createElement("p", {
       className: "foodCategory"
     }, "Category: ", recipe.category),
-/*#__PURE__*/React.createElement("h3", {
+/*#__PURE__*/React.createElement("p", {
       className: "tasteCategory"
     }, "Taste: ", recipe.taste),
-/*#__PURE__*/React.createElement("h3", {
+/*#__PURE__*/React.createElement("p", {
       className: "priceCategory"
-    }, "Price: ", recipe.price));
+    }, "Price: ", recipe.price),
+/*#__PURE__*/React.createElement('input', { className: 'makeRecipeSubmit', type: 'submit', value: 'Information' }));
   });
   return /*#__PURE__*/React.createElement("div", {
     className: "recipeList"
