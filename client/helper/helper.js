@@ -1,13 +1,19 @@
 /* eslint-disable no-undef */
 /* eslint-disable linebreak-style */
-const handleError = (message) => {
-  $('#error').text = message;
-  $('#error').fadeIn(200);
+//error handler
+var handleError = function handleError(message) {
+  $("#errorMessage").text(message);
+  $("#recipeMessage").animate({
+    width: 'toggle'
+  }, 350);
 };
 
-const handleSuccess = (message) => {
-  $('#success').text = message;
-  $('#success').fadeIn(200);
+//success handler
+var handleSuccess = function handleSuccess(message) {
+  $("#success");
+  $("#success").animate({
+    width: 'toggle'
+  }, 350);
 };
 
 const redirect = (response) => {
@@ -15,23 +21,48 @@ const redirect = (response) => {
   window.location = response.redirect;
 };
 
-/* Sends Ajax request */
-const sendAjax = (action, data) => {
+//Functions for Ajax Requests
+
+var sendAjax = function sendAjax(type, action, data) {
+  $.ajax({
+    cache: false,
+    type: type,
+    url: action,
+    data: data,
+    dataType: "json",
+    success: success,
+    error: function error(xhr, status, _error) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};
+var sendAjaxCall = function sendAjaxCall(method, action, data, callback) {
+  $.ajax({
+    cache: false,
+    type: method,
+    url: action,
+    data: data,
+    dataType: 'json',
+    success: callback,
+    error: function error(xhr, status, _error2) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};
+
+var makeAjaxCallback = function makeAjaxCallback(action, data, callback) {
   $.ajax({
     cache: false,
     type: 'POST',
     url: action,
-    data,
+    data: data,
     dataType: 'json',
-    success: (result, status, xhr) => {
-      $('#error').fadeOut(200);
-
-      window.location = result.redirect;
-    },
-    error: (xhr, status, error) => {
-      const messageObj = JSON.parse(xhr.responseText);
-
+    success: callback,
+    error: function error(xhr, status, error) {
+      var messageObj = JSON.parse(xhr.responseText);
       handleError(messageObj.error);
-    },
+    }
   });
 };
