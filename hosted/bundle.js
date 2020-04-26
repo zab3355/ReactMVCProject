@@ -1,5 +1,30 @@
 "use strict";
 
+//error handler
+var handleError = function handleError(message) {
+  $("#errorMessage").text(message);
+  $("#errorMessage").animate({
+    width: 'toggle'
+  }, 350);
+};
+
+//success handler
+var handleSuccess = function handleSuccess(message) {
+  $("#success");
+  $("#success").animate({
+    width: 'toggle'
+  }, 350);
+};
+
+//redirect
+var redirect = function redirect(response) {
+  $("#errorMessage").animate({
+    width: 'hide'
+  }, 350);
+  window.location = response.redirect;
+};
+
+
 var handleRecipe = function handleRecipe(e) {
   e.preventDefault();
   $("#errormessage").animate({
@@ -195,21 +220,6 @@ var getToken = function getToken(url) {
 $(document).ready(function () {
   getToken();
 });
-
-//error handler
-var handleError = function handleError(message) {
-  $("#errorMessage").text(message);
-  $("#errorMessage").animate({
-    width: 'toggle'
-  }, 350);
-};
-
-var redirect = function redirect(response) {
-  $("#errorMessage").animate({
-    width: 'hide'
-  }, 350);
-  window.location = response.redirect;
-};
 
 //Functions for Ajax Requests
 
