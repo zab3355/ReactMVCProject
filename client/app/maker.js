@@ -23,7 +23,7 @@ const handleRecipe = (e) =>{
   return false;
 };
 
-var handleRecipe = function handleRecipe(e) {
+var handleRecipe = (e) => {
   e.preventDefault();
   $("#errormessage").animate({
     width: 'hide'
@@ -47,7 +47,7 @@ var handleRecipe = function handleRecipe(e) {
   return false;
 };
 
-var RecipeForm = function RecipeForm(props) {
+var RecipeForm = (props) => {
   return /*#__PURE__*/React.createElement("form", {
     id: "recipeForm",
     name: "recipeForm",
@@ -146,7 +146,7 @@ var RecipeForm = function RecipeForm(props) {
   }));
 };
 
-var RecipeList = function RecipeList(props) {
+var RecipeList = (props) =>{
   if (props.recipes.length === 0) {
     return /*#__PURE__*/React.createElement("div", {
       className: "recipeList"
