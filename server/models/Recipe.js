@@ -1,6 +1,7 @@
 module.exports.Account = require('./Account.js');
 
 const mongoose = require('mongoose');
+
 mongoose.Promise = global.Promise;
 const _ = require('underscore');
 
@@ -34,7 +35,7 @@ const RecipeSchema = new mongoose.Schema({
     default: 'Sour',
     required: true,
   },
-    
+
   owner: {
     type: mongoose.Schema.ObjectId,
     required: true,
@@ -56,9 +57,9 @@ RecipeSchema.statics.toAPI = (doc) => ({
 
 RecipeSchema.statics.findByOwner = (ownerId, callback) => {
   const search = {
-    owner: convertId(ownerId)
+    owner: convertId(ownerId),
   };
-  
+
   return RecipeModel.find(search).select('name category price taste').lean().exec(callback);
 };
 
@@ -68,8 +69,8 @@ RecipeSchema.statics.removeById = (recipeId, callback) => {
   };
 
   return RecipeModel.find(search).select('name category price taste').exec(callback);
-    
-  //return RecipeModel.remove(search).exec(callback);
+
+  // return RecipeModel.remove(search).exec(callback);
 };
 
 RecipeModel = mongoose.model('Recipe', RecipeSchema);

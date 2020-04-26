@@ -7,7 +7,7 @@ const AccountData = models.Account;
 // Renders Login page
 const loginPage = (req, res) => {
   res.render('login', {
-      csrfToken: req.csrfToken()
+    csrfToken: req.csrfToken(),
   });
 };
 
@@ -38,8 +38,8 @@ const login = (request, response) => {
     if (err || !account) {
       return res.status(401).json({ error: 'Wrong username or password' });
     }
-      
-      req.session.account = Account.AccountModel.toAPI(account);
+
+    req.session.account = Account.AccountModel.toAPI(account);
 
     return res.json({ redirect: '/addRecipe' });
   });
@@ -74,8 +74,8 @@ const signup = (request, response) => {
     const savePromise = newAccount.save();
 
     savePromise.then(() => {
-        req.session.account = Account.AccountModel.toAPI(newAccount);
-        res.json({ redirect: '/addRecipe' });
+      req.session.account = Account.AccountModel.toAPI(newAccount);
+      res.json({ redirect: '/addRecipe' });
     });
 
     savePromise.catch((err) => {
@@ -105,7 +105,7 @@ const settingsPage = (req, res) => {
   });
 };
 
-//Change password method
+// Change password method
 const changePassword = (request, response) => {
   const req = request;
   const res = response;
@@ -139,14 +139,14 @@ const changePassword = (request, response) => {
 };
 
 const getToken = (request, response) => {
-    const req = request;
-    const res = response;
-    
-    const csrfJSON = {
-        csrfToken: req.csrfToken(),
-    };
-    
-    res.json(csrfJSON);
+  const req = request;
+  const res = response;
+
+  const csrfJSON = {
+    csrfToken: req.csrfToken(),
+  };
+
+  res.json(csrfJSON);
 };
 
 module.exports.loginPage = loginPage;

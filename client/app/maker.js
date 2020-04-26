@@ -40,9 +40,9 @@ const RecipeForm = (props) =>{
             <option value="American Cuisine">American Cuisine</option>
             <option value="Mexican Cuisine">Mexican Cuisine</option>
             <option value="Indian Cuisine">Indian</option>
-            <option value="Indian">Indian Cuisine</option>
+            <option value="Indian Cuisine">Indian Cuisine</option>
             <option value="Japanese Cuisine">Japanese Cuisine</option>
-            <option value="Italian">Italian Cuisine</option>
+            <option value="Italian Cuisine">Italian Cuisine</option>
       </select>
       
     <select className="select-option" id="priceCateogry" name="price">
@@ -61,7 +61,7 @@ const RecipeForm = (props) =>{
             <option value="Bitter">Bitter</option>
       </select>
     <input id="csrfToken" type="hidden" name="_csrf" value={props.csrf} />
-    <input className="makeRecipeSubmit" type="submit" value="Add Recipe" />
+    <button className="makeRecipeSubmit" type="submit">Add Recipe</button>
   </form>
   );
 };

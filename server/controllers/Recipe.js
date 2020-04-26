@@ -1,6 +1,6 @@
 const models = require('../models');
 
-const Recipe = models.Recipe;
+const { Recipe } = models;
 
 const makerPage = (req, res) => {
   Recipe.RecipeModel.findByOwner(req.session.account._id, (err, docs) => {
@@ -19,13 +19,12 @@ const makerPage = (req, res) => {
 
 
 const makeRecipe = (req, res) => {
-
   if (!req.body.name) {
     return res.status(400).json({
       error: 'Please fill out each field before continuing.',
     });
   }
-  
+
 
   const recipeData = {
     name: req.body.name,
@@ -59,7 +58,7 @@ const makeRecipe = (req, res) => {
   return recipePromise;
 };
 
-//added a remove page to delete a recipe
+// added a remove page to delete a recipe
 const removePage = (req, res) => {
   Recipe.RecipeModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
@@ -75,35 +74,35 @@ const removePage = (req, res) => {
 const getRecipeItems = (request, response) => {
   const req = request;
   const res = response;
-  
+
   return Recipe.RecipeModel.findByOwner(req.session.account._id, (err, docs) => {
-    if(err) {
+    if (err) {
       console.log(err);
-      return res.status(400).json({ error: 'An error occurred'});
+      return res.status(400).json({ error: 'An error occurred' });
     }
-    
+
     return res.json({ recipes: docs });
   });
 };
 
 
 const removeRecipe = (request, response) => {
-    const req = request;
-    const res = response;
-    
-    return Recipe.RecipeModel.removeById(req.body._id, (err, docs) => {
-        if (err) {
-          console.log(err);
-          return res.status(400).json({ error: 'An error occurred' });
-        }
+  const req = request;
+  const res = response;
 
-        return res.json({ recipes: docs });
-    });
+  return Recipe.RecipeModel.removeById(req.body._id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occurred' });
+    }
+
+    return res.json({ recipes: docs });
+  });
 };
 
 const about = () => {
 
-}
+};
 
 module.exports.makerPage = makerPage;
 module.exports.getRecipeItems = getRecipeItems;
