@@ -1,7 +1,7 @@
 const handleRecipe = (e) =>{
   e.preventDefault();
   
-  $("#errorMessage").animate({width: 'hide'}, 350);
+  $("#errrorMessage").animate({width: 'hide'}, 350);
   
   if($("#recipeName").val() == '' || $("#foodCategory").val() == '' || $("#tasteCategory").val() == '' || $("#priceCategory").val() == '' ) {
     handleError("All fields are required!");
@@ -23,168 +23,85 @@ const handleRecipe = (e) =>{
   return false;
 };
 
-var handleRecipe = (e) => {
-  e.preventDefault();
-  $("#errormessage").animate({
-    width: 'hide'
-  }, 350);
 
-  if ($("#recipeName").val() == '' || $("#foodCategory").val() == '' || $("#priceCategory").val() == '' || $("#tasteCategory").val() == '') {
-    handleError("All fields are required!");
-    return false;
-  }
 
-  sendAjaxCall('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function () {
-    //get csrf token to send to new Recipe
-    var csrf = document.querySelector('#recipeForm').querySelector('#csrfToken').value;
-    loadRecipesFromServer(csrf);
-  });
-    
-  $('#tasteCategory').value = '';
-  $('#priceCategory').value = '';
-  $('#foodCategory').value = 'start';
-    
-  return false;
+const RecipeForm = (props) =>{
+  return(
+  <form id="recipeForm" name="recipeForm"
+        onSubmit={handleRecipe}
+        action="/addRecipe"
+        method='POST'
+        className="recipeForm"
+    >
+    <input id="recipeName" type="text" name="name" placeholder="Recipe Name" />    
+    <select className="select-option" id="foodCategory" name="category">
+            <option selected="selected" disabled="disabled" value="start">Category: </option>
+            <option value="Chinese Cuisine">Chinese Cuisine</option>
+            <option value="American Cuisine">American Cuisine</option>
+            <option value="Mexican Cuisine">Mexican Cuisine</option>
+            <option value="Indian Cuisine">Indian</option>
+            <option value="Indian">Indian Cuisine</option>
+            <option value="Japanese Cuisine">Japanese Cuisine</option>
+            <option value="Italian">Italian Cuisine</option>
+      </select>
+      
+    <select className="select-option" id="priceCateogry" name="price">
+            <option selected="selected" disabled="disabled" value="start">Price: </option>
+            <option value="$">$</option>
+            <option value="$$">$$</option>
+            <option value="$$$">$$$</option>
+            <option value="$$$$">$$$$</option>
+      </select>
+      
+    <select className="select-option" id="tasteCategory" name="taste">
+            <option selected="selected" disabled="disabled" value="start">Price: </option>
+            <option value="Sour">Sour</option>
+            <option value="Sweet">Sweet</option>
+            <option value="Spicy">Spicy</option>
+            <option value="Bitter">Bitter</option>
+      </select>
+    <input id="csrfToken" type="hidden" name="_csrf" value={props.csrf} />
+    <input className="makeRecipeSubmit" type="submit" value="Add Recipe" />
+  </form>
+  );
 };
 
-var RecipeForm = (props) => {
-  return /*#__PURE__*/React.createElement("form", {
-    id: "recipeForm",
-    name: "recipeForm",
-    onSubmit: handleRecipe,
-    action: "/addRecipe",
-    method: "POST",
-    className: "recipeForm"
-  },/*#__PURE__*/React.createElement("input", {
-    id: "recipeName",
-    type: "text",
-    name: "name",
-    placeholder: "Recipe Name"
-  }), 
-/*#__PURE__*/React.createElement("select", {
-    id: "foodCategory",
-    name: "category",
-    className: "select-option",
-  },
-/*#__PURE__*/React.createElement("option", {
-    selected: "selected",
-    disabled: "disabled",
-    value: "start"
-  }, "Category:"),
-/*#__PURE__*/React.createElement("option", {
-    value: "Chinese Cuisine"
-  }, "Chinese Cuisine"),
-/*#__PURE__*/React.createElement("option", {
-    value: "American Cuisine"
-  }, "American Cuisine"), 
-/*#__PURE__*/React.createElement("option", {
-    value: "Mexican Cuisine"
-  }, "Mexican Cuisine"), 
-/*#__PURE__*/React.createElement("option", {
-    value: "Indian Cuisine"
-  }, "Indian Cuisine"),
-/*#__PURE__*/React.createElement("option", {
-    value: "Japanese Cuisine"
-  }, "Japanese Cuisine"), 
-/*#__PURE__*/React.createElement("option", {
-    value: "Italian Cuisine"
-  }, "Italian Cuisine")), 
-
-/*#__PURE__*/React.createElement("select", {
-    id: "priceCategory",
-    name: "price",
-    className: "select-option",
-  },
-/*#__PURE__*/React.createElement("option", {
-    selected: "selected",
-    disabled: "disabled",
-    value: "start"
-  }, "Price:"),
-/*#__PURE__*/React.createElement("option", {
-    value: "$"
-  }, "$"),
-/*#__PURE__*/React.createElement("option", {
-    value: "$$"
-  }, "$$"), 
-/*#__PURE__*/React.createElement("option", {
-    value: "$$$"
-  }, "$$$"), 
-/*#__PURE__*/React.createElement("option", {
-    value: "$$$$"
-  }, "$$$$")),                                        
-/*#__PURE__*/React.createElement("select", {
-    id: "tasteCategory",
-    name: "taste",
-    className: "select-option",
-  },
-/*#__PURE__*/React.createElement("option", {
-    selected: "selected",
-    disabled: "disabled",
-    value: "start"
-  }, "Taste:"),
-/*#__PURE__*/React.createElement("option", {
-    value: "Sour"
-  }, "Sour"),
-/*#__PURE__*/React.createElement("option", {
-    value: "Sweet"
-  }, "Sweet"), 
-/*#__PURE__*/React.createElement("option", {
-    value: "Spicy"
-  }, "Spicy"), 
-/*#__PURE__*/React.createElement("option", {
-    value: "Bitter"
-  }, "Bitter")),                                               
-/*#__PURE__*/React.createElement("input", {
-    id: "csrfToken",
-    type: "hidden",
-    name: "_csrf",
-    value: props.csrf
-  }), /*#__PURE__*/React.createElement("input", {
-    className: "makeRecipeSubmit",
-    type: "submit",
-    value: "Add Recipe"
-  }));
-};
-
-var RecipeList = (props) =>{
-  if (props.recipes.length === 0) {
-    return /*#__PURE__*/React.createElement("div", {
-      className: "recipeList"
-    }, /*#__PURE__*/React.createElement("h3", {
-      className: "emptyRecipe"
-    }, "No Recipes Listed!"));
-  }
-
-  var recipeNodes = props.recipes.map(function (recipe) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: recipe._id,
-      className: "recipe"
-    }, /*#__PURE__*/React.createElement("img", {
-      src: "/assets/img/cartIcon.png",
-      alt: "recipe cart icon",
-      className: "cartIcon"
-    }), /*#__PURE__*/React.createElement("h3", {
-      className: "recipeName"
-    }, "Recipe Name: ", recipe.name),
-/*#__PURE__*/React.createElement("p", {
-      className: "foodCategory"
-    }, "Category: ", recipe.category),
-/*#__PURE__*/React.createElement("p", {
-      className: "tasteCategory"
-    }, "Taste: ", recipe.taste),
-/*#__PURE__*/React.createElement("p", {
-      className: "priceCategory"
-    }, "Price: ", recipe.price),
-/*#__PURE__*/React.createElement("input", {
-    className: "makeRecipeSubmit",
-    type: "submit",
-    id: "information",
-    value: "Information"
-  }));
+const RecipeList = function(props){
+  if(props.recipes.length === 0){
+    return(
+      <div className="recipeList">
+        <h3 className="emptyRecipe">No Recipes Listed!</h3>
+      </div>
+    );
+  };
+  
+  const recipeNodes = props.recipes.map(function(recipe){
+    return(
+  <form id="recipeForm" name="recipeForm"
+        onSubmit={handleRecipe}
+        action="/information"
+        method='POST'
+        className="recipeForm"
+    >
+      <div key={recipe._id} className="recipe">
+       <div className="recipeNode" id="recipeNodeShow" onclick="showRecipe()">
+        <img src="/assets/img/cartIcon.png" alt="recipe cart icon" className="cartIcon" />
+        <h3 className="recipeName">Recipe Name: {recipe.name}</h3> 
+        <p className="foodCategory">Category: {recipe.category}</p>
+        <p className="tasteCategory">Taste: {recipe.taste}</p>
+        <p className="priceCategory">Price: {recipe.price}</p>
+        <input className="makeRecipeSubmit" type="submit" value="Information" />
+      </div>
+    </div>
+    </form>
+    );
   });
-  return /*#__PURE__*/React.createElement("div", {
-    className: "recipeList"
-  }, recipeNodes);
+  
+  return(
+    <div className="recipeList">
+      {recipeNodes}
+    </div>
+  );
 };
 
 const loadRecipesFromServer = (csrf) =>{
