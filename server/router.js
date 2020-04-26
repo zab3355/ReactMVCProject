@@ -16,7 +16,7 @@ const router = (app) => {
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   //404 page
   app.get('/error', mid.requiresLogin, controllers.Account.errorPage);
- 
+  app.get('*', mid.requiresLogin, controllers.Account.errorPage);
     
   //app POSTs
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
