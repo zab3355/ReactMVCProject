@@ -10,11 +10,6 @@ const handleSuccess = (message) => {
   $('#success').fadeIn(200);
 };
 
-const handleSubSuccess = (message) => {
-  $('#subSuccess').text = message;
-  $('#subSuccess').fadeIn(200);
-};
-
 const redirect = (response) => {
   $('#error').fadeOut(200);
   window.location = response.redirect;

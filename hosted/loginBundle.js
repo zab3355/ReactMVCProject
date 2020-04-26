@@ -200,8 +200,6 @@ var redirect = function redirect(response) {
   window.location = response.redirect;
 };
 
-//Functions for Ajax Requests
-
 var sendAjax = function sendAjax(type, action, data, success) {
   $.ajax({
     cache: false,
@@ -211,35 +209,6 @@ var sendAjax = function sendAjax(type, action, data, success) {
     dataType: "json",
     success: success,
     error: function error(xhr, status, _error) {
-      var messageObj = JSON.parse(xhr.responseText);
-      handleError(messageObj.error);
-    }
-  });
-};
-var sendGenericAjax = function sendGenericAjax(method, action, data, callback) {
-  $.ajax({
-    cache: false,
-    type: method,
-    url: action,
-    data: data,
-    dataType: 'json',
-    success: callback,
-    error: function error(xhr, status, _error2) {
-      var messageObj = JSON.parse(xhr.responseText);
-      handleError(messageObj.error);
-    }
-  });
-};
-
-var sendAjaxWithCallback = function sendAjaxWithCallback(action, data, callback) {
-  $.ajax({
-    cache: false,
-    type: 'POST',
-    url: action,
-    data: data,
-    dataType: 'json',
-    success: callback,
-    error: function error(xhr, status, error) {
       var messageObj = JSON.parse(xhr.responseText);
       handleError(messageObj.error);
     }
