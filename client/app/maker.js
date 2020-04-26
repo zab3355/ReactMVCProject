@@ -8,7 +8,7 @@ const handleRecipe = (e) =>{
     return false;
   }
   
-  sendGenericAjax('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function(){
+  sendAjaxCall('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function(){
     
     //get csrf token to send to new Recipe
     const csrf = document.querySelector('#recipeForm').querySelector('#csrfToken').value;
@@ -121,7 +121,7 @@ const handleChangePass = (e) => {
   
     $('#error').fadeIn(200);
     /* Otherwise continue loading new page */
-    sendAjax($('#changePassword').attr('action'), $('#changePassword').serialize(), (data) => {
+    makeAjaxCallback($('#changePassword').attr('action'), $('#changePassword').serialize(), (data) => {
       handleSuccess('Password changed');
     $("#success").animate({width: 'hide'}, 350);
     });
@@ -154,7 +154,7 @@ const setupPassChangeForm = function(csrf) {
 };
 
 const loadRecipesFromServer = (csrf) =>{
-  sendAjax('GET', '/getRecipeItems', null, (data) =>{
+  sendAjaxCall('GET', '/getRecipeItems', null, (data) =>{
     ReactDOM.render(
       <RecipeList csrf={csrf} recipes={data.recipes} />,
       document.querySelector("#recipes")
@@ -177,7 +177,7 @@ const setup = function(csrf){
 };
 
 const getToken = (url) =>{
-  sendAjax('GET', '/getToken', null, (result) =>{
+  sendAjaxCall('GET', '/getToken', null, (result) =>{
     
     if(window.location.href.indexOf("maker") > -1){
         setup(result.csrfToken);
