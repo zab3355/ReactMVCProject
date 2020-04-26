@@ -15,7 +15,7 @@ const redis = require('redis');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
-const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/RecipeMaker';
+const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/DomoMaker';
 
 // Setup mongoose options to use newer functionality
 const mongooseOptions = {
@@ -40,7 +40,7 @@ let redisURL = {
 let redisPASS = 'qxnYKBGgRAYOmsugNl301mG1mDupOUYK';
 if (process.env.REDISCLOUD_URL){
     redisURL = url.parse(process.env.REDISCLOUD_URL);
-    [, redisPASS] = redisURL.auth.split(':')[1];
+    [, redisPASS] = redisURL.auth.split(':');
 }
 let redisClient = redis.createClient({
     host: redisURL.hostname, 
