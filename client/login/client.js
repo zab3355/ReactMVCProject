@@ -11,7 +11,7 @@ const handleLogin = (e) =>{
   
   console.log($("input[name=_csrf]").val());
   
-  sendAjax('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
+  sendAjaxCall('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
   
   return false;
 };
@@ -32,7 +32,7 @@ const handleSignup = (e) =>{
     return false;
   }  
   
-  sendAjax('POST', $("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
+  sendAjaxCall('POST', $("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
   
   return false;
 };
@@ -137,7 +137,7 @@ const setup = (csrf) =>{
 };
 
 const getToken = () =>{
-  sendAjax('GET', '/getToken', null, (result) =>{
+  sendAjaxCall('GET', '/getToken', null, (result) =>{
     setup(result.csrfToken);
   });
 };

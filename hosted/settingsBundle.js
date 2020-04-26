@@ -43,7 +43,7 @@ var handleChangePass = function handleChangePass(e) {
     
   /* Otherwise continue loading new page */
 
-  sendAjaxWithCallback($('#changePassword').attr('action'), $('#changePassword').serialize(), function (data) {
+  makeAjaxCallback($('#changePassword').attr('action'), $('#changePassword').serialize(), function (data) {
     handleSuccess('Password changed');
   });
   return false;
@@ -111,7 +111,7 @@ var setupAccountPage = function setupAccountPage(csrf) {
 };
 
 var getToken = function getToken(url) {
-  sendGenericAjax('GET', '/getToken', null, function (result) {
+  sendAjaxCall('GET', '/getToken', null, function (result) {
      if (window.location.href.indexOf("maker") > -1) {
     setup(result.csrfToken);
      }
@@ -144,9 +144,11 @@ var redirect = function redirect(response) {
   window.location = response.redirect;
 };
 
+// https://medium.com/front-end-weekly/ajax-async-callback-promise-e98f8074ebd7
+
 //Functions for Ajax Requests
 
-var sendAjax = function sendAjax(type, action, data, success) {
+var sendAjax = function sendAjax(type, action, data) {
   $.ajax({
     cache: false,
     type: type,
@@ -160,7 +162,7 @@ var sendAjax = function sendAjax(type, action, data, success) {
     }
   });
 };
-var sendGenericAjax = function sendGenericAjax(method, action, data, callback) {
+var sendAjaxCall = function sendAjaxCall(method, action, data, callback) {
   $.ajax({
     cache: false,
     type: method,
@@ -175,7 +177,7 @@ var sendGenericAjax = function sendGenericAjax(method, action, data, callback) {
   });
 };
 
-var sendAjaxWithCallback = function sendAjaxWithCallback(action, data, callback) {
+var makeAjaxCallback = function makeAjaxCallback(action, data, callback) {
   $.ajax({
     cache: false,
     type: 'POST',
