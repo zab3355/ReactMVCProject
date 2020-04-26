@@ -23,11 +23,7 @@ const handleRecipe = (e) =>{
   return false;
 };
 
-const handleInfo() = (e) => {
-  e.preventDefault();
-  
-  $("#recipeMessage").animate({width: 'hide'}, 350);
-}
+
 
 const RecipeForm = (props) =>{
   return(
@@ -82,7 +78,7 @@ const RecipeList = function(props){
   const recipeNodes = props.recipes.map(function(recipe){
     return(
   <form id="recipeForm" name="recipeForm"
-        onSubmit={handleInfo}
+        onSubmit={handleRecipe}
         action="/information"
         method='POST'
         className="recipeForm"
