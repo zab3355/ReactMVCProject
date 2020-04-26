@@ -1,49 +1,41 @@
   const searchRecipe = () => {
-      // grabs searchbar input
-        let input = document.getElementById("searchInput").value;
 
-        input = input.toLowerCase();
-        input = input.trim();
+        let recipeName = document.getElementById("searchByName").value;
 
-        //grabs tag element
-        let tag = document.querySelector(".tag");
-
-        // grabs all the cards on screen
-        let cardElements = document.querySelectorAll(".card");
+        let makeRecipe = document.getElementById("makeRecipe");
+        // grabs all the
+        let recipeNodeObj = document.querySelectorAll(".recipes");
 
         let recipeShow = false;
 
         //for each card,
-        cardElements.forEach(card => {
+        recipeNodeObj.forEach(recipes => {
           //if title matches input, display and show tag
-          let title = card.querySelector("h2").innerHTML;
+          let title = recipes.querySelector("h3").innerHTML;
           title = title.toLowerCase();
-
-          let ingred = card.querySelector("#ingred").innerHTML;
-          ingred = ingred.toLowerCase();
-          ingred = ingred.split(",");
-
-          ingred.forEach(item => {
-            item = item.trim();
-              if (title == input) {
-              recipeShow = true;
-              card.style.display = "block";
-              tag.querySelector("h5").innerHTML = input;
-              tag.style.display = "block";
-            //if not, set the display to none
-            } else if (item == input) {
-                recipeShow = true;
-                console.log(card);
-                card.style.display = "block";
-                tag.querySelector("h3").innerHTML = input;
-                tag.style.display = "block";
+        if (title == recipeName) {
+           recipeShow = true;
+                console.log(recipeNode);
+                recipe.style.display = "block";
+                makeRecipe.querySelector("h3").innerHTML = recipeName;
+                makeRecipe.style.display = "block";
             } else {
-              card.style.display = "none";
+              recipes.style.display = "none";
             }
-          });
         });
 
         if (recipeShow == false) {
             $('#searchEmpty').modal('show');
           }
-    } 
+      }
+  const removeSearch = () => {
+      $('#searchEmpty').modal('hide');
+      let makeRecipe = document.getElementById("makeRecipe");
+
+      let recipeNodeObj = document.querySelectorAll(".recipe");
+
+        recipeNodeObj.forEach(card => {
+          recipeNode.style.display = "block";
+          makeRecipe.style.display = "none";
+        });
+    }

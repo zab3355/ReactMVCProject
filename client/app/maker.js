@@ -76,12 +76,14 @@ const RecipeList = function(props){
   const recipeNodes = props.recipes.map(function(recipe){
     return(
       <div key={recipe._id} className="recipe">
+       <div className="recipeNode" id="recipeNodeShow" onclick="showData()">
         <img src="/assets/img/cartIcon.png" alt="recipe cart icon" className="cartIcon" />
         <h3 className="recipeName">Recipe Name: {recipe.name}</h3> 
         <p className="foodCategory">Category: {recipe.category}</p>
         <p className="tasteCategory">Taste: {recipe.taste}</p>
         <p className="priceCategory">Price: {recipe.price}</p>
       </div>
+    </div>
     );
   });
   
