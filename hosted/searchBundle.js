@@ -20,7 +20,7 @@
                 makeRecipe.querySelector("h3").innerHTML = recipeName;
                 makeRecipe.style.display = "block";
             } else {
-              recipes.style.display = "none";
+              recipe.style.display = "none";
             }
         });
 

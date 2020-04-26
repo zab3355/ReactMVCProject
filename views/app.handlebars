@@ -43,6 +43,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/account">Change Password</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/information">Info</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -50,6 +53,26 @@
 <section id="recipes"></section>
 <h3 class="makeRecipeh3">Create a Recipe</h3>
   <section id="makeRecipe">
+      <button id="information">Information</button>
+      
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Modal Header</h2>
+    </div>
+    <div class="modal-body">
+      <p>Some text in the Modal Body</p>
+      <p>Some other text...</p>
+    </div>
+    <div class="modal-footer">
+      <h3>Modal Footer</h3>
+    </div>
+  </div>
+
+</div>
+      
   </section>
         
       <div class="search">
@@ -59,12 +82,13 @@
             <button class="formSubmit" type="button" onclick="searchRecipe()">Search Recipe</button>
             </form>
       </div>
+
     <script src="/assets/searchBundle.js"></script>
 
   <div id="recipeMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box" />
     <h3><span id="errorMessage"></span></h3><img id="error" src="assets/img/errorIcon.png" alt="recipe" />
   </div>
-<div id="success"><img id="speech" src="/assets/img/success.png" alt="success"/></div>
+<div id="success"><img id="success" src="/assets/img/success.png" alt="success"/></div>
   <script src="/assets/bundle.js"></script>
 </body>
 

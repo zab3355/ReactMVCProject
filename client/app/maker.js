@@ -23,6 +23,12 @@ const handleRecipe = (e) =>{
   return false;
 };
 
+const handleInfo() = (e) => {
+  e.preventDefault();
+  
+  $("#recipeMessage").animate({width: 'hide'}, 350);
+}
+
 const RecipeForm = (props) =>{
   return(
   <form id="recipeForm" name="recipeForm"
@@ -75,15 +81,23 @@ const RecipeList = function(props){
   
   const recipeNodes = props.recipes.map(function(recipe){
     return(
+  <form id="recipeForm" name="recipeForm"
+        onSubmit={handleInfo}
+        action="/information"
+        method='POST'
+        className="recipeForm"
+    >
       <div key={recipe._id} className="recipe">
-       <div className="recipeNode" id="recipeNodeShow" onclick="showData()">
+       <div className="recipeNode" id="recipeNodeShow" onclick="showRecipe()">
         <img src="/assets/img/cartIcon.png" alt="recipe cart icon" className="cartIcon" />
         <h3 className="recipeName">Recipe Name: {recipe.name}</h3> 
         <p className="foodCategory">Category: {recipe.category}</p>
         <p className="tasteCategory">Taste: {recipe.taste}</p>
         <p className="priceCategory">Price: {recipe.price}</p>
+        <input className="makeRecipeSubmit" type="submit" value="Information" />
       </div>
     </div>
+    </form>
     );
   });
   

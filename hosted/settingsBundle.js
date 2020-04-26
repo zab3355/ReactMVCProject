@@ -1,15 +1,20 @@
 "use strict";
 
+//error handler
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#errorMessage").fadeIn(350);
+  $("#recipeMessage").animate({
+    width: 'toggle'
+  }, 350);
 };
 
+//success handler
 var handleSuccess = function handleSuccess(message) {
-  $('#success').text = message;
-  $('#success').fadeIn(200);
+  $("#success");
+  $("#success").animate({
+    width: 'toggle'
+  }, 350);
 };
-
 
 var handleChangePass = function handleChangePass(e) {
   e.preventDefault();

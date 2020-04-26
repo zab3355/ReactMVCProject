@@ -8,12 +8,12 @@
   "description": "A Simple Login Example using Node.js, Mongo and Redis",
   "main": "./server/app.js",
   "scripts": {
-   "buildLoginBundle": "babel ./client/login ./client/helper --presets react --out-file ./hosted/loginBundle.js",
-    "buildAppBundle": "babel ./client/app ./client/helper --presets react --out-file ./hosted/bundle.js",
-    "buildSettingsBundle": "babel ./client/app ./client/helper --presets react --out-file ./hosted/settingsBundle.js",
+    "buildLoginBundle": "babel ./client/login ./client/helper --presets @babel/preset-react --out-file ./hosted/loginBundle.js",
+    "buildAppBundle": "babel ./client/app ./client/helper --presets @babel/preset-react --out-file ./hosted/bundle.js",
+    "buildSettingsBundle": "babel ./client/app ./client/helper --presets @babel/preset-react --out-file ./hosted/settingsBundle.js",
     "build": "npm run buildLoginBundle && npm run buildAppBundle && npm run buildSettingsBundle",
-    "watchLoginBundle": "babel --watch ./client/login ./client/helper --presets react --out-file ./hosted/loginBundle.js",
-    "watchAppBundle": "babel --watch ./client/app ./client/helper --presets react --out-file ./hosted/bundle.js",
+    "watchLoginBundle": "babel --watch ./client/login ./client/helper --presets @babel/preset-react --out-file ./hosted/loginBundle.js",
+    "watchAppBundle": "babel --watch ./client/app ./client/helper --presets @babel/preset-react --out-file ./hosted/bundle.js",
     "nodemon": "nodemon --watch ./server ./server/app.js",
     "start": "node ./server/app.js",
     "pretest": "eslint ./server --fix",
@@ -31,29 +31,37 @@
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "connect-redis": "^4.0.4",
-    "cookie-parser": "^1.4.4",
+    "cookie-parser": "^1.4.5",
     "csurf": "^1.11.0",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
-    "express-session": "^1.17.0",
+    "express-session": "^1.17.1",
     "gulp": "^4.0.2",
-    "helmet": "^3.21.2",
-    "mongoose": "^5.9.1",
+    "helmet": "^3.22.0",
+    "mongoose": "^5.9.10",
     "redis": "^3.0.2",
     "serve-favicon": "^2.5.0",
-    "underscore": "^1.9.2"
+    "trumbowyg": "^2.21.0",
+    "underscore": "^1.10.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.9.4",
-    "babel-preset-react": "^6.24.1",
     "bootstrap": "^4.4.1",
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-plugin-import": "^2.20.2",
     "nodemon": "^2.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zab3355/ReactMVCProject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zab3355/ReactMVCProject/issues"
+  },
+  "homepage": "https://github.com/zab3355/ReactMVCProject#readme"
 }
