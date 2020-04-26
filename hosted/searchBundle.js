@@ -1,16 +1,31 @@
-  const searchRecipe = () => {
+//error handler
+var handleError = function handleError(message) {
+  $("#errorMessage").text(message);
+  $("#recipeMessage").animate({
+    width: 'toggle'
+  }, 350);
+};
 
-        let recipeName = document.getElementById("searchByName").value;
+//success handler
+var handleSuccess = function handleSuccess(message) {
+  $("#success");
+  $("#success").animate({
+    width: 'toggle'
+  }, 350);
+};
 
-        let makeRecipe = document.getElementById("makeRecipe");
-        // grabs all the
-        let recipeNodeObj = document.querySelectorAll(".recipes");
+const searchRecipe = () => {
 
-        let recipeShow = false;
+    let recipeName = document.getElementById("searchByName").value;
 
-        //for each card,
-        recipeNodeObj.forEach(recipes => {
-          //if title matches input, display and show tag
+    let makeRecipe = document.getElementById("makeRecipe");
+    // grabs recipe class objects
+    let recipeNodeObj = document.querySelectorAll(".recipes");
+
+    let recipeShow = false;
+
+    recipeNodeObj.forEach(recipes => {
+    //if search input matches a name, display and show tag
           let title = recipes.querySelector("h3").innerHTML;
           title = title.toLowerCase();
         if (title == recipeName) {

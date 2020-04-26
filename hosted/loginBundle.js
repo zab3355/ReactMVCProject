@@ -28,7 +28,7 @@ var handleLogin = function handleLogin(e) {
   }
 
   console.log($("input[name=_csrf]").val());
-  sendAjax('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
+  sendAjaxCall('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
   return false;
 };
 
@@ -48,7 +48,7 @@ var handleSignup = function handleSignup(e) {
     return false;
   }
 
-  sendAjax('POST', $("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
+  sendAjaxCall('POST', $("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
   return false;
 };
 
@@ -188,7 +188,7 @@ var setup = function setup(csrf) {
 };
 
 var getToken = function getToken() {
-  sendAjax('GET', '/getToken', null, function (result) {
+  sendAjaxCall('GET', '/getToken', null, function (result) {
     setup(result.csrfToken);
   });
 };
@@ -208,7 +208,8 @@ var redirect = function redirect(response) {
 
 // https://medium.com/front-end-weekly/ajax-async-callback-promise-e98f8074ebd7
 
-//Functions for sending Ajas
+//Functions for Ajax Requests
+
 var sendAjax = function sendAjax(type, action, data, success) {
   $.ajax({
     cache: false,
@@ -218,6 +219,35 @@ var sendAjax = function sendAjax(type, action, data, success) {
     dataType: "json",
     success: success,
     error: function error(xhr, status, _error) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};
+var sendAjaxCall = function sendAjaxCall(method, action, data, callback) {
+  $.ajax({
+    cache: false,
+    type: method,
+    url: action,
+    data: data,
+    dataType: 'json',
+    success: callback,
+    error: function error(xhr, status, _error2) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};
+
+var makeAjaxCallback = function makeAjaxCallback(action, data, callback) {
+  $.ajax({
+    cache: false,
+    type: 'POST',
+    url: action,
+    data: data,
+    dataType: 'json',
+    success: callback,
+    error: function error(xhr, status, error) {
       var messageObj = JSON.parse(xhr.responseText);
       handleError(messageObj.error);
     }
