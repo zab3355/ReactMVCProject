@@ -111,6 +111,7 @@ const handleChangePass = (e) => {
     /* Otherwise continue loading new page */
     sendAjax($('#changePassword').attr('action'), $('#changePassword').serialize(), (data) => {
       handleSuccess('Password changed');
+    $("#success").animate({width: 'hide'}, 350);
     });
   
     return false;

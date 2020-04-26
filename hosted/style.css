@@ -261,6 +261,14 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
+#success, #error {
+    display: none;
+    z-index: 225;
+    margin-left: -30px;
+    height: 450px;
+    margin-top: -150px;
+}
+
 #recipeMessage h3 {
     width: 200px;
     position: absolute;
@@ -342,12 +350,7 @@ nav:nth-child(1) {
     align-items: center;
 }
 
-#recipe {
-    z-index: 225;
-    margin-left: -30px;
-    height: 450px;
-    margin-top: -150px;
-}
+
 
 #recipes {
     width: 40%;

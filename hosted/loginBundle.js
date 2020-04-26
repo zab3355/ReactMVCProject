@@ -2,7 +2,7 @@
 
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#errorMessage").fadeIn(350);
+  $("#errorMessage").fadeIn(200);
 };
 
 var handleSuccess = function handleSuccess(message) {
