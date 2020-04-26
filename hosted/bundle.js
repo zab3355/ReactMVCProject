@@ -165,7 +165,7 @@ var RecipeList = function RecipeList(props) {
 };
 
 var loadRecipesFromServer = function loadRecipesFromServer(csrf) {
-  sendAjax('GET', '/getRecipeItems', null, function (data) {
+  sendAjaxCall('GET', '/getRecipeItems', null, function (data) {
     ReactDOM.render( /*#__PURE__*/React.createElement(RecipeList, {
       csrf: csrf,
       recipes: data.recipes
@@ -213,7 +213,7 @@ var redirect = function redirect(response) {
 
 //Functions for Ajax Requests
 
-var sendAjax = function sendAjax(type, action, data, success) {
+var sendAjax = function sendAjax(type, action, data) {
   $.ajax({
     cache: false,
     type: type,
@@ -227,4 +227,32 @@ var sendAjax = function sendAjax(type, action, data, success) {
     }
   });
 };
+var sendAjaxCall = function sendAjaxCall(method, action, data, callback) {
+  $.ajax({
+    cache: false,
+    type: method,
+    url: action,
+    data: data,
+    dataType: 'json',
+    success: callback,
+    error: function error(xhr, status, _error2) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};
 
+var makeAjaxCallback = function makeAjaxCallback(action, data, callback) {
+  $.ajax({
+    cache: false,
+    type: 'POST',
+    url: action,
+    data: data,
+    dataType: 'json',
+    success: callback,
+    error: function error(xhr, status, error) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};

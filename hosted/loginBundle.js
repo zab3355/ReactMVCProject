@@ -210,7 +210,7 @@ var redirect = function redirect(response) {
 
 //Functions for Ajax Requests
 
-var sendAjax = function sendAjax(type, action, data, success) {
+var sendAjax = function sendAjax(type, action, data) {
   $.ajax({
     cache: false,
     type: type,
