@@ -11,7 +11,7 @@ var handleRecipe = function handleRecipe(e) {
     return false;
   }
 
-  sendGenericAjax('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function () {
+  sendAjaxCall('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function () {
     //get csrf token to send to new Recipe
     var csrf = document.querySelector('#recipeForm').querySelector('#csrfToken').value;
     loadRecipesFromServer(csrf);
@@ -187,7 +187,7 @@ var setup = function setup(csrf) {
 };
 
 var getToken = function getToken(url) {
-  sendGenericAjax('GET', '/getToken', null, function (result) {
+  sendAjaxCall('GET', '/getToken', null, function (result) {
     setup(result.csrfToken);
   });
 };
@@ -227,7 +227,8 @@ var sendAjax = function sendAjax(type, action, data, success) {
     }
   });
 };
-var sendGenericAjax = function sendGenericAjax(method, action, data, callback) {
+
+var sendAjaxCall = function sendAjaxCall(method, action, data, callback) {
   $.ajax({
     cache: false,
     type: method,
@@ -242,7 +243,7 @@ var sendGenericAjax = function sendGenericAjax(method, action, data, callback) {
   });
 };
 
-var sendAjaxWithCallback = function sendAjaxWithCallback(action, data, callback) {
+var makeAjaxCallback = function makeAjaxCallback(action, data, callback) {
   $.ajax({
     cache: false,
     type: 'POST',
