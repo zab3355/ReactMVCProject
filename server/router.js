@@ -11,12 +11,10 @@ const router = (app) => {
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
   app.get('/addRecipe', mid.requiresLogin, controllers.Recipe.makerPage);
   app.get('/deleteRecipe', mid.requiresLogin, controllers.Recipe.removePage);
+  app.get('/error', mid.requiresLogin, controllers.Account.errorPage);
   app.get('/about', mid.requiresLogin, controllers.Recipe.about);
   app.get('/account', mid.requiresLogin, controllers.Account.settingsPage);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
-  //404 page
-  app.get('/error', mid.requiresLogin, controllers.Account.errorPage);
-  app.get('/*', mid.requiresLogin, controllers.Account.errorPage);
     
   //app POSTs
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);

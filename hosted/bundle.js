@@ -49,23 +49,23 @@ var RecipeForm = function RecipeForm(props) {
     value: "start"
   }, "Category:"),
 /*#__PURE__*/React.createElement("option", {
-    value: "Chinese"
-  }, "Chinese"),
+    value: "Chinese Cuisine"
+  }, "Chinese Cuisine"),
 /*#__PURE__*/React.createElement("option", {
-    value: "American"
-  }, "American"), 
+    value: "American Cuisine"
+  }, "American Cuisine"), 
 /*#__PURE__*/React.createElement("option", {
-    value: "Mexican"
-  }, "Mexican"), 
+    value: "Mexican Cuisine"
+  }, "Mexican Cuisine"), 
 /*#__PURE__*/React.createElement("option", {
-    value: "Indian"
-  }, "Indian"),
+    value: "Indian Cuisine"
+  }, "Indian Cuisine"),
 /*#__PURE__*/React.createElement("option", {
-    value: "Japanese"
-  }, "Japanese"), 
+    value: "Japanese Cuisine"
+  }, "Japanese Cuisine"), 
 /*#__PURE__*/React.createElement("option", {
-    value: "Italian"
-  }, "Italian")), 
+    value: "Italian Cuisine"
+  }, "Italian Cuisine")), 
 
 /*#__PURE__*/React.createElement("select", {
     id: "priceCategory",
@@ -152,7 +152,11 @@ var RecipeList = function RecipeList(props) {
 /*#__PURE__*/React.createElement("p", {
       className: "priceCategory"
     }, "Price: ", recipe.price),
-/*#__PURE__*/React.createElement('input', { className: 'makeRecipeSubmit', type: 'submit', value: 'Information' }));
+/*#__PURE__*/React.createElement("input", {
+    className: "makeRecipeSubmit",
+    type: "submit",
+    value: "Information"
+  }));
   });
   return /*#__PURE__*/React.createElement("div", {
     className: "recipeList"
