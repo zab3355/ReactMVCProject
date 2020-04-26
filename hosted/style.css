@@ -250,7 +250,7 @@ nav:nth-child(1) {
     box-shadow: 0px 0px 1px 1px #2f2626;
 }
 
-#recipeMessage {
+#errorMessage {
     display:none;
     top: 250px;
     width: 250px;
@@ -269,7 +269,7 @@ nav:nth-child(1) {
     margin-top: -150px;
 }
 
-#recipeMessage h3 {
+#errorMessage h3 {
     width: 200px;
     position: absolute;
     left: 20px;

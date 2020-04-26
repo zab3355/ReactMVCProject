@@ -1,7 +1,7 @@
 const handleLogin = (e) =>{
   e.preventDefault();
   
-  $("#recipeMessage").animate({width: 'hide'}, 350);
+  $("#errorMessage").animate({width: 'hide'}, 350);
   $("#success").animate({width: 'hide'}, 350);
   
   if($("#user").val() == '' || $("#pass").val() == ''){
@@ -19,7 +19,7 @@ const handleLogin = (e) =>{
 const handleSignup = (e) =>{
   e.preventDefault();
   
-  $("#recipeMessage").animate({width: 'hide'}, 350);
+  $("#errorMessage").animate({width: 'hide'}, 350);
   $("#success").animate({width: 'hide'}, 350);
   
   if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == ''){

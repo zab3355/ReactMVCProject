@@ -3,7 +3,7 @@
 //error handler
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#recipeMessage").animate({
+  $("#errorMessage").animate({
     width: 'toggle'
   }, 350);
 };

@@ -2,7 +2,7 @@
 
 var handleRecipe = function handleRecipe(e) {
   e.preventDefault();
-  $("#recipeMessage").animate({
+  $("#errormessage").animate({
     width: 'hide'
   }, 350);
 
@@ -199,13 +199,13 @@ $(document).ready(function () {
 //error handler
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#recipeMessage").animate({
+  $("#errorMessage").animate({
     width: 'toggle'
   }, 350);
 };
 
 var redirect = function redirect(response) {
-  $("#recipeMessage").animate({
+  $("#errorMessage").animate({
     width: 'hide'
   }, 350);
   window.location = response.redirect;

@@ -1,7 +1,7 @@
 const handleRecipe = (e) =>{
   e.preventDefault();
   
-  $("#recipeMessage").animate({width: 'hide'}, 350);
+  $("#errorMessage").animate({width: 'hide'}, 350);
   
   if($("#recipeName").val() == '' || $("#foodCategory").val() == '' || $("#tasteCategory").val() == '' || $("#priceCategory").val() == '' ) {
     handleError("All fields are required!");

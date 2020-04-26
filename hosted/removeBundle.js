@@ -7,13 +7,13 @@ var csrf = 0;
 //From login bundle
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#recipeMessage").animate({
+  $("#errorMessage").animate({
     width: 'toggle'
   }, 350);
 };
 
 var redirect = function redirect(response) {
-  $("#recipeMessage").animate({
+  $("#errorMessage").animate({
     width: 'hide'
   }, 350);
   window.location = response.redirect;
@@ -39,7 +39,7 @@ var sendAjax = function sendAjax(type, action, data, success) {
 var removeRecipe = function removeRecipe(e) {
     e.preventDefault();
 
-    $("#recipeMessage").animate({ width: 'hide' }, 350);
+    $("#errorMessage").animate({ width: 'hide' }, 350);
 
     var recipeForm = e.target;
     var getRecipeId = recipeForm.querySelector('.getRecipeId');

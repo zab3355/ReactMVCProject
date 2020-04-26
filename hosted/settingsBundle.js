@@ -3,7 +3,7 @@
 //error handler
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#recipeMessage").animate({
+  $("#errorMessage").animate({
     width: 'toggle'
   }, 350);
 };
@@ -127,7 +127,7 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#recipeMessage").animate({
+  $("#errorMessage").animate({
     width: 'toggle'
   }, 350);
 };
@@ -138,7 +138,7 @@ var handleSuccess = function handleSuccess(message) {
 };
 
 var redirect = function redirect(response) {
-  $("#recipeMessage").animate({
+  $("#errorMessage").animate({
     width: 'hide'
   }, 350);
   window.location = response.redirect;
