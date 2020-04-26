@@ -196,7 +196,6 @@ var getToken = function getToken() {
 $(document).ready(function () {
   getToken();
 });
-"use strict";
 
 
 var redirect = function redirect(response) {
