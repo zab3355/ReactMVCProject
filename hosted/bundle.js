@@ -228,32 +228,3 @@ var sendAjax = function sendAjax(type, action, data, success) {
   });
 };
 
-var sendAjaxCall = function sendAjaxCall(method, action, data, callback) {
-  $.ajax({
-    cache: false,
-    type: method,
-    url: action,
-    data: data,
-    dataType: 'json',
-    success: callback,
-    error: function error(xhr, status, _error2) {
-      var messageObj = JSON.parse(xhr.responseText);
-      handleError(messageObj.error);
-    }
-  });
-};
-
-var makeAjaxCallback = function makeAjaxCallback(action, data, callback) {
-  $.ajax({
-    cache: false,
-    type: 'POST',
-    url: action,
-    data: data,
-    dataType: 'json',
-    success: callback,
-    error: function error(xhr, status, error) {
-      var messageObj = JSON.parse(xhr.responseText);
-      handleError(messageObj.error);
-    }
-  });
-};

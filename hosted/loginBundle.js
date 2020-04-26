@@ -196,6 +196,8 @@ var getToken = function getToken() {
 $(document).ready(function () {
   getToken();
 });
+"use strict";
+
 
 var redirect = function redirect(response) {
   $("#recipeMessage").animate({
@@ -206,50 +208,16 @@ var redirect = function redirect(response) {
 
 // https://medium.com/front-end-weekly/ajax-async-callback-promise-e98f8074ebd7
 
-//Functions for sending Ajax
-
-var sendAjax = function sendAjax(action, data) {
+//Functions for sending Ajas
+var sendAjax = function sendAjax(type, action, data, success) {
   $.ajax({
     cache: false,
-    type: 'POST',
+    type: type,
     url: action,
     data: data,
-    dataType: 'json',
-    success: function success(result, status, xhr) {
-      $('#handleError').fadeOut(200);
-      window.location = result.redirect;
-    },
+    dataType: "json",
+    success: success,
     error: function error(xhr, status, _error) {
-      var messageObj = JSON.parse(xhr.responseText);
-      handleError(messageObj.error);
-    }
-  });
-};
-
-var sendAjaxCall = function sendAjaxCall(method, action, data, callback) {
-  $.ajax({
-    cache: false,
-    type: method,
-    url: action,
-    data: data,
-    dataType: 'json',
-    success: callback,
-    error: function error(xhr, status, _error2) {
-      var messageObj = JSON.parse(xhr.responseText);
-      handleError(messageObj.error);
-    }
-  });
-};
-
-var makeAjaxCallback = function makeAjaxCallback(action, data, callback) {
-  $.ajax({
-    cache: false,
-    type: 'POST',
-    url: action,
-    data: data,
-    dataType: 'json',
-    success: callback,
-    error: function error(xhr, status, error) {
       var messageObj = JSON.parse(xhr.responseText);
       handleError(messageObj.error);
     }
