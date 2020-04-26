@@ -16,7 +16,9 @@ const router = (app) => {
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   //404 page
   app.get('/error', mid.requiresLogin, controllers.Account.errorPage);
-  app.get('*', mid.requiresLogin, controllers.Account.errorPage);
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'build', '/login'));
+});
     
   //app POSTs
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
