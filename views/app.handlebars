@@ -80,13 +80,52 @@
             </form>
       </div>
 
-    <script src="/assets/searchBundle.js"></script>
+    <!-- <script src="/assets/searchBundle.js"></script> -->
+<script>
 
+//search for recipe
+const searchRecipe = () => {
+
+    let recipeName = document.getElementById("searchByName").value;
+    
+    recipeName = recipeName.toLowerCase();
+    recipeName = recipeName.trim();
+
+    // grabs recipe class objects
+    let recipeNodeObj = document.querySelectorAll(".recipes");
+
+    let recipeShow = false;
+
+    recipeNodeObj.forEach(recipes => {
+    //if search input matches a name
+          let title = recipes.querySelector("h3").innerHTML;
+        title = title.toLowerCase();
+        
+        if (title == recipeName) {
+           recipeShow = true;
+                console.log(recipeName);
+                title.style.display = "block";
+            } else {
+              recipeNodeObj.style.display = "none";
+            }
+        });
+
+        if (recipeShow == false) {
+            $('#searchEmpty').modal('show');
+          }
+      }
+
+  const showRecipe = () => {
+      window.location.href="/addRecipe";
+  }
+
+    </script>
   <div id="errorMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box" />
     <h3><span id="success"></span>Password Changed!</h3>
   </div>
 <div id="success"><img id="success" src="/assets/img/success.png" alt="success"/></div>
   <script src="/assets/bundle.js"></script>
+        
 </body>
 
 </html>

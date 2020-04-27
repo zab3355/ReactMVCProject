@@ -43,8 +43,7 @@ var handleChangePass = function handleChangePass(e) {
   }
 
     
-  //Loads
-
+  //Callback for change password
   makeAjaxCallback($('#changePassword').attr('action'), $('#changePassword').serialize(), function (data) {
     handleSuccess('Password changed');
   });

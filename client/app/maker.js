@@ -1,6 +1,8 @@
+//recipe Handler
 const handleRecipe = (e) =>{
   e.preventDefault();
   
+  //error handling
   $("#errorMessage").text(message);
   $("#errorMessage").animate({
     width: 'toggle'
@@ -11,6 +13,7 @@ const handleRecipe = (e) =>{
     return false;
   }
   
+  //Ajax call to send Recipe Form
   sendAjaxCall('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function(){
     
     //get csrf token to send to new Recipe
@@ -56,7 +59,7 @@ const RecipeForm = (props) =>{
       </select>
       
     <select className="select-option" id="tasteCategory" name="taste">
-            <option selected="selected" disabled="disabled" value="start">Price: </option>
+            <option selected="selected" disabled="disabled" value="start">Taste: </option>
             <option value="Sour">Sour</option>
             <option value="Sweet">Sweet</option>
             <option value="Spicy">Spicy</option>
@@ -84,11 +87,11 @@ const recipeNodes = props.recipes.map(function (recipe){
     return(
       <div className="recipe" key={recipe._id}>
         <img src={"/assets/img/cartIcon.png"} alt="recipe cart icon" className="cartIcon" />
-        <h3 className="recipeName">Recipe Name: {recipe.name}</h3> 
+        <h3 className="recipeName"> {recipe.name}</h3> 
         <p className="foodCategory">Category: {recipe.category}</p>
         <p className="tasteCategory">Taste: {recipe.taste}</p>
         <p className="priceCategory">Price: {recipe.price}</p>
-        <input className="makeRecipeSubmit" type="submit" id="information" value="Information" data-toggle="modal" data-target="#myModal" />
+        <input className="makeRecipeSubmit" type="submit" id="information" value="Information" href="#myModal" />
       </div>
     );
   });

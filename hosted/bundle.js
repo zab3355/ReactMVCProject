@@ -49,6 +49,11 @@ var handleRecipe = function handleRecipe(e) {
   return false;
 };
 
+var handleInfo = function handleInfo(e) {
+  e.preventDefault();
+  
+}
+
 var RecipeForm = function RecipeForm(props) {
   return /*#__PURE__*/React.createElement("form", {
     id: "recipeForm",
@@ -180,13 +185,13 @@ var RecipeList = function RecipeList(props) {
 /*#__PURE__*/React.createElement("input", {
     className: "makeRecipeSubmit",
     type: "submit",
-    id: "information",
-    value: "Information",
-    data-toggle: "modal",
-    data-target: "#myModal"
+    href: "#myModal",
+    id: "infoModal",
+    value: "Information"
   }));
   });
-  return /*#__PURE__*/React.createElement("div", {
+
+  return /*#__PURE_a_*/React.createElement("div", {
     className: "recipeList"
   }, recipeNodes);
 };
@@ -200,6 +205,14 @@ var loadRecipesFromServer = function loadRecipesFromServer(csrf) {
   });
 };
 
+var infoModal = function infoModal() {
+    $(document).ready(function(){
+        let info = document.getElementById('information');
+  $(info).click(function(){
+    $("#myModal").modal();
+  });
+});
+}
 
 
 var setup = function setup(csrf) {
