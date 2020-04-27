@@ -18,7 +18,10 @@ html, body {
     background-color: skyblue;
 }
 
-/* ===== NAVIGATION ======*/
+/*
+    Nav Bar implementation 
+    Implemented based off Oishii Theme https://colorlib.com/wp/bootstrap-navbar/
+*/
 .navbar {
     border: 0;
     z-index: 9999;
@@ -97,6 +100,8 @@ nav:nth-child(1) {
     transition: background-color 0.8s ease;
     background-color: white;
 }
+
+/* Main Recipe Form CSS */
 
 .recipeForm {
     opacity: .9;
@@ -250,11 +255,15 @@ nav:nth-child(1) {
     box-shadow: 0px 0px 1px 1px #2f2626;
 }
 
+/* Error Handling CSS */
+
 #errorMessage {
-    display:none;
-    top: 250px;
-    width: 250px;
-    height: 650px;
+    display: none;
+    top: 67px;
+    width: 254px;
+    background-color: black;
+    border: crimson solid 2px;
+    padding: 1em;
     position: absolute;
     z-index: 200;
     right: 0px;
@@ -276,6 +285,22 @@ nav:nth-child(1) {
     top: 13px;
     text-align: right;
 }
+
+#errorMessage {
+    font-size: 1.0em;
+    font-weight: bold;
+    color: red;
+    font-style: italic;
+}
+
+.errorPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Search CSS */
 
 .makeRecipeh3{
     z-index: 1;
@@ -330,28 +355,7 @@ nav:nth-child(1) {
     transition: border-color 0.2s;
 }
 
-#speech {
-    height: 120px;
-    width: 250px;
-    z-index:300;
-}
-
-#errorMessage {
-    font-size: 1.0em;
-    font-weight: bold;
-    color: red;
-    font-style: italic;
-}
-
-.errorPage {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-
-
+/* Recipe Chart CSS */
 #recipes {
     width: 40%;
     min-width: 400px;
@@ -463,7 +467,7 @@ p.priceCategory {
 }
 
 
-/* About Page */
+/* About Page CSS */
 #titleAbout {
     text-align: center;
     background-color: #e6c4b3;
@@ -477,7 +481,7 @@ p.priceCategory {
     border: 1px solid black;
 }
 
-/* Password Change Page */
+/* Password Change CSS */
 .accountPage {
     text-align: center;
     margin-top: 100px;

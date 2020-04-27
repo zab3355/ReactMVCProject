@@ -3,7 +3,7 @@
 //error handler
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#errormessage").animate({
+  $("#errorMessage").animate({
     width: 'toggle'
   }, 350);
 };
@@ -16,12 +16,15 @@ var handleSuccess = function handleSuccess(message) {
   }, 350);
 };
 
+//handling Login
 var handleLogin = function handleLogin(e) {
   e.preventDefault();
+//hide Error Message
   $("#errorMessage").animate({
     width: 'hide'
   }, 350);
 
+//if user and pass fields are empty
   if ($("#user").val() == '' || $("#pass").val() == '') {
     handleError("Username or password is empty!");
     return false;
@@ -159,6 +162,7 @@ var createSignupWindow = function createSignupWindow(csrf) {
   }), document.querySelector("#content"));
 };
 
+//creating About Window
 var createAboutWindow = function createAboutWindow(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(AboutWindow, {
     csrf: csrf
@@ -184,7 +188,7 @@ var setup = function setup(csrf) {
     createLoginWindow(csrf);
     return false;
   });
-  createLoginWindow(csrf); //default view
+  createLoginWindow(csrf); 
 };
 
 var getToken = function getToken() {
