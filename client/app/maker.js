@@ -24,6 +24,7 @@ const handleRecipe = (e) =>{
   return false;
 };
 
+//Recipe input form
 const RecipeForm = (props) =>{
   return(
   <form id="recipeForm" name="recipeForm"
@@ -59,12 +60,14 @@ const RecipeForm = (props) =>{
             <option value="Spicy">Spicy</option>
             <option value="Bitter">Bitter</option>
       </select>
+      
     <input id="csrfToken" type="hidden" name="_csrf" value={props.csrf} />
-    <button className="makeRecipeSubmit" type="submit" value="Add Recipe" />
+    <input className="makeRecipeSubmit" type="submit" value="Add Recipe" />
   </form>
   );
 };
 
+//If no recipes are listed
 const RecipeList = function(props){
   if(props.recipes.length === 0){
     return(
@@ -74,22 +77,16 @@ const RecipeList = function(props){
     );
   };
   
-  const recipeNodes = props.recipes.map(function(recipe){
+//Recipe nodes
+const recipeNodes = props.recipes.map(function(recipe){
     return(
-  <form id="recipeForm" name="recipeForm"
-        onSubmit={handleRecipe}
-        action="/information"
-        method='POST'
-        className="recipeForm"
-    >
-      <div key={recipe._id} className="recipe">
-       <div className="recipeNode" id="recipeNodeShow" onclick="showRecipe()">
-        <img src="/assets/img/cartIcon.png" alt="recipe cart icon" className="cartIcon" />
+      <div className="recipe" key={recipe._id}>
+        <img src={"/assets/img/cartIcon.png"} alt="recipe cart icon" className="cartIcon" />
         <h3 className="recipeName">Recipe Name: {recipe.name}</h3> 
         <p className="foodCategory">Category: {recipe.category}</p>
         <p className="tasteCategory">Taste: {recipe.taste}</p>
         <p className="priceCategory">Price: {recipe.price}</p>
-        <button className="makeRecipeSubmit" type="submit" value="Information" />
+        <input className="makeRecipeSubmit" type="submit" value="Information" />
       </div>
     </div>
     </form>
@@ -131,16 +128,15 @@ const handleChangePass = (e) => {
 
 //Password Change Form
   const ChangePassForm = (props) => {
-    // webkit text security from https://stackoverflow.com/questions/1648665/changing-the-symbols-shown-in-a-html-password-field -->
     return (
       <form id="changePassword" name="changePassword" 
       action="/changePassword" method="POST" 
       class="recipeForm" onSubmit={handleChangePass}>
-        <input id="oldPass" type="text" name="oldPass" placeholder="Old Password" />
-        <input id="newPass" type="text" name="newPass" placeholder="New Password" />
-        <input id="newPass2" type="text" name="newPass2" placeholder="Repeat New Password" />
+        <input id="oldPass" type="password" name="oldPass" placeholder="Old Password" />
+        <input id="newPass" type="password" name="newPass" placeholder="New Password" />
+        <input id="newPass2" type="password" name="newPass2" placeholder="Repeat New Password" />
         <input type="hidden" name="_csrf" value={props.csrf} />
-        <button className="formSubmit" type="submit" value="Change Password" />
+        <input className="formSubmit" type="submit" value="Change Password" />
     </form>
     )
   };
