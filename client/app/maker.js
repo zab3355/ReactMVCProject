@@ -90,7 +90,6 @@ const recipeNodes = props.recipes.map(function(recipe){
         <p className="priceCategory">Price: {recipe.price}</p>
         <input className="makeRecipeSubmit" type="submit" value="Information" />
       </div>
-    </div>
     </form>
     );
   });
