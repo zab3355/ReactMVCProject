@@ -69,18 +69,6 @@ const removePage = (req, res) => {
   });
 };
 
-// added a info page to edit recipe info
-const infoPage = (req, res) => {
-  Recipe.RecipeModel.findByOwner(req.session.account._id, (err, docs) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({ error: 'An error occurred' });
-    }
-
-    return res.render('info', { csrfToken: req.csrfToken(), recipes: docs });
-  });
-};
-
 
 const getRecipeItems = (request, response) => {
   const req = request;
@@ -96,45 +84,6 @@ const getRecipeItems = (request, response) => {
   });
 };
 
-//Adds Recipe to the database
-const makeRecipe = (req, res) => {
-  if (!req.body.name) {
-    return res.status(400).json({
-      error: 'Please fill out each field before continuing.',
-    });
-  }
-
-  const recipeData = {
-    name: req.body.name,
-    category: req.body.category,
-    price: req.body.price,
-    taste: req.body.taste,
-    owner: req.session.account._id,
-  };
-
-  const newRecipe = new Recipe.RecipeModel(recipeData);
-
-  const recipePromise = newRecipe.save();
-
-  recipePromise.then(() => res.json({
-    redirect: 'maker',
-  }));
-
-  recipePromise.catch((err) => {
-    console.log(err);
-    if (err.code === 11000) {
-      return res.status(400).json({
-        error: 'Recipe already exists.',
-      });
-    }
-
-    return res.status(400).json({
-      error: 'An error occurred',
-    });
-  });
-
-  return recipePromise;
-};
 
 const removeRecipe = (request, response) => {
   const req = request;
