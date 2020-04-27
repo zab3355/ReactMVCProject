@@ -180,7 +180,7 @@ const setup = function(csrf){
 const getToken = (url) =>{
   sendAjaxCall('GET', '/getToken', null, (result) =>{
     
-    if(window.location.href.indexOf("maker") > -1){
+    if(window.location.href.indexOf("addRecipe") > -1){
         setup(result.csrfToken);
     }
     if(window.location.href.indexOf("account") > -1) {

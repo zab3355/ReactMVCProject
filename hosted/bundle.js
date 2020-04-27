@@ -181,7 +181,9 @@ var RecipeList = function RecipeList(props) {
     className: "makeRecipeSubmit",
     type: "submit",
     id: "information",
-    value: "Information"
+    value: "Information",
+    data-toggle: "modal",
+    data-target: "#myModal"
   }));
   });
   return /*#__PURE__*/React.createElement("div", {
