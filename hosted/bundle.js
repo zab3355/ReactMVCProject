@@ -24,6 +24,11 @@ var redirect = function redirect(response) {
   window.location = response.redirect;
 };
 
+var handleFavorite = function handleFavorite(e) {
+  e.preventDefault();
+  recipeList.style.background = "#ff0000";
+};
+
 
 var handleRecipe = function handleRecipe(e) {
   e.preventDefault();
@@ -49,17 +54,6 @@ var handleRecipe = function handleRecipe(e) {
     
   return false;
 };
-
-var handleInfo = function handleInfo(e) {
-  e.preventDefault();
-  
- $(document).ready(function() {
-  $('infoButton').on('submit', function(e){
-      $('#myModal').modal('show');
-      e.preventDefault();
-  });
-});
-}
 
 var RecipeForm = function RecipeForm(props) {
   return /*#__PURE__*/React.createElement("form", {
@@ -172,7 +166,8 @@ var RecipeList = function RecipeList(props) {
   var recipeNodes = props.recipes.map(function (recipe) {
     return /*#__PURE__*/React.createElement("div", {
       key: recipe._id,
-      className: "recipe"
+      className: "recipe",
+      method: "POST",
     }, /*#__PURE__*/React.createElement("img", {
       src: "/assets/img/cartIcon.png",
       alt: "recipe cart icon",
@@ -193,9 +188,8 @@ var RecipeList = function RecipeList(props) {
 /*#__PURE__*/React.createElement("input", {
     className: "makeRecipeSubmit",
     type: "submit",
-    id: "infoModal",
-    onSubmit: handleInfo,
-    value: "Information"
+    id: "favorite",
+    value: "Favorite"
   }));
   });
 
@@ -205,12 +199,8 @@ var RecipeList = function RecipeList(props) {
   }, recipeNodes);
 };
 
-var handleInfo = function handleInfo(e){
-$(document).ready(function() {
-    $("infoModal").click(function(event) {
-        $('#myModal').modal('show');
-        });
-});
+var handleFavorite = function handleFavorite(e){
+
 }
 
 var loadRecipesFromServer = function loadRecipesFromServer(csrf) {
@@ -222,17 +212,9 @@ var loadRecipesFromServer = function loadRecipesFromServer(csrf) {
   });
 };
 
-var infoModal = function infoModal() {
-    $(document).ready(function(){
-        let info = document.getElementById('information');
-  $(info).click(function(){
-    $("#myModal").modal();
-  });
-});
-}
-
 
 var setup = function setup(csrf) {
+
   ReactDOM.render( /*#__PURE__*/React.createElement(RecipeForm, {
     csrf: csrf
   }), document.querySelector("#makeRecipe"));
