@@ -88,7 +88,7 @@ const recipeNodes = props.recipes.map(function (recipe){
         <p className="foodCategory">Category: {recipe.category}</p>
         <p className="tasteCategory">Taste: {recipe.taste}</p>
         <p className="priceCategory">Price: {recipe.price}</p>
-        <input className="makeRecipeSubmit" type="submit" id="information" value="Information" />
+        <input className="makeRecipeSubmit" type="submit" id="information" value="Information" data-toggle="modal" data-target="#myModal />
       </div>
     );
   });
@@ -175,6 +175,7 @@ const setup = function(csrf){
   
   loadRecipesFromServer(csrf);
 };
+
 
 const getToken = (url) =>{
   sendAjaxCall('GET', '/getToken', null, (result) =>{
