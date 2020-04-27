@@ -23,7 +23,7 @@ const handleSignup = (e) =>{
   $("#success").animate({width: 'hide'}, 350);
   
   if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == ''){
-    handleError("All fields are required!");
+    handleError("Please fill out each field!");
     return false;
   }
   

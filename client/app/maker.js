@@ -7,7 +7,7 @@ const handleRecipe = (e) =>{
   }, 350);
 
   if($("#recipeName").val() == '' || $("#foodCategory").val() == '' || $("#tasteCategory").val() == '' || $("#priceCategory").val() == '' ) {
-    handleError("Please fill out each fields!");
+    handleError("Please fill out each field!");
     return false;
   }
   
@@ -80,15 +80,15 @@ const RecipeList = function(props){
   };
   
 //Recipe nodes
-const recipeNodes = props.recipes.map(function(recipe){
+const recipeNodes = props.recipes.map(function (recipe){
     return(
-      <div className="recipe" key={recipe._id}>
+      <div className="recipe">
         <img src={"/assets/img/cartIcon.png"} alt="recipe cart icon" className="cartIcon" />
         <h3 className="recipeName">Recipe Name: {recipe.name}</h3> 
         <p className="foodCategory">Category: {recipe.category}</p>
         <p className="tasteCategory">Taste: {recipe.taste}</p>
         <p className="priceCategory">Price: {recipe.price}</p>
-        <input className="makeRecipeSubmit" type="submit" value="Information" />
+        <input className="makeRecipeSubmit" type="submit" id="information" value="Information" />
       </div>
     );
   });
@@ -106,7 +106,7 @@ const handleChangePass = (e) => {
     $('#error').fadeOut(200);
   
     if ($('#oldPass').val() == '' || $('#newPass').val() == '' || $('#newPass2').val() == '') {
-      handleError('All fields are required');
+      handleError('Please fill out each field!');
       return false;
     }
   
@@ -121,7 +121,9 @@ const handleChangePass = (e) => {
   }, 350);
     /* Otherwise continue loading new page */
     makeAjaxCallback($('#changePassword').attr('action'), $('#changePassword').serialize(), (data) => {
-      handleSuccess('Password changed');
+    //success handler
+      handleSuccess('Password changed!');
+    $("#success").text="Success!";
     $("#success").animate({width: 'hide'}, 350);
     });
   

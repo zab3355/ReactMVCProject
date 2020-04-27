@@ -32,7 +32,7 @@ var handleRecipe = function handleRecipe(e) {
   }, 350);
 
   if ($("#recipeName").val() == '' || $("#foodCategory").val() == '' || $("#priceCategory").val() == '' || $("#tasteCategory").val() == '') {
-    handleError("All fields are required!");
+    handleError("Please fill out each field!");
     return false;
   }
 

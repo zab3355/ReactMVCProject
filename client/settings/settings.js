@@ -7,7 +7,7 @@ const handleChangePass = (e) => {
   
   
     if ($('#oldPass').val() == '' || $('#newPass').val() == '' || $('#newPass2').val() == '') {
-      handleError('All fields are required');
+      handleError('Please fill out each field!');
       return false;
     }
   

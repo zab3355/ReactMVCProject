@@ -42,7 +42,7 @@ var handleSignup = function handleSignup(e) {
   }, 350);
 
   if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
-    handleError("All fields are required!");
+    handleError("Please fill out each field!");
     return false;
   }
 

@@ -283,6 +283,10 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
+#error {
+    display:none;
+}
+
 #errorMessage h3 {
     width: 200px;
     position: absolute;
