@@ -6,14 +6,7 @@ var handleError = function handleError(message) {
   }, 350);
 };
 
-//success handler
-var handleSuccess = function handleSuccess(message) {
-  $("#success");
-  $("#success").animate({
-    width: 'toggle'
-  }, 350);
-};
-
+//search for recipe
 const searchRecipe = () => {
 
     let recipeName = document.getElementById("searchByName").value;

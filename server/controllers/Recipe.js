@@ -17,7 +17,7 @@ const makerPage = (req, res) => {
   });
 };
 
-
+//Adds Recipe to the database
 const makeRecipe = (req, res) => {
   if (!req.body.name) {
     return res.status(400).json({
