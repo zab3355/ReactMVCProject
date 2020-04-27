@@ -10,7 +10,7 @@ var handleError = function handleError(message) {
 
 //success handler
 var handleSuccess = function handleSuccess(message) {
-  $("#success");
+  $("#success").text="Success!";
   $("#success").animate({
     width: 'toggle'
   }, 350);

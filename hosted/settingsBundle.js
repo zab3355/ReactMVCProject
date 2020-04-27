@@ -3,7 +3,7 @@
 //error handler
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#errorMessage").animate({
+  $("#recipeMessage").animate({
     width: 'toggle'
   }, 350);
 };
@@ -16,9 +16,11 @@ var handleSuccess = function handleSuccess(message) {
   }, 350);
 };
 
+//handler for Change Password
 var handleChangePass = function handleChangePass(e) {
   e.preventDefault();
 
+//error handling for Change Password
   if ($('#oldPass').val() == '' || $('#newPass').val() == '' || $('#newPass2').val() == '') {
     handleError('All fields are required');
     return false;
@@ -41,7 +43,7 @@ var handleChangePass = function handleChangePass(e) {
   }
 
     
-  /* Otherwise continue loading new page */
+  //Loads
 
   makeAjaxCallback($('#changePassword').attr('action'), $('#changePassword').serialize(), function (data) {
     handleSuccess('Password changed');
@@ -105,8 +107,7 @@ var setupAccountPage = function setupAccountPage(csrf) {
 
   var password = document.querySelector("#passwordContainer");
   if (password) {
-    //renders form
-    ReactDOM.render(React.createElement(PasswordForm, { csrf: csrf }), document.querySelector("#updateForm"));
+      ReactDOM.render(React.createElement(PasswordForm, { csrf: csrf }), document.querySelector("#updateForm"));
   }
 };
 
@@ -127,18 +128,20 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#errorMessage").animate({
+  $("#recipeMessage").animate({
     width: 'toggle'
   }, 350);
 };
 
 var handleSuccess = function handleSuccess(message) {
-  $('#success').text = message;
-  $('#success').fadeIn(200);
+  $('#success').text = "Password Changed!";
+  $("#success").animate({
+    width: 'toggle'
+  }, 350);
 };
 
 var redirect = function redirect(response) {
-  $("#errorMessage").animate({
+  $("#recipeMessage").animate({
     width: 'hide'
   }, 350);
   window.location = response.redirect;
