@@ -13,7 +13,7 @@ var handleSuccess = function handleSuccess(message) {
   $("#success");
   $("#success").animate({
     width: 'toggle'
-  }, 350);
+  }, 150);
 };
 
 //handling Login
@@ -22,7 +22,7 @@ var handleLogin = function handleLogin(e) {
 //hide Error Message
   $("#errorMessage").animate({
     width: 'hide'
-  }, 350);
+  }, 150);
 
 //if user and pass fields are empty
   if ($("#user").val() == '' || $("#pass").val() == '') {

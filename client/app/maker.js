@@ -1,11 +1,13 @@
 const handleRecipe = (e) =>{
   e.preventDefault();
   
-  $("#errrorMessage").animate({width: 'hide'}, 350);
-  $("#errrorMessage").animate({width: 'hide'}, 350);
-  
+  $("#errorMessage").text(message);
+  $("#errorMessage").animate({
+    width: 'toggle'
+  }, 350);
+
   if($("#recipeName").val() == '' || $("#foodCategory").val() == '' || $("#tasteCategory").val() == '' || $("#priceCategory").val() == '' ) {
-    handleError("All fields are required!");
+    handleError("Please fill out each fields!");
     return false;
   }
   
