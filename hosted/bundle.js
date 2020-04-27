@@ -42,9 +42,10 @@ var handleRecipe = function handleRecipe(e) {
     loadRecipesFromServer(csrf);
   });
     
+  $('#foodCategory').value = 'start';
   $('#tasteCategory').value = '';
   $('#priceCategory').value = '';
-  $('#foodCategory').value = 'start';
+
     
   return false;
 };
@@ -52,6 +53,12 @@ var handleRecipe = function handleRecipe(e) {
 var handleInfo = function handleInfo(e) {
   e.preventDefault();
   
+ $(document).ready(function() {
+  $('infoButton').on('submit', function(e){
+      $('#myModal').modal('show');
+      e.preventDefault();
+  });
+});
 }
 
 var RecipeForm = function RecipeForm(props) {
@@ -171,7 +178,8 @@ var RecipeList = function RecipeList(props) {
       alt: "recipe cart icon",
       className: "cartIcon"
     }), /*#__PURE__*/React.createElement("h3", {
-      className: "recipeName"
+      className: "recipeName",
+      id: "recipeName",
     }, "Recipe Name: ", recipe.name),
 /*#__PURE__*/React.createElement("p", {
       className: "foodCategory"
@@ -185,16 +193,25 @@ var RecipeList = function RecipeList(props) {
 /*#__PURE__*/React.createElement("input", {
     className: "makeRecipeSubmit",
     type: "submit",
-    href: "#myModal",
     id: "infoModal",
+    onSubmit: handleInfo,
     value: "Information"
   }));
   });
 
   return /*#__PURE_a_*/React.createElement("div", {
-    className: "recipeList"
+    className: "recipeList",
+    id: "recipeList",
   }, recipeNodes);
 };
+
+var handleInfo = function handleInfo(e){
+$(document).ready(function() {
+    $("infoModal").click(function(event) {
+        $('#myModal').modal('show');
+        });
+});
+}
 
 var loadRecipesFromServer = function loadRecipesFromServer(csrf) {
   sendAjaxCall('GET', '/getRecipeItems', null, function (data) {

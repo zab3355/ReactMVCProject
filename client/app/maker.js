@@ -22,12 +22,42 @@ const handleRecipe = (e) =>{
     loadRecipesFromServer(csrf);
   });
     
+  $('#foodCategory').value = 'start';
   $('#tasteCategory').value = '';
   $('#priceCategory').value = '';
-  $('#foodCategory').value = 'start';
+
   
   return false;
 };
+
+const infoModal = (props) =>{
+    return (
+      <div className="App">
+        <h1>Hello!! {this.state.name}</h1>
+        <a href="javascript:;" onClick={e => this.modalOpen(e)}>
+          <input id="infoModal"></input>
+        </a>
+        <Modal show={this.state.modal} handleClose={e => this.modalClose(e)}>
+          <h2>Hello Modal</h2>
+          <div className="form-group">
+            <label>Enter Name:</label>
+            <input
+              type="text"
+              value={this.state.modalInputName}
+              name="modalInputName"
+              onChange={e => this.handleChange(e)}
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <input onClick={e => this.handleSubmit(e)} type="input">
+              Save
+            </button>
+          </div>
+        </Modal>
+      </div>
+    );
+}
 
 //Recipe input form
 const RecipeForm = (props) =>{
