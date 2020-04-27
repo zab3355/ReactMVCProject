@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable linebreak-style */
 //error handler
-var handleError = function handleError(message) {
+var handleError = (message) => {
   $("#errorMessage").text(message);
   $("#errorMessage").animate({
     width: 'toggle'
@@ -9,7 +9,7 @@ var handleError = function handleError(message) {
 };
 
 //success handler
-var handleSuccess = function handleSuccess(message) {
+var handleSuccess = (message) => {
   $("#success").text="Success!";
   $("#success").animate({
     width: 'toggle'
