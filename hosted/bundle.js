@@ -24,11 +24,6 @@ var redirect = function redirect(response) {
   window.location = response.redirect;
 };
 
-var handleFavorite = function handleFavorite(e) {
-  e.preventDefault();
-  recipeList.style.background = "#ff0000";
-};
-
 
 var handleRecipe = function handleRecipe(e) {
   e.preventDefault();
@@ -57,6 +52,19 @@ var handleRecipe = function handleRecipe(e) {
   $('#priceCategory').value = '';
 
     
+  return false;
+};
+
+var handleFavorite = function handleFavorite(e) {
+  e.preventDefault();
+  $("#errorMessage").animate({
+    width: 'hide'
+  }, 350);;
+  /* Otherwise continue loading new page */
+
+  sendAjaxWithCallback($('#favorited').attr('action'), $('#favorited').serialize(), function (data) {
+    handleSubSuccess('Favorited!');
+  });
   return false;
 };
 
@@ -169,10 +177,13 @@ var RecipeList = function RecipeList(props) {
   }
 
   var recipeNodes = props.recipes.map(function (recipe) {
-    return /*#__PURE__*/React.createElement("div", {
+    return 
+    /*#__PURE__*/React.createElement("form", {
       key: recipe._id,
       className: "recipe",
       method: "POST",
+      onSubmit: handleFavorite,
+      action: "/favorite"
     }, /*#__PURE__*/React.createElement("img", {
       src: "/assets/img/cartIcon.png",
       alt: "recipe cart icon",
@@ -203,10 +214,6 @@ var RecipeList = function RecipeList(props) {
     id: "recipeList",
   }, recipeNodes);
 };
-
-var handleFavorite = function handleFavorite(e){
-
-}
 
 var loadRecipesFromServer = function loadRecipesFromServer(csrf) {
   sendAjaxCall('GET', '/getRecipeItems', null, function (data) {

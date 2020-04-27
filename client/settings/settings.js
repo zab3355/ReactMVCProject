@@ -1,10 +1,7 @@
 // Handling Password Change Form
 const handleChangePass = (e) => {
     e.preventDefault();
-  
   $("#errorMessage").animate({width: 'hide'}, 350);
-  $("#success").animate({width: 'hide'}, 350);
-  
   
     if ($('#oldPass').val() == '' || $('#newPass').val() == '' || $('#newPass2').val() == '') {
       handleError('Please fill out each field!');
@@ -16,13 +13,15 @@ const handleChangePass = (e) => {
       return false;
     }
   
-  $("#errorMessage").text(message);
   $("#errorMessage").animate({
     width: 'toggle'
   }, 350);
-    /* Otherwise continue loading new page */
+    
+    //Load the success message and change password if there are no errors
     makeAjaxCallback($('#changePassword').attr('action'), $('#changePassword').serialize(), (data) => {
-      handleSuccess('Password changed');
+    //success handler
+      handleSuccess('Password changed!');
+    $("#success").text="Success!";
     $("#success").animate({width: 'hide'}, 350);
     });
   
@@ -32,14 +31,13 @@ const handleChangePass = (e) => {
 
 //Password Change Form
   const ChangePassForm = (props) => {
-    // webkit text security from https://stackoverflow.com/questions/1648665/changing-the-symbols-shown-in-a-html-password-field -->
     return (
       <form id="changePassword" name="changePassword" 
       action="/changePassword" method="POST" 
       class="recipeForm" onSubmit={handleChangePass}>
-        <input id="oldPass" type="text" name="oldPass" placeholder="Old Password" />
-        <input id="newPass" type="text" name="newPass" placeholder="New Password" />
-        <input id="newPass2" type="text" name="newPass2" placeholder="Repeat New Password" />
+        <input id="oldPass" type="password" name="oldPass" placeholder="Old Password" />
+        <input id="newPass" type="password" name="newPass" placeholder="New Password" />
+        <input id="newPass2" type="password" name="newPass2" placeholder="Repeat New Password" />
         <input type="hidden" name="_csrf" value={props.csrf} />
         <input className="formSubmit" type="submit" value="Change Password" />
     </form>
@@ -52,3 +50,14 @@ const setupPassChangeForm = function(csrf) {
         <ChangePassForm csrf={csrf} />, document.querySelector("#changePassForm")
     );
 };
+
+//based upon URL, will setup specific renders
+const getToken = () =>{
+  sendAjaxCall('GET', '/getToken', null, (result) =>{
+      setupPassChangeForm(result.csrfToken); 
+    });
+};
+
+$(document).ready(function(){
+  getToken();
+});
