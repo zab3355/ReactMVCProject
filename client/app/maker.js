@@ -133,7 +133,7 @@ const setup = function(csrf){
 const getToken = () =>{
   sendAjaxCall('GET', '/getToken', null, (result) =>{
         setup(result.csrfToken);
-    }
+    });
 };
 
 $(document).ready(function(){
