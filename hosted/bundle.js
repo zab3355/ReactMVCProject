@@ -40,6 +40,11 @@ var handleRecipe = function handleRecipe(e) {
     handleError("Please fill out each field!");
     return false;
   }
+    
+    if($("#searchByTaste").val() ==''){
+    handleError('Please fill out search!');
+      return false;
+  }
 
   sendAjaxCall('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function () {
     //get csrf token to send to new Recipe

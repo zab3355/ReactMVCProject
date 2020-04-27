@@ -1,3 +1,10 @@
+var handleError = (message) => {
+  $("#errorMessage").text(message);
+  $("#errorMessage").animate({
+    width: 'toggle'
+  }, 350);
+};
+
 //recipe Handler
 const handleRecipe = (e) =>{
   e.preventDefault();
@@ -11,6 +18,11 @@ const handleRecipe = (e) =>{
   if($("#recipeName").val() == '' || $("#foodCategory").val() == '' || $("#tasteCategory").val() == '' || $("#priceCategory").val() == '' ) {
     handleError("Please fill out each field!");
     return false;
+  }
+    
+  if($("#searchByTaste").val() ==''){
+    handleError('Please fill out search!');
+      return false;
   }
   
   //Ajax call to send Recipe Form
