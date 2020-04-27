@@ -145,7 +145,17 @@ var RecipeForm = function RecipeForm(props) {
     className: "makeRecipeSubmit",
     type: "submit",
     value: "Add Recipe"
-  }));
+  }),
+  /*#__PURE__*/React.createElement("div", {
+    className: "alert alert-danger",
+    role: "alert",
+    id: "errorMessage"
+  }, "Error"), 
+  /*#__PURE__*/React.createElement("div", {
+    className: "alert alert-success",
+    role: "alert",
+    id: "success"
+  }, "Success"));
 };
 
 var RecipeList = function RecipeList(props) {
