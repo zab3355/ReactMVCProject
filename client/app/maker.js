@@ -1,16 +1,8 @@
-var handleError = (message) => {
-  $("#errorMessage").text(message);
-  $("#errorMessage").animate({
-    width: 'toggle'
-  }, 350);
-};
-
 //recipe Handler
 const handleRecipe = (e) =>{
   e.preventDefault();
   
   //error handling
-  $("#errorMessage").text(message);
   $("#errorMessage").animate({
     width: 'toggle'
   }, 350);
@@ -131,7 +123,6 @@ const handleChangePass = (e) => {
       return false;
     }
   
-  $("#errorMessage").text(message);
   $("#errorMessage").animate({
     width: 'toggle'
   }, 350);
