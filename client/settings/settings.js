@@ -16,7 +16,10 @@ const handleChangePass = (e) => {
       return false;
     }
   
-    $('#error').fadeIn(200);
+  $("#errorMessage").text(message);
+  $("#errorMessage").animate({
+    width: 'toggle'
+  }, 350);
     /* Otherwise continue loading new page */
     makeAjaxCallback($('#changePassword').attr('action'), $('#changePassword').serialize(), (data) => {
       handleSuccess('Password changed');

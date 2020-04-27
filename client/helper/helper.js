@@ -17,7 +17,7 @@ var handleSuccess = function handleSuccess(message) {
 };
 
 const redirect = (response) => {
-  $('#error').fadeOut(200);
+  $("#errorMessage").animate({width: 'hide'}, 350);
   window.location = response.redirect;
 };
 

@@ -68,7 +68,7 @@ const RecipeForm = (props) =>{
       </select>
       
     <input id="csrfToken" type="hidden" name="_csrf" value={props.csrf} />
-    <input className="makeRecipeSubmit" type="submit" value="Add Recipe" />
+    <button className="makeRecipeSubmit" type="submit">Add Recipe</button>
   </form>
   );
 };
@@ -107,7 +107,7 @@ const recipeNodes = props.recipes.map(function (recipe){
 // Handling Password Change Form
 const handleChangePass = (e) => {
     e.preventDefault();
-    $('#error').fadeOut(200);
+  $("#errorMessage").animate({width: 'hide'}, 350);
   
     if ($('#oldPass').val() == '' || $('#newPass').val() == '' || $('#newPass2').val() == '') {
       handleError('Please fill out each field!');
@@ -123,7 +123,8 @@ const handleChangePass = (e) => {
   $("#errorMessage").animate({
     width: 'toggle'
   }, 350);
-    /* Otherwise continue loading new page */
+    
+    //Load the success message and change password if there are no errors
     makeAjaxCallback($('#changePassword').attr('action'), $('#changePassword').serialize(), (data) => {
     //success handler
       handleSuccess('Password changed!');
@@ -157,6 +158,7 @@ const setupPassChangeForm = function(csrf) {
     );
 };
 
+//load getRecipeItems
 const loadRecipesFromServer = (csrf) =>{
   sendAjaxCall('GET', '/getRecipeItems', null, (data) =>{
     ReactDOM.render(
@@ -166,6 +168,7 @@ const loadRecipesFromServer = (csrf) =>{
   });
 };
 
+//setup Renders
 const setup = function(csrf){
   ReactDOM.render(
     <RecipeForm csrf={csrf} />,
@@ -181,10 +184,10 @@ const setup = function(csrf){
 };
 
 
+//based upon URL, will setup specific renders
 const getToken = (url) =>{
   sendAjaxCall('GET', '/getToken', null, (result) =>{
-    
-    if(window.location.href.indexOf("addRecipe") > -1){
+      if(window.location.href.indexOf("addRecipe") > -1){
         setup(result.csrfToken);
     }
     if(window.location.href.indexOf("account") > -1) {
