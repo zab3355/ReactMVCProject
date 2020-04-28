@@ -16,10 +16,11 @@ var handleSuccess = function handleSuccess(message) {
   }, 150);
 };
 
-//handling Login
+//Login handler
 var handleLogin = function handleLogin(e) {
   e.preventDefault();
-//hide Error Message
+  
+  //error handling
   $("#errorMessage").animate({
     width: 'hide'
   }, 150);
@@ -35,8 +36,10 @@ var handleLogin = function handleLogin(e) {
   return false;
 };
 
+//Signup Handler
 var handleSignup = function handleSignup(e) {
   e.preventDefault();
+  //error handling
   $("#errorMessage").animate({
     width: 'hide'
   }, 350);
@@ -55,10 +58,15 @@ var handleSignup = function handleSignup(e) {
   return false;
 };
 
+//about Handler
 var handleAbout = function handleAbout(e) {
   e.preventDefault();
+  $("#errorMessage").animate({
+    width: 'hide'
+  }, 350);
 };
 
+//login window setup
 var LoginWindow = function LoginWindow(props) {
   return /*#__PURE__*/React.createElement("form", {
     id: "loginForm",
@@ -92,6 +100,7 @@ var LoginWindow = function LoginWindow(props) {
   }));
 };
 
+//signup window setup
 var SignupWindow = function SignupWindow(props) {
   return /*#__PURE__*/React.createElement("form", {
     id: "signupForm",
@@ -132,6 +141,7 @@ var SignupWindow = function SignupWindow(props) {
   }));
 };
 
+//about window setup
 var AboutWindow = function AboutWindow(props) {
   return /*#__PURE__*/React.createElement("div", {
     id: "actionSection",
@@ -150,25 +160,28 @@ var AboutWindow = function AboutWindow(props) {
 );
 };
 
+//creating login window render
 var createLoginWindow = function createLoginWindow(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(LoginWindow, {
     csrf: csrf
   }), document.querySelector("#content"));
 };
 
+//creating signup window render
 var createSignupWindow = function createSignupWindow(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(SignupWindow, {
     csrf: csrf
   }), document.querySelector("#content"));
 };
 
-//creating About Window
+//creating About Window render
 var createAboutWindow = function createAboutWindow(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(AboutWindow, {
     csrf: csrf
   }), document.querySelector("#content"));
 };
 
+//setup function
 var setup = function setup(csrf) {
   var loginButton = document.querySelector("#loginButton");
   var signupButton = document.querySelector("#signupButton");
@@ -191,6 +204,7 @@ var setup = function setup(csrf) {
   createLoginWindow(csrf); 
 };
 
+//get token call
 var getToken = function getToken() {
   sendAjaxCall('GET', '/getToken', null, function (result) {
     setup(result.csrfToken);
@@ -201,7 +215,7 @@ $(document).ready(function () {
   getToken();
 });
 
-
+//redirect
 var redirect = function redirect(response) {
   $("#errorMessage").animate({
     width: 'hide'

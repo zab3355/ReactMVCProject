@@ -1,6 +1,8 @@
+//login handler
 const handleLogin = (e) =>{
   e.preventDefault();
   
+  //error handling
   $("#errorMessage").animate({width: 'hide'}, 350);
   $("#success").animate({width: 'hide'}, 350);
   
@@ -8,17 +10,20 @@ const handleLogin = (e) =>{
     handleError("Username or password is empty!");
     return false;
   }
-  
+    
   console.log($("input[name=_csrf]").val());
   
+  //ajax call made for login
   sendAjaxCall('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
   
   return false;
 };
 
+//signup handler
 const handleSignup = (e) =>{
   e.preventDefault();
   
+  //error handling
   $("#errorMessage").animate({width: 'hide'}, 350);
   $("#success").animate({width: 'hide'}, 350);
   
@@ -32,15 +37,23 @@ const handleSignup = (e) =>{
     return false;
   }  
   
+  //ajax call for signup
   sendAjaxCall('POST', $("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
   
   return false;
 };
 
+//about handler 
 const handleAbout = (e) =>{
   e.preventDefault();
+  //error handling
+  $("#errorMessage").animate({width: 'hide'}, 350);
+  $("#success").animate({width: 'hide'}, 350);
+    
+  //no ajax needed for static page
 }
 
+//login form window
 const LoginWindow = (props) =>{
   return(
   <form id="loginForm" name="loginForm"
@@ -59,6 +72,7 @@ const LoginWindow = (props) =>{
   );
 };
 
+//signup form window
 const SignupWindow = (props) =>{
   return(
   <form id="signupForm" name="signupForm"
@@ -79,6 +93,7 @@ const SignupWindow = (props) =>{
   );
 };
 
+//about page window
 const AboutWindow = (props) => {
   return /*#__PURE__*/React.createElement("div", {
     id: "actionSection",
@@ -97,6 +112,7 @@ const AboutWindow = (props) => {
 );
 };
 
+//create login window render
 const createLoginWindow = (csrf) =>{
   ReactDOM.render(
     <LoginWindow csrf={csrf} />,
@@ -104,6 +120,7 @@ const createLoginWindow = (csrf) =>{
   );
 };
 
+//create signup window render
 const createSignupWindow = (csrf) =>{
   ReactDOM.render(
     <SignupWindow csrf={csrf} />,
@@ -111,6 +128,7 @@ const createSignupWindow = (csrf) =>{
   );
 };
 
+//create about window render
 const createAboutWindow= (csrf) =>{
   ReactDOM.render(
     <AboutWindow csrf={csrf} />,
@@ -118,6 +136,7 @@ const createAboutWindow= (csrf) =>{
   );
 };
 
+//setup function 
 const setup = (csrf) =>{
   const loginButton = document.querySelector("#loginButton");
   const signupButton = document.querySelector("#signupButton");
@@ -143,6 +162,7 @@ const setup = (csrf) =>{
   createLoginWindow(csrf); //default view
 };
 
+//get token call
 const getToken = () =>{
   sendAjaxCall('GET', '/getToken', null, (result) =>{
     setup(result.csrfToken);

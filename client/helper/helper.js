@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable linebreak-style */
 //error handler
 var handleError = (message) => {
   $("#errorMessage").text(message);

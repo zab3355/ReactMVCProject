@@ -24,9 +24,11 @@ var redirect = function redirect(response) {
   window.location = response.redirect;
 };
 
-
+//recipe handler
 var handleRecipe = function handleRecipe(e) {
   e.preventDefault();
+    
+  //error handling
   $("#errormessage").animate({
     width: 'hide'
   }, 350);
@@ -49,14 +51,13 @@ var handleRecipe = function handleRecipe(e) {
   return false;
 };
 
+//favorite handler - functionality to tag a recipe if the user presses favorite
 var handleFavorite = function handleFavorite(e) {
   e.preventDefault();
       
     var recipeForm = e.target;
     var getRecipeId = recipeForm.querySelector('.getRecipeId');
     var csrfSelect = recipeForm.querySelector('.csrfSelect');
-        
-    recipeForm.style.color = "red";
 
     sendAjax('POST', '/addRecipe', formData, function () {
         loadRecipesFromServer();
@@ -65,6 +66,7 @@ var handleFavorite = function handleFavorite(e) {
     return false;
 };
 
+//adding recipe form
 var RecipeForm = function RecipeForm(props) {
   return /*#__PURE__*/React.createElement("form", {
     id: "recipeForm",
@@ -164,6 +166,7 @@ var RecipeForm = function RecipeForm(props) {
   }));
 };
 
+//recipe list check
 var RecipeList = function RecipeList(props) {
   if (props.recipes.length === 0) {
     return /*#__PURE__*/React.createElement("div", {
@@ -173,7 +176,8 @@ var RecipeList = function RecipeList(props) {
     }, "No Recipes Listed!"));
   }
 
-  var recipeNodes = props.recipes.map(function (recipe) {
+//Recipe node setup
+var recipeNodes = props.recipes.map(function (recipe) {
     return /*#__PURE__*/React.createElement("div", {
       key: recipe._id,
       className: "recipe",
@@ -199,16 +203,16 @@ var RecipeList = function RecipeList(props) {
 /*#__PURE__*/React.createElement("input", {
     className: "makeFavorite",
     type: "submit",
-    value: "Favorite",
-        
+    value: "Favorite",    
   }));
-  });
+});
 
-  return /*#__PURE_a_*/React.createElement("div", {
+return /*#__PURE_a_*/React.createElement("div", {
     className: "recipeList"
   }, recipeNodes);
 };
 
+//Load recipes 
 var loadRecipesFromServer = function loadRecipesFromServer(csrf) {
   sendAjaxCall('GET', '/getRecipeItems', null, function (data) {
     ReactDOM.render( /*#__PURE__*/React.createElement(RecipeList, {
@@ -218,6 +222,7 @@ var loadRecipesFromServer = function loadRecipesFromServer(csrf) {
   });
 };
 
+//setup renders
 var setup = function setup(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(RecipeForm, {
     csrf: csrf
@@ -229,6 +234,7 @@ var setup = function setup(csrf) {
   loadRecipesFromServer(csrf);
 };
 
+//get token 
 var getToken = function getToken(url) {
   sendAjaxCall('GET', '/getToken', null, function (result) {
     setup(result.csrfToken);
@@ -239,6 +245,7 @@ $(document).ready(function () {
   getToken();
 });
 
+// https://medium.com/front-end-weekly/ajax-async-callback-promise-e98f8074ebd7
 //Functions for Ajax Requests
 
 var sendAjax = function sendAjax(type, action, data) {

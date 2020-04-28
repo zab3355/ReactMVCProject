@@ -1,7 +1,7 @@
 //recipe Handler
 const handleRecipe = (e) =>{
-  //error handling
   e.preventDefault();
+  //error handling
   $("#errormessage").animate({
     width: 'hide'
   }, 350);
@@ -110,6 +110,7 @@ const recipeNodes = props.recipes.map(function (recipe){
 // Handling Password Change Form
 const handleChangePass = (e) => {
     e.preventDefault();
+  //error handling
   $("#errorMessage").animate({width: 'hide'}, 350);
   
     if ($('#oldPass').val() == '' || $('#newPass').val() == '' || $('#newPass2').val() == '') {

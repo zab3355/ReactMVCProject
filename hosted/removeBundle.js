@@ -1,10 +1,8 @@
 "use strict";
 
-//added removeBundle for removing a Recipe
-
 var csrf = 0;
 
-//From login bundle
+//error handler
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
   $("#errorMessage").animate({
@@ -12,6 +10,7 @@ var handleError = function handleError(message) {
   }, 350);
 };
 
+//
 var redirect = function redirect(response) {
   $("#errorMessage").animate({
     width: 'hide'
@@ -19,20 +18,6 @@ var redirect = function redirect(response) {
   window.location = response.redirect;
 };
 
-var sendAjax = function sendAjax(type, action, data, success) {
-  $.ajax({
-    cache: false,
-    type: type,
-    url: action,
-    data: data,
-    dataType: "json",
-    success: success,
-    error: function error(xhr, status, _error) {
-      var messageObj = JSON.parse(xhr.responseText);
-      handleError(messageObj.error);
-    }
-  });
-};
 
 //Remove recipe from the form
 var removeRecipe = function removeRecipe(e) {
@@ -54,7 +39,7 @@ var removeRecipe = function removeRecipe(e) {
     return false;
 };
 
-
+//recipe list check
 var RecipeList = function RecipeList(props) {
     if (props.recipes.length === 0) {
         return React.createElement(
@@ -134,8 +119,15 @@ var loadRecipesFromServer = function loadRecipesFromServer() {
     });
 };
 
+//setup function
 var setup = function setup(csrfToken) {
-    csrf = csrfToken; ReactDOM.render(React.createElement(RecipeList, { recipes: [] }), document.querySelector("#recipes"));
+    csrf = csrfToken; 
+    ReactDOM.render(
+        React.createElement(
+            RecipeList, { 
+                recipes: [] 
+            }), 
+        document.querySelector("#recipes"));
     loadRecipesFromServer();
 };
 
@@ -149,3 +141,20 @@ var getToken = function getToken() {
 $(document).ready(function () {
     getToken();
 });
+
+//Function for Ajax
+
+var sendAjax = function sendAjax(type, action, data, success) {
+  $.ajax({
+    cache: false,
+    type: type,
+    url: action,
+    data: data,
+    dataType: "json",
+    success: success,
+    error: function error(xhr, status, _error) {
+      var messageObj = JSON.parse(xhr.responseText);
+      handleError(messageObj.error);
+    }
+  });
+};
