@@ -364,6 +364,7 @@ nav:nth-child(1) {
     color: black;
     background-color: sandybrown;
     border: 2px solid;
+    margin-top: 1em;
 }
 
 .searchForm {

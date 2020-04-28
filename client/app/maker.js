@@ -95,7 +95,7 @@ const recipeNodes = props.recipes.map(function (recipe){
         <p className="foodCategory">Category: {recipe.category}</p>
         <p className="tasteCategory">Taste: {recipe.taste}</p>
         <p className="priceCategory">Price: {recipe.price}</p>
-        <input className="makeFavorite" type="submit"  value="Favorite" />
+        <input className="makeFavorite" type="submit" value="Favorite" />
       </div>
     );
   });
@@ -111,6 +111,8 @@ const recipeNodes = props.recipes.map(function (recipe){
 const handleChangePass = (e) => {
     e.preventDefault();
   $("#errorMessage").animate({width: 'hide'}, 350);
+   $("#success").animate({width: 'hide'}, 350);
+    });
   
     if ($('#oldPass').val() == '' || $('#newPass').val() == '' || $('#newPass2').val() == '') {
       handleError('Please fill out each field!');
@@ -131,8 +133,7 @@ const handleChangePass = (e) => {
     //success handler
       handleSuccess('Password changed!');
     $("#success").text="Success!";
-    $("#success").animate({width: 'hide'}, 350);
-    });
+
   
     return false;
   };
