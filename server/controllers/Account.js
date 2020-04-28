@@ -116,7 +116,7 @@ const changePassword = (request, response) => {
   Account.AccountModel.authenticate(
     req.session.account.username,
     req.body.oldPass,
-
+   // eslint-disable-next-line consistent-return
     (err, doc) => {
       if (err) {
         return res.status(400).json({ err });
