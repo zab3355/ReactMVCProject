@@ -305,7 +305,7 @@ nav:nth-child(1) {
 #success{
     display: none;
     top: 67px;
-    width: 504px;
+    width: 300px;
     background-color: white;
     border: green solid 2px;
     padding: 1em;
@@ -339,6 +339,21 @@ nav:nth-child(1) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#notFoundh1{
+    margin-top: 400px;
+    background-color: #ffcc9b;
+    padding: 1em;
+    opacity: .9;
+    border: 2px solid black; 
+}
+
+#notFoundh2{
+    background-color: #ffcc9b;
+    padding: 1em;
+    opacity: .9;
+    border: 2px solid black; 
 }
 
 /* Search CSS */

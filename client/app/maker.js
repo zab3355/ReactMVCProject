@@ -131,7 +131,7 @@ const handleChangePass = (e) => {
     //success handler
       handleSuccess('Password changed!');
     $("#success").text="Success!";
-    $("#success").animate({width: 'toggle'}, 350);
+    $("#success").animate({width: 'toggle'}, 200);
     });
   
     return false;
