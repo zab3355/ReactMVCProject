@@ -42,7 +42,6 @@ var handleChangePass = function handleChangePass(e) {
     return true;
   }
 
-    
   //Callback for change password
   makeAjaxCallback($('#changePassword').attr('action'), $('#changePassword').serialize(), function (data) {
     handleSuccess('Password changed');
@@ -50,9 +49,8 @@ var handleChangePass = function handleChangePass(e) {
   return false;
 };
 
-
+//change Password Form
 var ChangePassForm = function ChangePassForm(props) {
-  // webkit text security from https://stackoverflow.com/questions/1648665/changing-the-symbols-shown-in-a-html-password-field -->
   return React.createElement("form", {
     id: "changePassword",
     name: "changePassword",
@@ -95,21 +93,24 @@ var ChangePassForm = function ChangePassForm(props) {
   }));
 };
 
-
+//setup change password form render
 var setupPassChangeForm = function setupPassChangeForm(csrf) {
   ReactDOM.render(React.createElement(ChangePassForm, {
     csrf: csrf
   }), document.querySelector("#changePassForm"));
 };
 
+//setting up page for Change Password - render form
 var setupAccountPage = function setupAccountPage(csrf) {
 
   var password = document.querySelector("#passwordContainer");
-  if (password) {
-      ReactDOM.render(React.createElement(PasswordForm, { csrf: csrf }), document.querySelector("#updateForm"));
+  
+    if (password) {             
+        ReactDOM.render(React.createElement(PasswordForm, { csrf: csrf }), document.querySelector("#updateForm"));
   }
 };
 
+//based upon URL, will setup specific renders
 var getToken = function getToken(url) {
   sendAjaxCall('GET', '/getToken', null, function (result) {
      if (window.location.href.indexOf("addRecipe") > -1) {
@@ -125,20 +126,7 @@ $(document).ready(function () {
   getToken();
 });
 
-var handleError = function handleError(message) {
-  $("#errorMessage").text(message);
-  $("#recipeMessage").animate({
-    width: 'toggle'
-  }, 350);
-};
-
-var handleSuccess = function handleSuccess(message) {
-  $('#success').text = "Password Changed!";
-  $("#success").animate({
-    width: 'toggle'
-  }, 350);
-};
-
+//redirect 
 var redirect = function redirect(response) {
   $("#recipeMessage").animate({
     width: 'hide'
