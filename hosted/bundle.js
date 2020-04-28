@@ -51,8 +51,19 @@ var handleRecipe = function handleRecipe(e) {
 
 var handleFavorite = function handleFavorite(e) {
   e.preventDefault();
-  
-}
+      
+    var recipeForm = e.target;
+    var getRecipeId = recipeForm.querySelector('.getRecipeId');
+    var csrfSelect = recipeForm.querySelector('.csrfSelect');
+        
+    recipeForm.style.color = "red";
+
+    sendAjax('POST', '/addRecipe', formData, function () {
+        loadRecipesFromServer();
+    });
+
+    return false;
+};
 
 var RecipeForm = function RecipeForm(props) {
   return /*#__PURE__*/React.createElement("form", {
@@ -165,7 +176,10 @@ var RecipeList = function RecipeList(props) {
   var recipeNodes = props.recipes.map(function (recipe) {
     return /*#__PURE__*/React.createElement("div", {
       key: recipe._id,
-      className: "recipe"
+      className: "recipe",
+      onSubmit: handleFavorite,
+      action: "/addRecipe",
+      method: "POST",
     }, /*#__PURE__*/React.createElement("img", {
       src: "/assets/img/cartIcon.png",
       alt: "recipe cart icon",
@@ -183,10 +197,10 @@ var RecipeList = function RecipeList(props) {
       className: "priceCategory"
     }, "Price: ", recipe.price),
 /*#__PURE__*/React.createElement("input", {
-    className: "makeRecipeSubmit",
+    className: "makeFavorite",
     type: "submit",
-    id: "faveModal",
-    value: "Favorite"
+    value: "Favorite",
+        
   }));
   });
 

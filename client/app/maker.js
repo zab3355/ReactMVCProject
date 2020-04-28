@@ -95,7 +95,7 @@ const recipeNodes = props.recipes.map(function (recipe){
         <p className="foodCategory">Category: {recipe.category}</p>
         <p className="tasteCategory">Taste: {recipe.taste}</p>
         <p className="priceCategory">Price: {recipe.price}</p>
-        <input className="makeRecipeSubmit" type="submit" id="favorite" value="Favorite" />
+        <input className="makeFavorite" type="submit"  value="Favorite" />
       </div>
     );
   });

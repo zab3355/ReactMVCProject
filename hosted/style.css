@@ -186,6 +186,39 @@ nav:nth-child(1) {
     transition: background-color 0.4s ease;
     background-color: #5f4c4c;
 }
+.makeFavorite {
+    transition: background-color 0.4s ease;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    margin: 1em;
+    font-size: 1.2em;
+    width: 200px;
+    background-color: #2f2626;
+    border-radius: 2px;
+    border-color: #5f4c4c;
+    padding: 3px 0px;
+    color: white;
+    text-decoration: none;
+}
+
+
+.makeFavorite:visited, .makeFavorite:hover, .makeFavorite:active {
+    transition: background-color 0.4s ease;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    margin: 1em;
+    font-size: 1.2em;
+    width: 200px;
+    background-color: salmon;
+    border-radius: 2px;
+    border-color: #5f4c4c;
+    padding: 3px 0px;
+    color: white;
+    text-decoration: none;
+}
+
 
 .mainForm {
     height: 300px;
@@ -630,6 +663,10 @@ p.priceCategory {
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
   animation-duration: 0.4s
+}
+
+.inputName{
+    margin
 }
 
 .modal-backdrop {

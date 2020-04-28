@@ -34,8 +34,7 @@ var sendAjax = function sendAjax(type, action, data, success) {
   });
 };
 
-//removing recipe from form
-
+//Remove recipe from the form
 var removeRecipe = function removeRecipe(e) {
     e.preventDefault();
 
@@ -55,6 +54,7 @@ var removeRecipe = function removeRecipe(e) {
     return false;
 };
 
+
 var RecipeList = function RecipeList(props) {
     if (props.recipes.length === 0) {
         return React.createElement(
@@ -67,7 +67,7 @@ var RecipeList = function RecipeList(props) {
         );
     }
 
-    //create react elements
+    //Creating react elements
     var recipeNodes = props.recipes.map(function (recipe) {
         console.dir(recipe);
         return React.createElement(
@@ -127,16 +127,19 @@ var RecipeList = function RecipeList(props) {
 //get Recipes from the server for deletion
 var loadRecipesFromServer = function loadRecipesFromServer() {
     sendAjax('GET', '/getRecipeItems', null, function (data) {
-        ReactDOM.render(React.createElement(RecipeList, { recipes: data.recipes }), document.querySelector("#recipes"));
+        ReactDOM.render(React.createElement(RecipeList, { 
+            recipes: data.recipes 
+        }), 
+        document.querySelector("#recipes"));
     });
 };
 
 var setup = function setup(csrfToken) {
-    csrf = csrfToken;
-    ReactDOM.render(React.createElement(RecipeList, { recipes: [] }), document.querySelector("#recipes"));
+    csrf = csrfToken; ReactDOM.render(React.createElement(RecipeList, { recipes: [] }), document.querySelector("#recipes"));
     loadRecipesFromServer();
 };
 
+//get token 
 var getToken = function getToken() {
     sendAjax('GET', '/getToken', null, function (result) {
         setup(result.csrfToken);
