@@ -1,4 +1,4 @@
-App Name: Recipe Resort
+<h1>App Name: Recipe Resort</h1>
 
 Decided to create a site that will allow a user to store recipes, and categorize them by price, food category, and taste. The goal is to allow a user to easily store recipes and write notes about these recipes. 
 
