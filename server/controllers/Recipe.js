@@ -2,7 +2,7 @@ const models = require('../models');
 
 const { Recipe } = models;
 
-//
+//page render for app
 const makerPage = (req, res) => {
   Recipe.RecipeModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
@@ -25,7 +25,7 @@ const makeRecipe = (req, res) => {
       error: 'Please fill out each field before continuing.',
     });
   }
-
+ 
   const recipeData = {
     name: req.body.name,
     category: req.body.category,
@@ -34,6 +34,7 @@ const makeRecipe = (req, res) => {
     owner: req.session.account._id,
   };
 
+    
   const newRecipe = new Recipe.RecipeModel(recipeData);
 
   const recipePromise = newRecipe.save();
@@ -71,6 +72,7 @@ const removePage = (req, res) => {
 };
 
 
+//getting recipeItems
 const getRecipeItems = (request, response) => {
   const req = request;
   const res = response;
@@ -86,6 +88,7 @@ const getRecipeItems = (request, response) => {
 };
 
 
+//remove recipe section
 const removeRecipe = (request, response) => {
   const req = request;
   const res = response;
@@ -100,10 +103,12 @@ const removeRecipe = (request, response) => {
   });
 };
 
+//about section
 const about = () => {
 
 };
 
+//module exports
 module.exports.makerPage = makerPage;
 module.exports.getRecipeItems = getRecipeItems;
 module.exports.make = makeRecipe;

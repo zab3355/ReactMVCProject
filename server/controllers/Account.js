@@ -22,6 +22,7 @@ const errorPage = (req, res) => {
   res.render('error', { csrfToken: req.csrfToken() });
 };
 
+//login functionality
 const login = (request, response) => {
   const req = request;
   const res = response;
@@ -30,6 +31,7 @@ const login = (request, response) => {
   const username = `${req.body.username}`;
   const password = `${req.body.pass}`;
 
+  //error handling
   if (!username || !password) {
     return res.status(400).json({ error: 'Please fill out each field!' });
   }
@@ -90,7 +92,7 @@ const signup = (request, response) => {
   });
 };
 
-/* Renders account page */
+//Renders account page
 const settingsPage = (req, res) => {
   AccountData.AccountModel.findByUsername(req.session.account.username, (err) => {
     if (err) {
@@ -110,11 +112,11 @@ const changePassword = (request, response) => {
   const req = request;
   const res = response;
 
-  // creates settings
+  //authentication for account
   Account.AccountModel.authenticate(
     req.session.account.username,
     req.body.oldPass,
-    // eslint-disable-next-line consistent-return
+
     (err, doc) => {
       if (err) {
         return res.status(400).json({ err });
@@ -138,6 +140,7 @@ const changePassword = (request, response) => {
   );
 };
 
+//get token
 const getToken = (request, response) => {
   const req = request;
   const res = response;
@@ -149,6 +152,7 @@ const getToken = (request, response) => {
   res.json(csrfJSON);
 };
 
+//module exports
 module.exports.loginPage = loginPage;
 module.exports.login = login;
 module.exports.errorPage = errorPage;
