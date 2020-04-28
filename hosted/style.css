@@ -20,6 +20,7 @@ html, body {
 
 /*
     Nav Bar implementation CSS
+    Bootstrap code taken and modified from: https://startbootstrap.com/snippets/full-slider
 */
 .navbar {
     border: 0;
