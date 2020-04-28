@@ -35,11 +35,6 @@ var handleRecipe = function handleRecipe(e) {
     handleError("Please fill out each field!");
     return false;
   }
-    
-    if($("#searchByTaste").val() ==''){
-    handleError('Please fill out search!');
-      return false;
-  }
 
   sendAjaxCall('POST', $("#recipeForm").attr("action"), $("#recipeForm").serialize(), function () {
     //get csrf token to send to new Recipe
@@ -47,26 +42,17 @@ var handleRecipe = function handleRecipe(e) {
     loadRecipesFromServer(csrf);
   });
     
-  $('#foodCategory').value = 'start';
   $('#tasteCategory').value = '';
   $('#priceCategory').value = '';
-
+  $('#foodCategory').value = 'start';
     
   return false;
 };
 
 var handleFavorite = function handleFavorite(e) {
   e.preventDefault();
-  $("#errorMessage").animate({
-    width: 'hide'
-  }, 350);;
-  /* Otherwise continue loading new page */
-
-  sendAjaxWithCallback($('#favorited').attr('action'), $('#favorited').serialize(), function (data) {
-    handleSubSuccess('Favorited!');
-  });
-  return false;
-};
+  
+}
 
 var RecipeForm = function RecipeForm(props) {
   return /*#__PURE__*/React.createElement("form", {
@@ -177,21 +163,16 @@ var RecipeList = function RecipeList(props) {
   }
 
   var recipeNodes = props.recipes.map(function (recipe) {
-    return 
-    /*#__PURE__*/React.createElement("form", {
+    return /*#__PURE__*/React.createElement("div", {
       key: recipe._id,
-      className: "recipe",
-      method: "POST",
-      onSubmit: handleFavorite,
-      action: "/favorite"
+      className: "recipe"
     }, /*#__PURE__*/React.createElement("img", {
       src: "/assets/img/cartIcon.png",
       alt: "recipe cart icon",
       className: "cartIcon"
     }), /*#__PURE__*/React.createElement("h3", {
-      className: "recipeName",
-      id: "recipeName",
-    }, "Recipe Name: ", recipe.name),
+      className: "recipeName"
+    }, recipe.name),
 /*#__PURE__*/React.createElement("p", {
       className: "foodCategory"
     }, "Category: ", recipe.category),
@@ -204,14 +185,13 @@ var RecipeList = function RecipeList(props) {
 /*#__PURE__*/React.createElement("input", {
     className: "makeRecipeSubmit",
     type: "submit",
-    id: "favorite",
+    id: "faveModal",
     value: "Favorite"
   }));
   });
 
   return /*#__PURE_a_*/React.createElement("div", {
-    className: "recipeList",
-    id: "recipeList",
+    className: "recipeList"
   }, recipeNodes);
 };
 
@@ -224,9 +204,7 @@ var loadRecipesFromServer = function loadRecipesFromServer(csrf) {
   });
 };
 
-
 var setup = function setup(csrf) {
-
   ReactDOM.render( /*#__PURE__*/React.createElement(RecipeForm, {
     csrf: csrf
   }), document.querySelector("#makeRecipe"));

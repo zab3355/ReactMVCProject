@@ -78,15 +78,21 @@
 
     </div>
     <div class="modal-footer">
-      <h3>${recipe.recipeName}</h3>
+      <button id="update" class="formSubmit" type="button" onclick="updateFavorite()">Update</button>
     </div>
+      <div id="updateFavorite"></div>
+      <script>
+        function updateFavorite(){
+            
+        }
+      </script>
   </div>
 </div>
 </div> 
       <div class="search">
         <h3 class="searchRecipeh3">Search Recipe</h3>
           <form class="searchForm" name="searchForm" method="GET">
-            <input type="text" class="searchForm input" id="searchByTaste" placeholder="Search By Recipe Name">
+            <input type="text" class="searchForm input" id="searchByName" placeholder="Search By Recipe Name">
             <button class="formSubmit" type="button" onclick="searchRecipe()">Search Recipe</button>
             </form>
       </div>
