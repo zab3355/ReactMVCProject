@@ -111,8 +111,6 @@ const recipeNodes = props.recipes.map(function (recipe){
 const handleChangePass = (e) => {
     e.preventDefault();
   $("#errorMessage").animate({width: 'hide'}, 350);
-   $("#success").animate({width: 'hide'}, 350);
-    });
   
     if ($('#oldPass').val() == '' || $('#newPass').val() == '' || $('#newPass2').val() == '') {
       handleError('Please fill out each field!');
@@ -133,7 +131,8 @@ const handleChangePass = (e) => {
     //success handler
       handleSuccess('Password changed!');
     $("#success").text="Success!";
-
+    $("#success").animate({width: 'toggle'}, 350);
+    });
   
     return false;
   };

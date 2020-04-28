@@ -305,7 +305,7 @@ nav:nth-child(1) {
 #success{
     display: none;
     top: 67px;
-    width: 254px;
+    width: 504px;
     background-color: white;
     border: green solid 2px;
     padding: 1em;
