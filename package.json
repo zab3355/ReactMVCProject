@@ -42,7 +42,7 @@
     "gulp": "^4.0.2",
     "helmet": "^3.22.0",
     "mongoose": "^5.9.10",
-    "redis": "^3.0.2",
+    "redis": "^3.1.1",
     "serve-favicon": "^2.5.0",
     "trumbowyg": "^2.21.0",
     "underscore": "^1.10.2"
